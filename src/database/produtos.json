@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "Computador Gamer Acer Orion",
+    "price": 9999.99,
+    "imagem": "/images/imagensProdutos/pc-gamer-acer-predator-orion-5000-i5-11400-le (1).jpg"
+  },
+  {
+    "id": 2,
+    "name": "Macbooker Air M1",
+    "price": 12799.99
+  },
+  {
+    "id": 3,
+    "name": "Teclado Mecânico Gamer Razer",
+    "price": 899.99
+  },
+  {
+    "id": 4,
+    "name": "Headset Astro A50",
+    "price": 2399.99,
+    "imagem": "images/imagensProdutos/1xg.webp" 
+  }
+]
