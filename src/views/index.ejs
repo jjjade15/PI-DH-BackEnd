@@ -25,8 +25,9 @@
     />
   </head>
   <body>
-    <%- include("./partials/hamburguer.ejs"); %> <%-
-    include("./partials/header.ejs"); %>
+    <!-- Partials do hamburguer menu e do header -->
+    <%- include("./partials/header.ejs"); %> <%-
+    include("./partials/hamburguer.ejs"); %>
 
     <div class="container-home">
       <section class="banners">
@@ -68,12 +69,10 @@
             </svg>
             <h1>OFERTAS DO MOMENTO</h1>
           </div>
-          <!-- Anuncios-->
+          <!-- Anuncios (include card produto)-->
           <div class="flex-anuncios">
-            <% for(let c = 0; c < 5; c++) { %>
-              <%produtos.forEach((produto) => { %>
-                <%- include("./partials/cardProduto", {produto}); %> 
-              <% }); %> 
+            <% for(let c = 0; c < 5; c++) { %> <%produtos.forEach((produto) => {
+            %> <%- include("./partials/cardProduto", {produto}); %> <% }); %>
             <%}%>
           </div>
         </div>
@@ -104,7 +103,11 @@
 
             <h1>MAIS VENDIDOS</h1>
           </div>
-          <div class="flex-anuncios"></div>
+          <div class="flex-anuncios">
+            <% for(let c = 0; c < 5; c++) { %> <%produtos.forEach((produto) => {
+            %> <%- include("./partials/cardProduto", {produto}); %> <% }); %>
+            <%}%>
+          </div>
         </div>
         <!-- Departamentos -->
         <div class="departamentos">
@@ -129,7 +132,7 @@
           <!-- Grid dos departamentos-->
           <div class="grid-departamentos">
             <div class="dep d1">
-              <a href="monte-seu-pc/monte-seu-pc.html" class="dep-flex">
+              <a href="/monteseupc" class="dep-flex">
                 <img src="/images/homeImages/monte-seu-pc.png" alt="" />
                 <h2>Monte Seu PC</h2>
               </a>
@@ -200,6 +203,7 @@
       </main>
     </div>
 
+    <!-- Partial footer -->
     <%- include("./partials/footer.ejs"); %>
 
     <!-- Scripts do slick slider-->
@@ -212,9 +216,11 @@
       referrerpolicy="no-referrer"
     ></script>
     <script>
-      $(".slider-container").slick({
+      $(window).on("load", function() {
+        $(".slider-container").slick({
         infinite: true,
         speed: 750,
+        dots: true,
         slidesToShow: 1,
         adaptiveHeight: false,
         prevArrow:
@@ -222,6 +228,11 @@
         nextArrow:
           '<span class="next_arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="seta-avanca"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg></span>',
       });
+      })
+
+      $(".banners").show(); 
+     
     </script>
+
   </body>
 </html>

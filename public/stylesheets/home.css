@@ -454,7 +454,21 @@ main a {
 
 /* =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* SLIDER =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=**/
 .banners{
+  display: none;
   margin-bottom: 12rem;
+}
+.slick-dots li button:before {
+  font-size: 10px !important;
+  color: #4d4d4d !important;
+  
+}
+.slick-dots {
+  bottom: 15px !important;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1 !important;
+  color: #4f7dcc !important;
 }
 
 .slider-container img {
