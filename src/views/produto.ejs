@@ -6,19 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="/stylesheets/global.css">
-    <link rel="stylesheet" href="/stylesheets/produto-especifico.css">
+    <link rel="stylesheet" href="/stylesheets/global.css" />
+    <link rel="stylesheet" href="/stylesheets/produto-especifico.css" />
   </head>
   <body>
-    <%- include("./partials/hamburguer.ejs") %>
-    <%- include("./partials/header.ejs") %>
-    
+    <%- include("./partials/hamburguer.ejs") %> <%-
+    include("./partials/header.ejs") %>
+
     <main class="container-principal">
       <div class="container-produto">
-        <h1>
-          PC Gamer Acer Predator Orion PO5-620-BR12, Intel Core i5-11400, LED,
-          NVIDIA GeForce RTX 3060, 16GB DDR4, SSD 512GB, Windows 11 Home, Preto
-        </h1>
+        <h1><%= produto.name %></h1>
 
         <div class="area-produto">
           <div class="slide-imagens">
@@ -40,19 +37,9 @@
             </button>
 
             <div class="container-imagens">
-              <img
-                src="Imageye - PC Gamer Acer Predator Orion PO5-620-BR12_ Intel Core i5-11400_ LED_ NVIDIA GeForce RTX 3060_ 16GB DDR4_ SSD 512GB_ Windows 11 Home_ Preto - DG_E2QAL_005/pc-gamer-acer-predator-orion-5000-i5-11400-le (1).jpg"
-                alt=""
-                class="ativa"
-              />
-              <img
-                src="Imageye - PC Gamer Acer Predator Orion PO5-620-BR12_ Intel Core i5-11400_ LED_ NVIDIA GeForce RTX 3060_ 16GB DDR4_ SSD 512GB_ Windows 11 Home_ Preto - DG_E2QAL_005/pc-gamer-acer-predator-orion-5000-i5-11400-le (4).jpg"
-                alt=""
-              />
-              <img
-                src="Imageye - PC Gamer Acer Predator Orion PO5-620-BR12_ Intel Core i5-11400_ LED_ NVIDIA GeForce RTX 3060_ 16GB DDR4_ SSD 512GB_ Windows 11 Home_ Preto - DG_E2QAL_005/pc-gamer-acer-predator-orion-5000-i5-11400-le (5).jpg"
-                alt=""
-              />
+              <% for(img of produto.imagens) { %>
+              <img src="<%=img%>" alt="" class="ativa" />
+              <% } %>
             </div>
 
             <button class="volta-imagem">
@@ -119,11 +106,15 @@
             </div>
             <div class="caixa-preco">
               <h2>
-                <span id="preco-produto">R$ 9999,99 </span><span>ou</span>
+                <% const preco = produto.price.toLocaleString('pt-br',{style:
+                'currency', currency: 'BRL'}); %>
+                <span id="preco-produto"><%= preco %></span><span>ou </span>
               </h2>
               <h4>
                 <span id="parcela">12X</span> de
-                <span id="preco-produto-parcelado">833.26</span>
+                <span id="preco-produto-parcelado"
+                  ><%= (produto.price/12).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});%></span
+                >
               </h4>
             </div>
             <button class="btn-add-carrinho">
@@ -237,14 +228,9 @@
       </section>
     </main>
 
-    <h2><%= produto.name %></h2>
-    <ul>
-      <li>ID: <%= produto.id %></li>
-      <li>Preço: <%= produto.price %></li>
-    </ul>
-    <img src="<%= produto.imagem %>" alt="" />
-
     <%- include("./partials/footer.ejs") %>
+    
     <script src="/javascripts/global.js"></script>
+    <script src="/javascripts/produto-especifico.js"></script>
   </body>
 </html>

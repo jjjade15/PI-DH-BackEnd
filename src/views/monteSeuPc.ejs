@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech Star | Monte seu PC</title>
+
+    <link rel="stylesheet" href="/stylesheets/global.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <link rel="stylesheet" href="/stylesheets/menu-montePC.css" />
+
+  </head>
+  <body>
+
+    <%- include("./partials/hamburguer.ejs") %> <%-
+    include("./partials/header.ejs") %>
+
+    <div class="container">
+      <section class="banner-monteseupc"></section>
+      <main>
+        <!-- OPÇÕES PEÇAS -->
+        <div class="opcoes-pecas">
+          <div class="opcao">
+            <div class="imagem-componente">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z"
+                />
+              </svg>
+              <h2>PROCESSADOR</h2>
+            </div>
+            <div class="caixa-selecao">
+              <span>ESCOLHA OS COMPONENTES</span>
+              <button data-tipo-peca="processador" class="opcao-btn">
+                SELECIONAR
+              </button>
+            </div>
+          </div>
+
+          <div class="opcao">
+            <div class="imagem-componente">
+              <img src="/images/monteSeuPcImages/graphics-card.svg" alt="" />
+              <h2>PLACA DE VÍDEO</h2>
+            </div>
+            <div class="caixa-selecao">
+              <span>ESCOLHA OS COMPONENTES</span>
+              <button data-tipo-peca="Placa de Vídeo" class="opcao-btn">
+                SELECIONAR
+              </button>
+            </div>
+          </div>
+
+          <div class="opcao">
+            <div class="imagem-componente">
+              <img src="/images/monteSeuPcImages/motherboard.svg" alt="" />
+              <h2>PLACA MÃE</h2>
+            </div>
+            <div class="caixa-selecao">
+              <span>ESCOLHA OS COMPONENTES</span>
+              <button data-tipo-peca="Placa-Mãe" class="opcao-btn">
+                SELECIONAR
+              </button>
+            </div>
+          </div>
+
+          <div class="opcao">
+            <div class="imagem-componente">
+              <img src="/images/monteSeuPcImages/cooler.svg" alt="" />
+              <h2>COOLER</h2>
+            </div>
+            <div class="caixa-selecao">
+              <span>ESCOLHA OS COMPONENTES</span>
+              <button data-tipo-peca="cooler" class="opcao-btn">
+                SELECIONAR
+              </button>
+            </div>
+          </div>
+
+          <div class="opcao">
+            <div class="imagem-componente">
+              <img src="/images/monteSeuPcImages/ram.svg" alt="" />
+              <h2>MEMÓRIA RAM</h2>
+            </div>
+            <div class="caixa-selecao">
+              <span>ESCOLHA OS COMPONENTES</span>
+              <button data-tipo-peca="memória" class="opcao-btn">
+                SELECIONAR
+              </button>
+            </div>
+          </div>
+
+          <div class="opcao">
+            <div class="imagem-componente">
+              <img src="/images/monteSeuPcImages/solid-state-drive.svg" alt="" />
+              <h2>ARMAZENAMENTO</h2>
+            </div>
+            <div class="caixa-selecao">
+              <span>ESCOLHA OS COMPONENTES</span>
+              <button data-tipo-peca="armazenamento" class="opcao-btn">
+                SELECIONAR
+              </button>
+            </div>
+          </div>
+
+          <div class="opcao">
+            <div class="imagem-componente">
+              <img src="/images/monteSeuPcImages/power-supply (1).svg" alt="" />
+              <h2>FONTE</h2>
+            </div>
+            <div class="caixa-selecao">
+              <span>ESCOLHA OS COMPONENTES</span>
+              <button data-tipo-peca="fonte" class="opcao-btn">
+                SELECIONAR
+              </button>
+            </div>
+          </div>
+
+          <div class="opcao">
+            <div class="imagem-componente">
+              <img src="/images/monteSeuPcImages/computer-tower.svg" alt="" />
+              <h2>GABINETE</h2>
+            </div>
+            <div class="caixa-selecao">
+              <span>ESCOLHA OS COMPONENTES</span>
+              <button data-tipo-peca="gabinete" class="opcao-btn">
+                SELECIONAR
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Valor total -->
+        <div class="valor-total">
+          <h2>Valor Atual</h2>
+          <div class="descricao-valor-total">
+            <span class="total">R$ 0,00</span>
+            <button>Adicionar ao carrinho</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- MENU MONTE-PC-->
+    <div class="menu_monte_pc">
+      <div class="cabecalho-montepc">
+        <h2 id="titulo-produto"></h2>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="fecha-montepc"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </div>
+
+      <div class="form-montepc" action="">
+        <form class="filtros-montepc">
+          <select name="" id="">
+            <option value="">Marcas</option>
+          </select>
+
+          <div class="filtro-pesquisa">
+            <input placeholder="Buscar produto..." type="text" name="" id="" />
+            <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        </form>
+        <!-- Itens dentro do menu -->
+        <form class="produtos-montepc">
+
+
+        </form>
+      </div>
+
+      <div class="fileira-preco">
+        <div class="caixa-valor-atual">
+          Valor Atual: <span id="valor-atual-pix"></span>
+          <span class="valor-atual-parcelado"></span>
+        </div>
+        <button class="btn-avancar">Avançar</button>
+      </div>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+
+    <script src="../global/global.js"></script>
+    <script src="/javascripts/monte-pc.js" type="module"></script>
+  </body>
+</html>

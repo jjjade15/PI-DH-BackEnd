@@ -1,0 +1,235 @@
+/* -=-=-=- Container -=-=-=- */
+
+.menu_monte_pc {
+  width: 90rem;
+  height: 100vh;
+
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  right: -100%;
+
+  top: 0;
+
+  transition: right 0.5s;
+  z-index: 9999;
+
+  box-shadow: -4px 2px 191px 41px rgba(46, 46, 46, 0.37);
+
+  display: grid;
+  grid-template-rows: 64px calc(100% - 184px) 120px;
+
+}
+
+#blur {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background-color: black;
+  opacity: 0.5;
+}
+
+#titulo-produto {
+
+  text-transform: uppercase;
+}
+
+/* -=-=-=- Cabeçalho -=-=-=- */
+.cabecalho-montepc {
+  display: flex;
+  background-color: #1a4895;
+  color: white;
+
+  padding: 0 24px;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.cabecalho-montepc h2 {
+  font-size: 32px;
+}
+
+.cabecalho-montepc svg {
+  height: 100%;
+  cursor: pointer;
+}
+
+.cabecalho-montepc svg:hover {
+ color: #f03e3e;
+}
+
+/* -=-=-=- FORMULÁRIO -=-=-=- */
+
+/* Filtro Formulário */
+.menu_monte_pc .form-montepc {
+  display: grid;
+  grid-template-rows: 52px 1fr;
+}
+
+.form-montepc .filtros-montepc {
+  display: flex;
+  gap: 8px;
+  background-color: #143979;
+  padding: 8px;
+} 
+
+.form-montepc .filtros-montepc select {
+  width: 35%;
+  border-radius: 3px;
+}
+
+.form-montepc .filtros-montepc .filtro-pesquisa {
+  width: 65%;
+
+  display: flex;
+  border-radius: 5px;
+}
+
+.form-montepc .filtros-montepc .filtro-pesquisa input {
+  width: 100%;
+  border: none;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+  padding-left: 12px;
+  font-size: 17px;
+  outline: none;
+}
+.form-montepc .filtros-montepc .filtro-pesquisa input:focus {
+  border: none;
+}
+.form-montepc .filtros-montepc .filtro-pesquisa button {
+  border: none;
+  padding: 0 12px;
+  background-color: #ff2222;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.form-montepc .filtros-montepc .filtro-pesquisa button svg {
+  height: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Produtos Formulário*/
+.produtos-montepc {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+
+  box-sizing: content-box;
+  padding-bottom: 16px;
+}
+
+.produtos-montepc .produto {
+
+  display: flex;
+  align-items: center;
+  height: 180px;
+  padding: 12px 12px 12px 24px;
+  border-bottom: 1px solid rgb(224, 224, 224);
+  cursor: pointer;
+  transition: 0.15s;
+  box-sizing: content-box;
+}
+
+.produtos-montepc .produto.selected {
+  box-shadow: inset 0px 0px 0px 7px rgba(39,113,241,1);
+}
+
+.produtos-montepc .produto input {
+
+  margin-right: 24px;
+  cursor: pointer;
+  transform: scale(1.5);
+}
+
+.produtos-montepc .produto button {
+  padding: 10px 12px;
+  color: white;
+  border: none;
+  font-size: 15px;
+  background-color: #F2B01B;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.produtos-montepc .produto button:hover {
+  background-color: #daa01b;
+  cursor: pointer;
+}
+
+.produtos-montepc .produto .info-produto {
+  flex: 1 1;
+  height: 100%;
+  display: flex;
+  gap: 16px;
+}
+
+.produtos-montepc .produto .info-produto .foto-produto {
+  height: 100%;
+  max-width: 156px;
+  min-width: 156px;
+  text-align: center;
+  font-size: 28px;
+  background-color: rgb(212, 212, 212);
+  display: flex;
+  align-items: center;
+}
+
+.produtos-montepc .produto .info-produto .descricao {
+
+  padding: 24px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.produtos-montepc .produto .info-produto .descricao h2 {
+  font-size: 18px;
+  font-weight: normal;
+  min-height: 66px;
+  max-height: 66px;
+}
+
+.produtos-montepc .produto .info-produto .descricao .preco {
+  height: 100%;
+  display: flex;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+
+
+/* -=-=-=- COLUNA PREÇO -=-=-=- */
+.fileira-preco {
+  background-color: #1a4895;
+  box-shadow: 0px -6px 50px -16px rgba(43, 42, 42, 0.753);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.fileira-preco .caixa-valor-atual {
+  font-size: 26px;
+  font-weight: 600;
+  color: white;
+}
+
+.fileira-preco .btn-avancar {
+  padding: 12px 24px;
+  font-size: 20px;
+  background-color: #ff0c0c;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.fileira-preco .btn-avancar:hover {
+  opacity: 0.85;
+  cursor: pointer;
+}

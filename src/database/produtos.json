@@ -1,14 +1,20 @@
 [
   {
     "id": 1,
-    "name": "Computador Gamer Acer Orion",
-    "price": 9999.99,
-    "imagem": "/images/imagensProdutos/pc-gamer-acer-predator-orion-5000-i5-11400-le (1).jpg"
+    "name": "PC Gamer Acer Predator Orion PO5-620-BR12, Intel Core i5-11400, LED, NVIDIA GeForce RTX 3060, 16GB DDR4, SSD 512GB, Windows 11 Home, Preto",
+    "price": 99999.99,
+    "imagens": ["/images/productImages/Imageye - PC Gamer Acer Predator/pc-gamer-acer-predator-orion-5000-i5-11400-le (1).jpg", "/images/productImages/Imageye - PC Gamer Acer Predator/pc-gamer-acer-predator-orion-5000-i5-11400-le (4).jpg", "/images/productImages/Imageye - PC Gamer Acer Predator/pc-gamer-acer-predator-orion-5000-i5-11400-le (5).jpg"]
   },
   {
     "id": 2,
-    "name": "Macbooker Air M1",
-    "price": 12799.99
+    "name": "Apple notebook MacBook Air de 13 polegadas: Chip M2 da Apple com CPU de oito núcleos e GPU de oito núcleos, de 256 GB SSD - Cinza espacial",
+    "price": 9157.88,
+    "imagens": ["/images/productImages/Imageye - MacBook Air Apple 13_6__ 2K QHD_ M2 _ KaBuM_/macbook-air-apple-13-6-2k-qhd-processador-m2-8gb-ram-ssd-256gb-ips-macos-spacial-grey-mlxw3bz-a_1671806121_gg.jpg", 
+    "/images/productImages/Imageye - MacBook Air Apple 13_6__ 2K QHD_ M2 _ KaBuM_/macbook-air-apple-13-6-2k-qhd-processador-m2-8gb-ram-ssd-256gb-ips-macos-spacial-grey-mlxw3bz-a_1671806122_gg.jpg",
+    "/images/productImages/Imageye - MacBook Air Apple 13_6__ 2K QHD_ M2 _ KaBuM_/macbook-air-apple-13-6-2k-qhd-processador-m2-8gb-ram-ssd-256gb-ips-macos-spacial-grey-mlxw3bz-a_1671806123_gg.jpg",
+    "/images/productImages/Imageye - MacBook Air Apple 13_6__ 2K QHD_ M2 _ KaBuM_/macbook-air-apple-13-6-2k-qhd-processador-m2-8gb-ram-ssd-256gb-ips-macos-spacial-grey-mlxw3bz-a_1671806124_original.jpg",
+    "/images/productImages/Imageye - MacBook Air Apple 13_6__ 2K QHD_ M2 _ KaBuM_/macbook-air-apple-13-6-2k-qhd-processador-m2-8gb-ram-ssd-256gb-ips-macos-spacial-grey-mlxw3bz-a_1671806125_gg.jpg"  
+  ]
   },
   {
     "id": 3,
