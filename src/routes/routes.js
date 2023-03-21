@@ -15,4 +15,8 @@ router.get("/produto/:id", productController.showById);
 //Rotas monteSeuPc
 router.get("/monteseupc", monteSeuPcController.showMonteSeuPc);
 
+router.get("/teste", (req, res) => {
+  res.render("partials/teste")
+})
+
 module.exports = router;
