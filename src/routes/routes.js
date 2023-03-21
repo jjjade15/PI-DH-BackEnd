@@ -15,8 +15,10 @@ router.get("/produto/:id", productController.showById);
 //Rotas monteSeuPc
 router.get("/monteseupc", monteSeuPcController.showMonteSeuPc);
 
+const productsData = require("../database/produtos.json");
+
 router.get("/teste", (req, res) => {
-  res.render("partials/teste")
+  res.render("partials/cardProduto", {produto: productsData[0]})
 })
 
 module.exports = router;

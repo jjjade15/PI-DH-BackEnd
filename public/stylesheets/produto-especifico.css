@@ -214,11 +214,14 @@ h1 {
   background-color:  #4290e9;
   color: white;
   border: none;
-
+  cursor: pointer;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
 
 
+}
+.submit_calculo-cep:hover {
+  background-color: #3d83d3;
 }
 
 /* slide Imagem */

@@ -18,13 +18,27 @@
   },
   {
     "id": 3,
-    "name": "Teclado Mecânico Gamer Razer",
-    "price": 899.99
+    "name": "Teclado Mecânico Gamer Razer BlackWidow, Chroma, Razer Switch Green",
+    "price": 749.99,
+    "imagens": [
+      "/images/productImages/Imageye - Teclado Mec_nico Gamer Razer BlackWidow_ Chroma_ Razer Switch Green_ US - RZ03-02860100-R3M1/teclado-mecanico-gamer-razer-blackwidow-chroma-switch-razer-green-us-rz-tc-bw-60-rt_1589811668_gg.jpg",
+      "/images/productImages/Imageye - Teclado Mec_nico Gamer Razer BlackWidow_ Chroma_ Razer Switch Green_ US - RZ03-02860100-R3M1/teclado-mecanico-gamer-razer-blackwidow-chroma-switch-razer-green-us-rz-tc-bw-60-rt_1589811669_gg.jpg",
+      "/images/productImages/Imageye - Teclado Mec_nico Gamer Razer BlackWidow_ Chroma_ Razer Switch Green_ US - RZ03-02860100-R3M1/teclado-mecanico-gamer-razer-blackwidow-chroma-switch-razer-green-us-rz-tc-bw-60-rt_1589811670_gg.jpg",
+      "/images/productImages/Imageye - Teclado Mec_nico Gamer Razer BlackWidow_ Chroma_ Razer Switch Green_ US - RZ03-02860100-R3M1/teclado-mecanico-gamer-razer-blackwidow-chroma-switch-razer-green-us-rz-tc-bw-60-rt_1589811671_gg.jpg",
+      "/images/productImages/Imageye - Teclado Mec_nico Gamer Razer BlackWidow_ Chroma_ Razer Switch Green_ US - RZ03-02860100-R3M1/teclado-mecanico-gamer-razer-blackwidow-chroma-switch-razer-green-us-rz-tc-bw-60-rt_1589811672_original.jpg"
+    ]
   },
   {
     "id": 4,
-    "name": "Headset Astro A50",
+    "name": "Headset Gamer Astro A50, Sem Fio+Base, PS4 e PC, Preto",
     "price": 2399.99,
-    "imagem": "images/imagensProdutos/1xg.webp" 
+    "imagens": [
+      "/images/productImages/Imageye - Headset Gamer Astro A50_ Sem Fio_Base/Headset-Gamer-Astro-A50-Sem-Fio-Base-PS4-e-PC-Preto_1672322893_gg.jpg",
+      "/images/productImages/Imageye - Headset Gamer Astro A50_ Sem Fio_Base/Headset-Gamer-Astro-A50-Sem-Fio-Base-PS4-e-PC-Preto_1672322904_gg.jpg",
+      "/images/productImages/Imageye - Headset Gamer Astro A50_ Sem Fio_Base/Headset-Gamer-Astro-A50-Sem-Fio-Base-PS4-e-PC-Preto_1672322915_gg.jpg",
+      "/images/productImages/Imageye - Headset Gamer Astro A50_ Sem Fio_Base/Headset-Gamer-Astro-A50-Sem-Fio-Base-PS4-e-PC-Preto_1672322925_gg.jpg",
+      "/images/productImages/Imageye - Headset Gamer Astro A50_ Sem Fio_Base/Headset-Gamer-Astro-A50-Sem-Fio-Base-PS4-e-PC-Preto_1672322936_gg.jpg"
+    ]
+
   }
 ]

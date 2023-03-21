@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="/stylesheets/global.css" />
     <link rel="stylesheet" href="/stylesheets/produto-especifico.css" />
     
   </head>
@@ -109,12 +108,12 @@
               <h2>
                 <% const preco = produto.price.toLocaleString('pt-br',{style:
                 'currency', currency: 'BRL'}); %>
-                <span id="preco-produto"><%= preco %></span><span>ou </span>
+                <span id="preco-produto"><%= preco %></span><span> ou </span>
               </h2>
               <h4>
                 <span id="parcela">12X</span> de
                 <span id="preco-produto-parcelado"
-                  ><%= (produto.price/12).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});%></span
+                  ><%= (produto.price*1.15/12).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});%></span
                 >
               </h4>
             </div>

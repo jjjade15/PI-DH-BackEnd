@@ -1,6 +1,8 @@
+const productsData = require("../database/produtos.json");
+
 const homeController = {
   showHome(req, res) {
-    res.render("index");
+    res.render("index", {produtos:productsData});
   }
 }
 
