@@ -7,22 +7,10 @@
     <title>Tech Star | os melhores produtos de tecnologia do mercado</title>
 
     <link rel="stylesheet" href="/stylesheets/home.css" />
-
-    <!--slick slider -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
-      integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"
-      integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="/stylesheets/card-produto.css">
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
   </head>
   <body>
     <!-- Partials do hamburguer menu e do header -->
@@ -205,28 +193,31 @@
 
     <!-- Partial footer -->
     <%- include("./partials/footer.ejs"); %>
-
+    
     <!-- Scripts do slick slider-->
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-    <script src="https://code.jquery.com/jquery-migrate-3.4.0.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"
-      integrity="sha512-WNZwVebQjhSxEzwbettGuQgWxbpYdoLf7mH+25A7sfQbbxKeS5SQ9QBf97zOY4nOlwtksgDA/czSTmfj4DUEiQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
+    
     <script>
       $(window).on("load", function() {
         $(".slider-container").slick({
         infinite: true,
-        speed: 750,
+        autoplay: true,
+        autoplaySpeed: 8000,
+        pauseOnHover: true,
+        pauseOnFocus: true,
+        speed: 900,
         dots: true,
         slidesToShow: 1,
-        adaptiveHeight: false,
         prevArrow:
           '<span class="prev_arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="seta-volta"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg></span>',
         nextArrow:
           '<span class="next_arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="seta-avanca"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg></span>',
+        adaptiveHeight: false,
+        arrow:true,     
+        cssEase: 'cubic-bezier(0.39, 0.58, 0.15, 0.98)'   
+        
       });
       })
 

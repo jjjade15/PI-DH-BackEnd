@@ -1,26 +1,24 @@
-@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;500;700;800;900&display=swap%22");
+@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;500;700;800;900&display=swap");
 
 * {
-  margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: Sofia Sans, sans-serif;
-  text-decoration: none;
+  margin: 0;
   list-style: none;
+  box-sizing: border-box;
 }
 
 :root {
-  --bg-color: var(--bg-color) #1d2631;
-  --tex-color: #0c0202;
-  --main-color: #34e7f8;
-  --other-color: #fcfcfc;
-  --h1-font: 4rem;
-  --p-font: 1rem;
+  font-size: 62.5%;
+  --transition-principal: 0.35s;
 }
 
 body {
-  color: var(--tex-color);
+  font-size: 1.6rem;
+  font-family: Sofia Sans, sans-serif;
+
+  background-color: #dceaff;
 }
+
 
 .container-principal {
   max-width: 1300px;

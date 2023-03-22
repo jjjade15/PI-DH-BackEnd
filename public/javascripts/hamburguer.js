@@ -93,4 +93,9 @@ function hamburguerMenuOficial(elAbre) {
   dropdownHanburguer();
 }
 
-hamburguerMenuOficial(document.querySelector(".hamburguer-mobile"));
+window.onload = function(){
+  document.querySelector(".push-menu-container").style.display = "flex";
+  hamburguerMenuOficial(document.querySelector(".hamburguer-mobile"));
+}
+
+
