@@ -1,4 +1,3 @@
-//Hamburguer2
 function hamburguerMenuOficial(elAbre) {
   //Abre e fecha o menu
   function menuContainer() {
@@ -29,7 +28,7 @@ function hamburguerMenuOficial(elAbre) {
     elAbre.addEventListener("click", mudaMenu);
     fechaMenu.addEventListener("click", mudaMenu);
     document.body.addEventListener("click", function (e) {
-      if (e.target === document.querySelector("#blur") && c === 1) mudaMenu();
+      if (e.target === document.querySelector("#blur")  && c === 1) mudaMenu();
     });
   }
 
@@ -69,6 +68,9 @@ function hamburguerMenuOficial(elAbre) {
     
           
           }, 10);
+
+
+
         }
 
         fechaSubMenu(subMenu); //Fecha o menu clicado
@@ -92,6 +94,7 @@ function hamburguerMenuOficial(elAbre) {
   menuContainer();
   dropdownHanburguer();
 }
+
 
 window.onload = function(){
   document.querySelector(".push-menu-container").style.display = "flex";

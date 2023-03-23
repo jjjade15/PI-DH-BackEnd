@@ -22,7 +22,7 @@ body {
 
 .container-principal {
   max-width: 1300px;
-  width: 100%;
+  width: 95%;
 
 
   margin: 0 auto;
@@ -37,6 +37,7 @@ body {
 .container-produto {
 
   padding: 36px;
+
   margin-bottom: 72px;
   background-color: rgb(255, 255, 255);
   border-radius: 6px;

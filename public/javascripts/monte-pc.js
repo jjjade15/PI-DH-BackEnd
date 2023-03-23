@@ -133,7 +133,7 @@ function MontePC() {
 
   //Eventos para fechar o menu
   document.body.addEventListener("click", function (e) {
-    if (e.target === document.querySelector("#blur")) mudaMenuMontePC();
+    if (e.target === document.querySelector("#blur") && menuContainer.classList.contains("aberto")) mudaMenuMontePC();
   });
   document
     .querySelector(".fecha-montepc")

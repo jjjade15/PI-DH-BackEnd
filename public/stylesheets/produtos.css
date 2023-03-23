@@ -28,11 +28,11 @@ main {
   max-width: 1620px;
 
   margin: 96px auto;
-  margin-bottom: 96px;
+  margin-bottom: 156px;
   
   display: grid;
   grid-template-columns: 270px 1fr;
-  grid-template-rows: 80px 1fr 1fr;
+  grid-template-rows: 80px 1fr 90px;
 
   column-gap: 20px;
 }
@@ -47,6 +47,7 @@ main .filtros-produtos {
   border-radius: 5px;
 
   padding: 16px 12px;
+
 
 }
 
@@ -174,84 +175,46 @@ main .area-produtos {
 
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  min-height: 700px;
 }
 
 
 /* *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*= Flex anuncio *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*= */
 .flex-anuncios{
-  
-
   gap: 1.25%;
-
   align-content: flex-start;
   justify-content: flex-start;
   display: flex;
   flex-wrap: wrap;
-
   padding: 24px 20px;
-
 }
-/* -=-=-=- MEDIA QUERIES -=-=-=- */
+
 
 .flex-anuncios .caixa-anuncio {
   max-width: 24%;
 }
-
-/* Computadores desktop de resolução média */
-@media (max-width: 1750px) {
-  .flex-anuncios {
-    gap: calc(4% / 4 + 4% / 12);
-  }
-
-  .flex-anuncios .caixa-anuncio {
-    height: 1.3333%;
-    max-width: 24% !important;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.071);
-    border: 1px solid rgba(138, 138, 138, 0.252);
-
-    border-radius: 5px;
-    display: grid;
-    grid-template-rows: 220px 1fr auto;
-    transition: 0.15s;
-  }
-}
+/* -=-=-=- MEDIA QUERIES -=-=-=- */
 /* Desktops ou tablets de resolução baixa */
-@media (max-width: 1320px) {
+@media (max-width: 1370px) {
   .flex-anuncios {
-    gap: calc(3.1% / 3 + 3.1% / 6);
+    gap: 1.5%;
   }
 
   .caixa-anuncio {
-    height: calc(1.5 * 0.323 * var(--width));
-    max-width: 32.3%;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.071);
-    border: 1px solid rgba(138, 138, 138, 0.252);
-
-    border-radius: 5px;
-    display: grid;
-    grid-template-rows: 220px 1fr auto;
-    transition: 0.15s;
+    max-width: 32.3333333% !important;
   }
 
 
 }
 
 /* Tablets e outros dispositivos mobiles */
-@media (max-width: 1077px) {
+@media (max-width: 1080px) {
   .flex-anuncios {
-    gap: calc(2% / 2 + 1%);
+    gap: 2%;
   }
 
   .caixa-anuncio {
-    height: calc(1.5 * 0.49 * var(--width));
-    max-width: 49%;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.071);
-    border: 1px solid rgba(138, 138, 138, 0.252);
-
-    border-radius: 5px;
-    display: grid;
-    grid-template-rows: 220px 1fr auto;
-    transition: 0.15s;
+    max-width: 48% !important;
   }
 
   .caixa-anuncio svg {
@@ -274,13 +237,18 @@ main .area-produtos {
 @media (max-width: 670px) {
   
   main {
-    width: 100% !important;
+    display: block;
   }
-  
-  main h1 {
-    font-size: 20px;
+  .area-produtos {
+    padding: 16px 24px;
+    min-height: 0;
   }
-
+  .header-filtros {
+    height: 80px;
+  }
+  .filtros-produtos {
+    display: none;
+  }
   .flex-anuncios {
     gap: 0;
     flex-direction: column;
@@ -289,15 +257,8 @@ main .area-produtos {
   }
 
   .caixa-anuncio {
-    width: 100%;
-    max-width: none;
-    box-sizing: initial;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.071);
-    border: 1px solid rgba(138, 138, 138, 0.252);
-
-    border-radius: 5px;
-    display: grid;
-    grid-template-rows: 220px 1fr auto;
+    width: 100% !important;
+    max-width: none !important;
     transition: 0.15s;
   }
 

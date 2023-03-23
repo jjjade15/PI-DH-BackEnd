@@ -17,8 +17,6 @@ router.get("/monteseupc", monteSeuPcController.showMonteSeuPc);
 
 const productsData = require("../database/produtos.json");
 
-router.get("/teste", (req, res) => {
-  res.render("partials/cardProduto", {produto: productsData[0]})
-})
+router.get("/teste", productController.filter);
 
 module.exports = router;

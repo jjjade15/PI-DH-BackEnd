@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tech Star | Os Melhores Produtos de Tecnologia do Mercado</title>
-    <link rel="stylesheet" href="/stylesheets/card-produto.css">
-    <link rel="stylesheet" href="/stylesheets/produtos.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.svg" />
+    <link rel="stylesheet" href="/stylesheets/card-produto.css" />
+    <link rel="stylesheet" href="/stylesheets/produtos.css" />
   </head>
   <body>
-    <%- include("./partials/hamburguer.ejs") %> <%-
-    include("./partials/header.ejs") %>
+    <%-include("./partials/header.ejs") %> <%-
+    include("./partials/hamburguer.ejs") %>
 
     <main>
       <div class="filtros-produtos">
@@ -66,7 +67,7 @@
 
         <details open>
           <summary>
-            Filtro 1
+            Fabricantes
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -109,11 +110,12 @@
             </label>
           </form>
         </details>
-
       </div>
 
       <div class="header-filtros">
-        <span>Mostrando <strong>1</strong> à <strong id="quantid-produtos"></strong></span>
+        <span
+          >Mostrando <strong>1</strong> à <strong id="quantid-produtos"></strong
+        ></span>
         <div class="filtro-header f1">
           <span class="titulo-filtro">
             <svg
@@ -133,13 +135,11 @@
 
             Ordenar Por:
           </span>
-          <form action="">
+          <form>
             <select name="" id="" class="select-ord">
-              <option value="">Mais Procurados</option>
-              <option value="">Menor Preço</option>
-              <option value="">Maior Preço</option>
-              <option value="">Mais Vendidos</option>
-              <option value="">Mais Recentes</option>
+              <option value="maisproc">Mais Procurados</option>
+              <option value="menorp">Menor Preço</option>
+              <option value="maiorp">Maior Preço</option>
             </select>
           </form>
         </div>
@@ -148,20 +148,15 @@
       <div class="area-produtos">
         <!-- Área Anúncios -->
         <div class="flex-anuncios">
-          <% for(let c = 0; c < 6; c++) { %> <%produtos.forEach((produto) => {
-            %> <%- include("./partials/cardProduto", {produto}); %> <% }); %>
-            <%}%>
+          <%produtos.forEach((produto) => { %> <%-
+          include("./partials/cardProduto", {produto}); %> <% }); %>
         </div>
       </div>
-
     </main>
 
-    
     <%- include("./partials/footer.ejs") %>
-    
-    <script>
-      const numProdutos = document.querySelector(".flex-anuncios").childElementCount;
-      document.querySelector("#quantid-produtos").innerText = numProdutos;
-    </script>
+
+    <script src="/javascripts/produtos.js"></script>
+  
   </body>
 </html>
