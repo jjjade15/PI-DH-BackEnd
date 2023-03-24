@@ -12,17 +12,17 @@ const productController = {
         const produtosMaiorP = [...productsData];
         produtosMaiorP.sort((a, b) => b.price - a.price)
         
-        res.render("produtos", { produtos: produtosMaiorP });
+        return res.render("produtos", { produtos: produtosMaiorP });
       }
       if(queryP === "menorp") {
         const produtosMenorP = [...productsData];
         produtosMenorP.sort((a, b) => a.price - b.price)
 
-        res.render("produtos", { produtos: produtosMenorP});
+        return res.render("produtos", { produtos: produtosMenorP});
       }
     }
 
-    res.render("produtos", { produtos: productsData });
+    return res.render("produtos", { produtos: productsData });
   },
 
   showById(req, res) {
@@ -36,8 +36,10 @@ const productController = {
       : res.status(404).send("Produto não encontrado");
   },
 
-  filter(req, res) {
-    res.json(productsData);
+  sendById(req, res) {
+    const idProd = Number(req.params.id);
+    const targetProduct = productsData.find((obj) => obj.id === idProd);
+    res.send(targetProduct);
   },
 };
 

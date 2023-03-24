@@ -42,6 +42,7 @@ body {
 .caixa-anuncio:hover {
   box-shadow: 0 0 15px rgba(134, 134, 134, 0.629);
   cursor: pointer;
+  transform: scale(1.003);
 }
 
 .caixa-anuncio svg {

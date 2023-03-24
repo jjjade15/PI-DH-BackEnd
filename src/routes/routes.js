@@ -17,6 +17,9 @@ router.get("/monteseupc", monteSeuPcController.showMonteSeuPc);
 
 const productsData = require("../database/produtos.json");
 
-router.get("/teste", productController.filter);
+//Rota para enviar o produto
+router.get("/enviaprod/:id", productController.sendById);
+
+router.get("/busca", homeController.search);
 
 module.exports = router;

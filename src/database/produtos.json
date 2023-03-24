@@ -4,7 +4,7 @@
     "name": "Apple notebook MacBook Air de 13 polegadas: Chip M2 da Apple com CPU de oito núcleos e GPU de oito núcleos, de 256 GB SSD - Cinza espacial",
     "departmento": "notebook",
     "sub-departamento": "macbook",
-    "marca": "apple",
+    "fabricante": "apple",
     "price": 9157.88,
     "imagens": [
       "/images/productImages/Imageye - MacBook Air Apple 13_6__ 2K QHD_ M2 _ KaBuM_/macbook-air-apple-13-6-2k-qhd-processador-m2-8gb-ram-ssd-256gb-ips-macos-spacial-grey-mlxw3bz-a_1671806121_gg.jpg",
@@ -19,7 +19,7 @@
     "name": "PC Gamer Acer Predator Orion PO5-620-BR12, Intel Core i5-11400, LED, NVIDIA GeForce RTX 3060, 16GB DDR4, SSD 512GB, Windows 11 Home, Preto",
     "departamento": "computador",
     "sub-departamento": "computador-gamer",
-    "marca": "acer",
+    "fabricante": "acer",
     "price": 99999.99,
     "imagens": [
       "/images/productImages/Imageye - PC Gamer Acer Predator/pc-gamer-acer-predator-orion-5000-i5-11400-le (1).jpg",
@@ -33,7 +33,7 @@
     "price": 749.99,
     "departamento": "perifericos",
     "sub-departamento": "teclado",
-    "marca": "razer",
+    "fabricante": "razer",
     "imagens": [
       "/images/productImages/Imageye - Teclado Mec_nico Gamer Razer BlackWidow_ Chroma_ Razer Switch Green_ US - RZ03-02860100-R3M1/teclado-mecanico-gamer-razer-blackwidow-chroma-switch-razer-green-us-rz-tc-bw-60-rt_1589811668_gg.jpg",
       "/images/productImages/Imageye - Teclado Mec_nico Gamer Razer BlackWidow_ Chroma_ Razer Switch Green_ US - RZ03-02860100-R3M1/teclado-mecanico-gamer-razer-blackwidow-chroma-switch-razer-green-us-rz-tc-bw-60-rt_1589811669_gg.jpg",
@@ -47,7 +47,7 @@
     "name": "Headset Gamer Astro A50, Sem Fio+Base, PS4 e PC, Preto",
     "departamento": "perifericos",
     "sub-departamento": "headset",
-    "marca": "astro",
+    "fabricante": "astro",
     "price": 2399.99,
     "imagens": [
       "/images/productImages/Imageye - Headset Gamer Astro A50_ Sem Fio_Base/Headset-Gamer-Astro-A50-Sem-Fio-Base-PS4-e-PC-Preto_1672322893_gg.jpg",
@@ -63,7 +63,7 @@
     "name": "Processador AMD Ryzen 5 5600G, 3.9GHz (4.4GHz Max Turbo), Cache 19MB, 6 Núcleos, 12 Threads, Vídeo Integrado, AM4",
     "departamento": "processador",
     "sub-departamento": "",
-    "marca": "amd",
+    "fabricante": "amd",
     "price": 849.99,
     "imagens": [
       "/images/productImages/Imageye - Processador AMD Ryzen 5 5600G e 6 N_cleos _ KaBuM_/processador-amd-ryzen-5-5600g-3-9ghz-4-4ghz-max-turbo-am4-video-integrado-6-nucleos-100-100000252box_1627505858_original.jpg",
@@ -78,7 +78,7 @@
     "name": "Processador AMD Ryzen 5 5600X, 3.7GHz (4.6GHz Max Turbo), Cache 35MB, 6 Núcleos, 12 Threads, AM4 - 100-100000065BOX",
     "departamento": "processador",
     "sub-departamento": "",
-    "marca": "amd",
+    "fabricante": "amd",
     "price": 1149.99,
     "imagens": [
       "/images/productImages/Imageye - Processador AMD Ryzen 5 5600X _ KaBuM_/processador-amd-ryzen-9-5950x-cache-72mb-3-4ghz-4-9ghz-max-turbo-am4-100-100000065box_1602603581_gg (1).jpg",
@@ -93,7 +93,7 @@
     "name": "Processador Intel Core i9-13900F, 5.6GHz Max Turbo, Cache 36MB, 24 Núcleos, 32 Threads, LGA 1700 - BX8071513900F",
     "departamento": "processador",
     "sub-departamento": "",
-    "marca": "intel",
+    "fabricante": "intel",
     "price": 3899.99,
     "imagens": [
       "/images/productImages/Imageye - Processador Intel Core i9-13900F LGA 1700 _ KaBuM_/processador-intel-core-i9-13900f-5-6ghz-max-turbo-cache-36mb-24-nucleos-32-threads-lga-1700-bx8071513900f_1672683560_gg.jpg",
@@ -105,7 +105,7 @@
     "name": "Processador Intel Core i5-10400F, 2.9GHz (4.3GHz Max Turbo), Cache 12MB, 6 Núcleos, 12 Threads, LGA 1200 - BX8070110400F",
     "departamento": "processador",
     "sub-departamento": "",
-    "marca": "intel",
+    "fabricante": "intel",
     "price": 899.99,
     "imagens": [
       "/images/productImages/Imageye - Processador Intel Core i5-10400F _ KaBuM_/processador-intel-core-i5-10400f-cache-12mb-2-9ghz-lga-1200-bx8070110400f_1589199927_gg.jpg",
@@ -119,7 +119,7 @@
     "name": "Placa de Vídeo RTX 3060 Asus Dual O12G V2 NVIDIA GeForce, 12GB GDDR6, LHR, DLSS, Ray Tracing - DUAL-RTX3060-O12G-V2",
     "departamento": "placadevideo",
     "sub-departamento": "",
-    "marca": "zotac",
+    "fabricante": "zotac",
     "price": 2489.99,
     "imagens": [
       "/images/productImages/Imageye - Placa de V_deo Asus NVIDIA RTX 3060 V2 _ KaBuM_/placa-de-video-asus-nvidia-dual-rtx-3060-o12g-v2-15-gbps-12gb-gddr6-ray-tracing-dlss-90yv0gb2-m0na10_1623244899_gg.jpg",
@@ -133,8 +133,8 @@
     "name": "Placa Mãe Asus TUF Gaming B550M-Plus, AMD AM4, mATX, DDR4",
     "departamento": "placadevideo",
     "sub-departamento": "",
-    "marca": "zotac",
-    "price": 3899.99,
+    "fabricante": "zotac",
+    "price": 1249.99,
     "imagens": [
       "/images/productImages/Imageye - Placa-M_e Asus TUF Gaming B550M-Plus AMD _ KaBuM_/placa-mae-asus-tuf-gaming-b550m-plus-amd-b550-matx-ddr4_1638447285_gg.jpg",
       "/images/productImages/Imageye - Placa-M_e Asus TUF Gaming B550M-Plus AMD _ KaBuM_/placa-mae-asus-tuf-gaming-b550m-plus-amd-b550-matx-ddr4_1638447286_original.jpg",

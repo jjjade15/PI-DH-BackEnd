@@ -7,12 +7,20 @@
     <title>Tech Star | os melhores produtos de tecnologia do mercado</title>
 
     <link rel="stylesheet" href="/stylesheets/home.css" />
-    <link rel="stylesheet" href="/stylesheets/card-produto.css">
+    <link rel="stylesheet" href="/stylesheets/card-produto.css" />
 
     <link rel="icon" type="image/x-icon" href="/images/favicon.svg" />
-    
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
+    />
   </head>
   <body>
     <!-- Partials do hamburguer menu e do header -->
@@ -195,37 +203,38 @@
 
     <!-- Partial footer -->
     <%- include("./partials/footer.ejs"); %>
-    
+
     <!-- Scripts do slick slider-->
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
-    
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"
+    ></script>
+
     <script>
-      $(window).on("load", function() {
+      $(window).on("load", function () {
         $(".slider-container").slick({
-        infinite: true,
-        autoplay: true,
-        autoplaySpeed: 8000,
-        pauseOnHover: true,
-        pauseOnFocus: true,
-        speed: 900,
-        dots: true,
-        slidesToShow: 1,
-        prevArrow:
-          '<span class="prev_arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="seta-volta"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg></span>',
-        nextArrow:
-          '<span class="next_arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="seta-avanca"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg></span>',
-        adaptiveHeight: false,
-        arrow:true,     
-        cssEase: 'cubic-bezier(0.39, 0.58, 0.15, 0.98)'   
-        
+          infinite: true,
+          autoplay: true,
+          autoplaySpeed: 8000,
+          pauseOnHover: true,
+          pauseOnFocus: true,
+          speed: 900,
+          dots: true,
+          slidesToShow: 1,
+          prevArrow:
+            '<span class="prev_arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="seta-volta"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg></span>',
+          nextArrow:
+            '<span class="next_arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="seta-avanca"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg></span>',
+          adaptiveHeight: false,
+          arrow: true,
+          cssEase: "cubic-bezier(0.39, 0.58, 0.15, 0.98)",
+        });
       });
-      })
 
-      $(".banners").show(); 
-     
+      $(".banners").show();
+
     </script>
-
   </body>
 </html>

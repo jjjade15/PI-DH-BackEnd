@@ -51,9 +51,6 @@ main .filtros-produtos {
 
 }
 
-
-
-
 .filtros-produtos h2 {
   color: rgb(44, 44, 44);
   display: flex;
@@ -67,6 +64,10 @@ main .filtros-produtos {
 .filtros-produtos h2 svg {
   width: 24px;
   color: rgb(16, 55, 92);
+}
+
+.filtros-produtos details[open] svg {
+  transform: rotate(180deg);
 }
 
 /* Filtro de preco*/
@@ -84,14 +85,17 @@ main .filtros-produtos {
 .filtros-produtos details {
 
   padding: 10px 0;
-  border-bottom: 1px solid rgba(170, 170, 170, 0.432);
+
   border-top: 1px solid rgba(170, 170, 170, 0.432);
+}
+.filtros-produtos details:last-child {
+  border-bottom: 1px solid rgba(170, 170, 170, 0.432);
 }
 .filtros-produtos details summary {
   font-size: 18px;
   color: rgb(73, 73, 73);
   font-weight: 600;
-
+  cursor: pointer;
   padding: 4px 0 ;
 
   padding-left: 16px;
@@ -109,7 +113,7 @@ main .filtros-produtos {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 4px 24px;
+  padding: 12px 24px;
 }
 
 .filtros-produtos details form label {
@@ -118,6 +122,10 @@ main .filtros-produtos {
 }
 
 
+.filtros-produtos .fabricantes form{
+  overflow-y: scroll;
+  height: 150px;
+}
 
 /* -=-=-=-  Header Filtros -=-=-=-*/
 main .header-filtros {
