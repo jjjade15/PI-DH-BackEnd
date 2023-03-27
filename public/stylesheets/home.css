@@ -228,7 +228,7 @@ main a {
 }
 
 /* Promoção anúncio */
-.ofertas .caixa-anuncio::before {
+/* .ofertas .caixa-anuncio::before {
   content: "-50%";
   border-radius: 0.5rem;
   position: absolute;
@@ -244,7 +244,7 @@ main a {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 .ofertas .flex-anuncios .caixa-anuncio .promo {
   display: none;
   position: absolute;

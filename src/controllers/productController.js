@@ -39,7 +39,7 @@ const productController = {
   sendById(req, res) {
     const idProd = Number(req.params.id);
     const targetProduct = productsData.find((obj) => obj.id === idProd);
-    res.send(targetProduct);
+    res.json(targetProduct);
   },
 };
 
