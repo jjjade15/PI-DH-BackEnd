@@ -16,6 +16,10 @@ app.use(express.json()); // middle que transforma Json requests and objetos no r
 const routes = require("./routes/routes.js"); //importa o módulo de rotas
 app.use(routes); //usa o route importado como middleware 
 
+app.use ((req, res, next) => {
+  res.status(404).render('not-found');	
+})
+
 app.listen(3000, () => {
   console.log("servidor iniciado");
 });
