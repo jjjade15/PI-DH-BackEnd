@@ -26,6 +26,8 @@ router.get("/busca", homeController.search);
 router.get("/carrinho", carrinhoController.mostraCarrinho);
 router.get("/enviarimagem/:id", carrinhoController.sendProductImage);
 
-
+router.get("/404", (req, res) => {
+  res.render("404")
+})
 
 module.exports = router;
