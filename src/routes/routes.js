@@ -29,14 +29,4 @@ router.get("/busca", homeController.search);
 router.get("/carrinho", carrinhoController.mostraCarrinho);
 router.get("/enviarimagem/:id", carrinhoController.sendProductImage);
 
-//Rota Cadastro
-router.get("/cadastro", cadastroController.showCadastro)
-router.post("/cadastro", cadastroController.cadastro)
-
-//Rota Login
-router.get("/login", loginController.showLogin)
-router.post("/login", loginController.login)
-
-
-
 module.exports = router;
