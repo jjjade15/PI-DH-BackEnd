@@ -5,6 +5,9 @@ const homeController = require("../controllers/homeController.js");
 const productController = require("../controllers/productController.js"); //Controller produto
 const monteSeuPcController = require("../controllers/monteSeuPcController.js");
 const carrinhoController = require("../controllers/carrinhoController.js");
+const loginController = require("../controllers/loginController.js");
+const cadastroController = require("../controllers/cadastroController.js");
+
 
 //Rota homepage
 router.get("/", homeController.showHome)
@@ -25,6 +28,14 @@ router.get("/busca", homeController.search);
 //Rotas do carrinho
 router.get("/carrinho", carrinhoController.mostraCarrinho);
 router.get("/enviarimagem/:id", carrinhoController.sendProductImage);
+
+//Rota Cadastro
+router.get("/cadastro", cadastroController.showCadastro)
+router.post("/cadastro", cadastroController.cadastro)
+
+//Rota Login
+router.get("/login", loginController.showLogin)
+router.post("/login", loginController.login)
 
 
 
