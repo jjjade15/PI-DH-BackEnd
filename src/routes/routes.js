@@ -5,6 +5,9 @@ const homeController = require("../controllers/homeController.js");
 const productController = require("../controllers/productController.js"); //Controller produto
 const monteSeuPcController = require("../controllers/monteSeuPcController.js");
 const carrinhoController = require("../controllers/carrinhoController.js");
+const loginController = require("../controllers/loginController.js");
+const cadastroController = require("../controllers/cadastroController.js");
+
 
 //Rota homepage
 router.get("/", homeController.showHome)
