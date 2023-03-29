@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrinho</title>
+    <link rel="stylesheet" href="/stylesheets/carrinho.css" />
+  </head>
+  <body>
+    <!-- Partials do hamburguer menu e do header -->
+    <%- include("./partials/header.ejs"); %> <%-
+    include("./partials/hamburguer.ejs"); %>
+    <div class="container-carrinho">
+      <div class="produtos-carrinho">
+        <div class="header-produtos">
+          <ul class="header-detalhes">
+            <li class="produto-header">Produto</li>
+            <li class="quantidade-header">Qntd</li>
+            <li class="preco-header">Preço</li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="produtos">
+
+
+        </div>
+
+        <button class="btn-limpar-carrinho">Limpar Carrinho</button>
+      </div>
+
+      <div class="detalhes-compra">
+        <div class="info-compra">
+          <h1>Resumo</h1>
+
+          <div class="total-container">
+            <div class="sub-total">
+              <span>Sub-total</span>
+              <span id="valor-subtotal">R$ 0,00</span>
+            </div>
+
+            <div class="frete">
+              <span>Frete</span>
+              <span id="opcao-frete"> -</span>
+            </div>
+            <form action="" class="form-cupom">
+              <input class="cupom-texto" id="" type="text" name="cupom" placeholder="Cupom Desconto">
+              <button type="submit" class="cupom-button">APLICAR</button>
+            </form>
+
+            <div class="total">
+              <span>Total</span>
+              <span id="valor-total">R$ 0,00</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-finalizar-compra">FINALIZAR COMPRA</button>
+      </div>
+    </div>
+
+    <!-- Partial footer -->
+    <%- include("./partials/footer.ejs"); %>
+
+    <script src="/javascripts/carrinho.js"></script>
+  </body>
+</html>

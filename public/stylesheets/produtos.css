@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;500;700;800;900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+  --transition-principal: 0.35s;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: Sofia Sans, sans-serif;
+
+  background-color: #dceaff;
+}
+
+
+
+
+/* -=-=- Área geral -=-=-*/
+main {
+  width: 95%;
+  max-width: 1620px;
+
+  margin: 96px auto;
+  margin-bottom: 156px;
+  
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  grid-template-rows: 80px 1fr 90px;
+
+  column-gap: 20px;
+}
+
+
+/* -=-=-=- Filtros Produtos -=-=-=- */
+main .filtros-produtos {
+  grid-row: 1 / -1;
+  grid-column: 1;
+
+  background-color: #fdfdfd;
+  border-radius: 5px;
+
+  padding: 16px 12px;
+
+
+}
+
+.filtros-produtos h2 {
+  color: rgb(44, 44, 44);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 22px;
+
+  margin-bottom: 18px;
+
+}
+.filtros-produtos h2 svg {
+  width: 24px;
+  color: rgb(16, 55, 92);
+}
+
+.filtros-produtos details[open] svg {
+  transform: rotate(180deg);
+}
+
+/* Filtro de preco*/
+.filtros-produtos  .filtro-preco h4 {
+  color: rgb(73, 73, 73);
+  height: 14px;
+  margin: 16px 0;
+}
+
+.filtros-produtos  .filtro-preco .range-slider {
+  width: 100%;
+}
+
+/* outros filtros*/
+.filtros-produtos details {
+
+  padding: 10px 0;
+
+  border-top: 1px solid rgba(170, 170, 170, 0.432);
+}
+.filtros-produtos details:last-child {
+  border-bottom: 1px solid rgba(170, 170, 170, 0.432);
+}
+.filtros-produtos details summary {
+  font-size: 18px;
+  color: rgb(73, 73, 73);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0 ;
+
+  padding-left: 16px;
+  padding-right: 20px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.filtros-produtos details summary svg {
+  width: 2.2rem;
+  color: rgb(16, 55, 92);
+}
+.filtros-produtos details form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 24px;
+}
+
+.filtros-produtos details form label {
+  display: flex;
+  gap: 5px;
+}
+
+
+.filtros-produtos .fabricantes form{
+  overflow-y: scroll;
+  height: 150px;
+}
+
+/* -=-=-=-  Header Filtros -=-=-=-*/
+main .header-filtros {
+  grid-row: 1;
+  grid-column: 2 / -1;
+
+  font-size: 18px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 1px solid rgb(212, 212, 212);
+  background-color: #fdfdfd;
+}
+
+.header-filtros .filtro-header {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.header-filtros .filtro-header .titulo-filtro {
+
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.header-filtros .filtro-header .titulo-filtro svg {
+  height: 18px;
+}
+
+.header-filtros .select-ord {
+  resize: none;
+  padding: 10px 0;
+  padding-left: 16px;
+  padding-right: 32px;
+  font-size: 16px;
+  border-radius: 0.25rem;
+  width:222px;
+  border: 1px solid rgba(104, 104, 104, 0.185);
+  background-color: white;
+  box-shadow: 0 0 12px rgba(119, 119, 119, 0.075);
+  font-family: sofia sans;
+  color: rgb(49, 49, 49);
+}
+
+/*  -=-=- Área Produto -=-=- */
+main .area-produtos {
+  grid-row: 2;
+  grid-column: 2 / -1;
+  background-color: #fdfdfd;
+
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  min-height: 700px;
+}
+
+
+
+
+/* *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*= Flex anuncio *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*= */
+.flex-anuncios{
+  gap: 1.25%;
+  align-content: flex-start;
+  justify-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 24px 20px;
+}
+
+
+.flex-anuncios .caixa-anuncio {
+  max-width: 24%;
+}
+/* -=-=-=- MEDIA QUERIES -=-=-=- */
+/* Desktops ou tablets de resolução baixa */
+@media (max-width: 1370px) {
+  .flex-anuncios {
+    gap: 1.5%;
+  }
+
+  .caixa-anuncio {
+    max-width: 32.3333333% !important;
+  }
+
+
+}
+
+/* Tablets e outros dispositivos mobiles */
+@media (max-width: 1080px) {
+  .flex-anuncios {
+    gap: 2%;
+  }
+
+  .caixa-anuncio {
+    max-width: 48% !important;
+  }
+
+  .caixa-anuncio svg {
+    display: inline-block;
+    width: 28px;
+    background-color: rgb(253, 253, 253);
+    box-sizing: initial;
+    padding: 5px;
+    border-radius: 10000px;
+    border: 1px solid rgba(128, 128, 128, 0.13);
+    display: inline-block;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+  }
+
+}
+
+/* Celulares */
+@media (max-width: 670px) {
+  
+  main {
+    display: block;
+  }
+  .area-produtos {
+    padding: 16px 24px;
+    min-height: 0;
+  }
+  .header-filtros {
+    height: 80px;
+  }
+  .filtros-produtos {
+    display: none;
+  }
+  .flex-anuncios {
+    gap: 0;
+    flex-direction: column;
+    padding: 0px;
+    border-radius: 5px;
+  }
+
+  .caixa-anuncio {
+    width: 100% !important;
+    max-width: none !important;
+    transition: 0.15s;
+  }
+
+}
+

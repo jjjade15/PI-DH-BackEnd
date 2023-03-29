@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adicionar produto</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.svg" />
+
+    <style>
+      .criar-produto-form {
+        display: flex;
+        flex-direction: column;
+
+        gap: 24px;
+        margin: 0 auto;
+        width: 60%;
+        padding: 24px;
+      }
+      .criar-produto-form > * {
+        display: flex;
+        flex-direction: column;
+      }
+      input {
+        padding: 5px 32px 5px 12px;
+
+        font-size: 17px;
+      }
+
+      .form-descricao {
+        min-height: 140px;
+        height: 100%;
+        resize: none;
+
+      }
+
+      .btn-criar {
+        padding: 12px;
+        max-width: 80px;
+        background-color: rgb(0, 148, 0);
+        color: white;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        display: block;
+        text-align: center;
+      }
+      .btn-criar:hover {
+        background-color: rgb(0, 105, 0);
+      }
+
+      .div-btn {
+        display: flex;
+        justify-content: flex-start !important;
+      }
+    </style>
+  </head>
+  <body>
+    <%-include("./partials/header.ejs") %> <%-
+    include("./partials/hamburguer.ejs") %>
+
+    <main>
+      <form
+        action="/criarproduto"
+        method="POST"
+        class="criar-produto-form"
+        enctype="multipart/form-data"
+      >
+        <div class="form-nome">
+          <label for="name">Nome:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Insira o nome do produto"
+          />
+        </div>
+        <div class="form-preco">
+          <label for="price">Preço:</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            placeholder="Insira o preco do produto"
+          />
+        </div>
+        <div class="form-fabricante">
+          <label for="fabricante">Fabricante:</label>
+          <input
+            type="text"
+            id="fabricante"
+            name="fabricante"
+            placeholder="Insira o preco do produto"
+          />
+        </div>
+        <div class="form-departamento">
+          <label for="departamento">Departamento:</label>
+          <input
+            type="text"
+            id="departamento"
+            name="departamento"
+            placeholder="Insira o preco do produto"
+          />
+        </div>
+        <div class="form-descricao">
+          <label for="description">Descrição:</label>
+          <textarea
+            name="description"
+            class="form-descricao"
+            cols="100"
+            rows="10"
+          ></textarea>
+        </div>
+        
+        <div class="">
+          <label for="imagens" class="form-label">Imagem:</label>
+          <input
+            type="file"
+            id="image"
+            name="imagens"
+            class="form-input"
+            accept="image/*"
+            multiple
+          />
+        </div>
+        <div class="div.btn"><button type="submit" class="btn-criar">CRIAR</button></div>
+        
+      </form>
+    </main>
+
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>
