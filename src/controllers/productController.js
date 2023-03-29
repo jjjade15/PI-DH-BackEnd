@@ -1,5 +1,8 @@
 const { render } = require("ejs");
 const { query } = require("express");
+const fs = require("fs");
+const path = require("path");
+
 const productsData = require("../database/produtos.json");
 
 const productController = {
@@ -33,7 +36,7 @@ const productController = {
 
     targetProduct
       ? res.render("produto", { produto: targetProduct })
-      : res.status(404).send("Produto não encontrado");
+      : res.status(404).render("404");
   },
   showCreateProduct(req, res) {
     res.render("adicionarProduto");
@@ -45,11 +48,23 @@ const productController = {
   },
   //Cria produto
   createProduct(req, res) {
-    console.log(req.body);
+    const produto = req.body;
 
-    //
-    res.render("adicionarProduto");
-  }
+    const imagensArray = req.files.map((file) => {
+      let caminhoImg = file.path.replace(/public/g, "");
+      caminhoImg = caminhoImg.replace(/\\/g, "/");
+
+      return caminhoImg;
+    });
+    produto.price = Number(produto.price);
+    produto.imagens = imagensArray;
+    produto.id = productsData.length + 1;
+    productsData.push(produto);
+    const filePath = path.join(__dirname, "../database/produtos.json");
+    fs.writeFileSync(filePath, JSON.stringify(productsData));
+
+    res.redirect(301, "/criarproduto");
+  },
 };
 
 module.exports = productController;
