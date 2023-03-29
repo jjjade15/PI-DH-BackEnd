@@ -66,11 +66,8 @@
     "fabricante": "amd",
     "price": 849.99,
     "imagens": [
-      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600G e 6 N_cleos _ KaBuM_/processador-amd-ryzen-5-5600g-3-9ghz-4-4ghz-max-turbo-am4-video-integrado-6-nucleos-100-100000252box_1627505858_original.jpg",
-      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600G e 6 N_cleos _ KaBuM_/processador-amd-ryzen-5-5600g-3-9ghz-4-4ghz-max-turbo-am4-video-integrado-6-nucleos-100-100000252box_1627505852_gg.jpg",
-      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600G e 6 N_cleos _ KaBuM_/processador-amd-ryzen-5-5600g-3-9ghz-4-4ghz-max-turbo-am4-video-integrado-6-nucleos-100-100000252box_1627505853_gg.jpg",
-      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600G e 6 N_cleos _ KaBuM_/processador-amd-ryzen-5-5600g-3-9ghz-4-4ghz-max-turbo-am4-video-integrado-6-nucleos-100-100000252box_1627505855_original.jpg",
-      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600G e 6 N_cleos _ KaBuM_/processador-amd-ryzen-5-5600g-3-9ghz-4-4ghz-max-turbo-am4-video-integrado-6-nucleos-100-100000252box_1627505856_original.jpg"
+      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600G e 6 N_cleos _ KaBuM_/processador-amd-ryzen-5-5600g.jpg",
+      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600G e 6 N_cleos _ KaBuM_/processador-amd-ryzen-5-5600g (2).jpg"
     ]
   },
   {
@@ -81,11 +78,11 @@
     "fabricante": "amd",
     "price": 1149.99,
     "imagens": [
-      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600X _ KaBuM_/processador-amd-ryzen-9-5950x-cache-72mb-3-4ghz-4-9ghz-max-turbo-am4-100-100000065box_1602603581_gg (1).jpg",
-      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600X _ KaBuM_/processador-amd-ryzen-5-5600x-3-7ghz-4-6ghz-max-turbo-cache-35mb-6-nucleos-12-threads-am4-100-100000065box_1676293148_gg.jpg",
-      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600X _ KaBuM_/processador-amd-ryzen-5-5600x-cache-35mb-3-7ghz-4-6ghz-max-turbo-am4-100-100000065box_1629139479_gg (1).jpg",
-      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600X _ KaBuM_/processador-amd-ryzen-9-5950x-cache-72mb-3-4ghz-4-9ghz-max-turbo-am4-100-100000065box_1602603580_gg.jpg",
-      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600X _ KaBuM_/processador-amd-ryzen-5-5600x-3-7ghz-4-6ghz-max-turbo-cache-35mb-6-nucleos-12-threads-am4-100-100000065box_1676293147_gg.jpg"
+      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600X _ KaBuM_/processador-amd-ryzen (2).jpg",
+      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600X _ KaBuM_/processador-amd-ryzen.jpg",
+      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600X _ KaBuM_/processador-amd-ryzen-5-5600x (2).jpg",
+      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600X _ KaBuM_/processador-amd-ryzen-5-5600x (3).jpg",
+      "/images/productImages/Imageye - Processador AMD Ryzen 5 5600X _ KaBuM_/processador-amd-ryzen-5-5600x.jpg"
     ]
   },
   {
@@ -96,8 +93,9 @@
     "fabricante": "intel",
     "price": 3899.99,
     "imagens": [
-      "/images/productImages/Imageye - Processador Intel Core i9-13900F LGA 1700 _ KaBuM_/processador-intel-core-i9-13900f-5-6ghz-max-turbo-cache-36mb-24-nucleos-32-threads-lga-1700-bx8071513900f_1672683560_gg.jpg",
-      "/images/productImages/Imageye - Processador Intel Core i9-13900F LGA 1700 _ KaBuM_/processador-intel-core-i9-13900f-5-6ghz-max-turbo-cache-36mb-24-nucleos-32-threads-lga-1700-bx8071513900f_1672683558_gg.jpg"
+      "/images/productImages/Imageye - Processador Intel Core i9-13900F LGA 1700 _ KaBuM_/processador-intel-core-i9-13900f.jpg",
+      "/images/productImages/Imageye - Processador Intel Core i9-13900F LGA 1700 _ KaBuM_/processador-intel-core-i9-13900f.jpg"
+
     ]
   },
   {
@@ -108,10 +106,10 @@
     "fabricante": "intel",
     "price": 899.99,
     "imagens": [
-      "/images/productImages/Imageye - Processador Intel Core i5-10400F _ KaBuM_/processador-intel-core-i5-10400f-cache-12mb-2-9ghz-lga-1200-bx8070110400f_1589199927_gg.jpg",
-      "/images/productImages/Imageye - Processador Intel Core i5-10400F _ KaBuM_/processador-intel-core-i5-10400f-cache-12mb-2-9ghz-4-3ghz-max-turbo-lga-1200-bx8070110400f_1629124876_gg.jpg",
-      "/images/productImages/Imageye - Processador Intel Core i5-10400F _ KaBuM_/processador-intel-core-i5-10400f-cache-12mb-2-9ghz-4-3ghz-max-turbo-lga-1200-bx8070110400f_1629124877_gg.jpg",
-      "/images/productImages/Imageye - Processador Intel Core i5-10400F _ KaBuM_/processador-intel-core-i5-10400f-cache-12mb-2-9ghz-lga-1200-bx8070110400f_1589199928_original.jpg"
+      "/images/productImages/Imageye - Processador Intel Core i5-10400F _ KaBuM_/processador-intel-core-i5-10400f (3).jpg",
+      "/images/productImages/Imageye - Processador Intel Core i5-10400F _ KaBuM_/processador-intel-core-i5-10400f (4).jpg",
+      "/images/productImages/Imageye - Processador Intel Core i5-10400F _ KaBuM_/processador-intel-core-i5-10400f.jpg",
+      "/images/productImages/Imageye - Processador Intel Core i5-10400F _ KaBuM_/processador-intel-core-i5-10400f (2).jpg"
     ]
   },
   {

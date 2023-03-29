@@ -1,6 +1,8 @@
+//Módulos
 const express = require("express");
-const router = express.Router();
+const multer = require("multer");
 
+//Controllers
 const homeController = require("../controllers/homeController.js");
 const productController = require("../controllers/productController.js"); //Controller produto
 const monteSeuPcController = require("../controllers/monteSeuPcController.js");
@@ -9,12 +11,31 @@ const loginController = require("../controllers/loginController.js");
 const cadastroController = require("../controllers/cadastroController.js");
 
 
+//Código principal
+const router = express.Router();
+
+//Multer
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'public/images/productImages/multerImages');
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname)
+  }
+})
+const upload = multer({ storage: storage });
+
+
 //Rota homepage
 router.get("/", homeController.showHome)
 
 //Rotas produto
+//get
 router.get("/produto", productController.showAll);
 router.get("/produto/:id", productController.showById);
+router.get("/criarproduto", productController.showCreateProduct)
+//post
+router.post("/criarproduto", upload.any(), productController.createProduct);
 
 //Rotas monteSeuPc
 router.get("/monteseupc", monteSeuPcController.showMonteSeuPc);

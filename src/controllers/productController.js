@@ -10,15 +10,15 @@ const productController = {
 
       if (queryP === "maiorp") {
         const produtosMaiorP = [...productsData];
-        produtosMaiorP.sort((a, b) => b.price - a.price)
-        
+        produtosMaiorP.sort((a, b) => b.price - a.price);
+
         return res.render("produtos", { produtos: produtosMaiorP });
       }
-      if(queryP === "menorp") {
+      if (queryP === "menorp") {
         const produtosMenorP = [...productsData];
-        produtosMenorP.sort((a, b) => a.price - b.price)
+        produtosMenorP.sort((a, b) => a.price - b.price);
 
-        return res.render("produtos", { produtos: produtosMenorP});
+        return res.render("produtos", { produtos: produtosMenorP });
       }
     }
 
@@ -35,12 +35,21 @@ const productController = {
       ? res.render("produto", { produto: targetProduct })
       : res.status(404).send("Produto não encontrado");
   },
-
+  showCreateProduct(req, res) {
+    res.render("adicionarProduto");
+  },
   sendById(req, res) {
     const idProd = Number(req.params.id);
     const targetProduct = productsData.find((obj) => obj.id === idProd);
     res.json(targetProduct);
   },
+  //Cria produto
+  createProduct(req, res) {
+    console.log(req.body);
+
+    //
+    res.render("adicionarProduto");
+  }
 };
 
 module.exports = productController;
