@@ -1,30 +1,19 @@
 //Módulos
 const express = require("express");
-const multer = require("multer");
+
+//Middlewares
+const upload = require("../middlewares/upload.js");
 
 //Controllers
 const homeController = require("../controllers/homeController.js");
 const productController = require("../controllers/productController.js"); //Controller produto
 const monteSeuPcController = require("../controllers/monteSeuPcController.js");
 const carrinhoController = require("../controllers/carrinhoController.js");
-const loginController = require("../controllers/loginController.js");
-const cadastroController = require("../controllers/cadastroController.js");
+const userController = require("../controllers/userController.js");
 
 
 //Código principal
 const router = express.Router();
-
-//Multer
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'public/images/productImages/multerImages');
-  },
-  filename: function(req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname)
-  }
-})
-const upload = multer({ storage: storage });
-
 
 //Rota homepage
 router.get("/", homeController.showHome)
@@ -56,12 +45,12 @@ router.get("/carrinho", carrinhoController.mostraCarrinho);
 
 
 //Rota Cadastro
-router.get("/cadastro", cadastroController.showCadastro)
-router.post("/cadastro", cadastroController.cadastro)
+router.get("/cadastro", userController.showCadastro)
+router.post("/cadastro", userController.cadastro)
 
 //Rota Login
-router.get("/login", loginController.showLogin)
-router.post("/login", loginController.login)
+router.get("/login", userController.showLogin)
+router.post("/login", userController.login)
 
 
 module.exports = router;
