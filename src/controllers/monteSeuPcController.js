@@ -4,8 +4,13 @@ const monteSeuPcController = {
   showMonteSeuPc(req, res) {
     res.render("monteSeuPc");
   },
-  sendDataByType(req, res) {
+  sendProductByDep(req, res) {
     
+    const departamento = req.params.dep.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w\s]/g, '');
+    console.log(departamento)
+    const produtosDep = productsData.filter((prod) => prod["sub-departamento"] === departamento);
+
+    res.json(produtosDep);
   }
 }
 

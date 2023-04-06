@@ -1,59 +1,85 @@
-'use strict'
+"use strict";
 
 /* 
  FAZER CADA CAIXA TER UM VALOR PRÓPRIO E CRIAR A FUNÇÃO SOMA TOTAL QUE SOMA O VALOR DE TODAS AS CAIXAS
 */
 
-import {
-  realParaNumber,
-  numberParaReal
-} from "./moeda.js";
+import { realParaNumber, numberParaReal } from "./moeda.js";
 
 function MontePC() {
   const menuContainer = document.querySelector(".menu_monte_pc");
-  const valorTotalEl = document.querySelector(".valor-total .total")
+  const valorTotalEl = document.querySelector(".valor-total .total");
   const caixaProds = menuContainer.querySelector(".produtos-montepc");
   const botaoAvancar = menuContainer.querySelector(".btn-avancar");
-  
+  const selectFabricantes = menuContainer.querySelector("#marcas-prod");
+
   let caixaOpcaoSelecionada;
   let valorTotal = 0;
 
   //Função que mostra o conteúdo dentro do menu
   const conteudoMenu = (tipoProd) => {
-    const tituloMenu = menuContainer.querySelector("#titulo-produto");
-
     //Muda o titulo do menu
+    const tituloMenu = menuContainer.querySelector("#titulo-produto");
     tituloMenu.textContent = tipoProd;
 
-    //Coloca os produtos de teste dentro da caixa de produtos
-    const valores = [200, 500, 1000, 345, 923, 120, 2399, 740];
+    //Puxa os dados do produto
+    let produtosDados;
+    const fabricantes = new Set();
+    fetch(`/monteseupc/${tipoProd.toLowerCase()}`)
+      .then((resp) => resp.json())
+      .then((prods) => {
+        produtosDados = prods;
 
-    for (let c = 0; c < 8; c++) {
-      caixaProds.insertAdjacentHTML(
-        "beforeend",
-        `
-      <div class="produto">
-      <input type="radio" name="produto" id="" />
+        //Puxa as imagens
+        prods.forEach((prod, i) => {
+          fetch(`/enviarimagem/${prod.id}`)
+            .then((resp) => resp.blob())
+            .then((blob) => {
+              const imgProd = URL.createObjectURL(blob);
+              caixaProds.insertAdjacentHTML(
+                "beforeend",
+                `
+                <div class="produto">
+                  <input type="radio" name="produto" id="" />
+          
+                  <!-- Infos do produto -->
+                <div class="info-produto">
+                  <div class="foto-produto"><img src="${imgProd}" alt=""></div>
+          
+                  <div class="descricao">
+                    <h2>
+                      ${prod.name}
+                    </h2>
+                    <span class="preco"
+                      ><span id="preco-produto">${prod.price}</span>
+                      <span class="preco-parcelado"></span
+                    ></span>
+                    </div>
+                  </div>
+                  <button>Selecionar</button>
+                </div>
+              
+              `
+              );
 
-      <!-- Infos do produto -->
-      <div class="info-produto">
-        <div class="foto-produto">FOTO PRODUTO ${c + 1}</div>
+              fabricantes.add(prod.fabricante);
+            })
+            .finally(() => {
+              if (i === prods.length - 1) {
+                fabricantes.forEach((fab) => {
+                  selectFabricantes.insertAdjacentHTML(
+                    "beforeend",
+                    `
+                  <option value="${fab}">${fab.toUpperCase()}</option>
+                  `
+                  );
+                });
+              }
+            });
+        });
+      });
 
-        <div class="descricao">
-          <h2>
-            PRODUTO ${c + 1} Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Sunt natus laborum, iure facilis minima recusandae et!!
-          </h2>
-          <span class="preco"
-            ><span id="preco-produto">R$ ${valores[c]},00</span>
-            <span class="preco-parcelado"></span
-          ></span>
-        </div>
-      </div>
-      <button>Selecionar</button>
-    </div>`
-      );
-    }
+    /* Adicionar as marcas*/
   };
 
   //Função que deixa como selected o produto clicado
@@ -79,17 +105,13 @@ function MontePC() {
 
     //Procura o selected
     const produto = menuContainer.querySelector(".produto.selected");
-    
-    if (!produto) 
-      return; 
-    
+
+    if (!produto) return;
+
     //Leva as informações para a caixa selecionada
 
-
     //Soma o valor total
-    const somaTotal = () => {
-
-    }
+    const somaTotal = () => {};
 
     //Fecha o menu
     mudaMenuMontePC();
@@ -115,7 +137,10 @@ function MontePC() {
       document.body.style.overflow = "visible";
       menuContainer.classList.remove("aberto");
       document.querySelector("#blur").remove();
+      //Remove todos os produtos recebidos
       caixaProds.innerHTML = "";
+      selectFabricantes.innerHTML = "";
+      selectFabricantes.innerHTML = `<option value="" selected>Todas as Marcas</option>`;
     }
   };
 
@@ -133,7 +158,11 @@ function MontePC() {
 
   //Eventos para fechar o menu
   document.body.addEventListener("click", function (e) {
-    if (e.target === document.querySelector("#blur") && menuContainer.classList.contains("aberto")) mudaMenuMontePC();
+    if (
+      e.target === document.querySelector("#blur") &&
+      menuContainer.classList.contains("aberto")
+    )
+      mudaMenuMontePC();
   });
   document
     .querySelector(".fecha-montepc")

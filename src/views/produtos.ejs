@@ -34,39 +34,82 @@
         <details open class="filtro-preco">
           <summary>
             Preço
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              />
             </svg>
-                      
           </summary>
-          <form class="deslizador-preco">
-            <h4>Intervalo de preco</h4>
+          <!-- Pega o maior e menor preço -->
 
-            <div class="range-slider">
+          <form class="deslizador-preco" class="wrapper">
+            <div class="slider">
+              <div class="progress"></div>
+            </div>
+            <div class="range-input">
               <input
                 type="range"
-                class="min-price"
-                value="100"
-                min="10"
-                max="500"
-                step="10"
+                class="range-min"
+                min="0"
+                max="10000"
+                value="2500"
+                step="100"
+              />
+              <input
+                type="range"
+                class="range-max"
+                min="0"
+                max="10000"
+                value="7500"
+                step="100"
               />
             </div>
+            <div class="price-input">
+              <div class="field">
+                <span>Min</span>
+                <input type="number" class="input-min" value="2500" />
+              </div>
+              <div class="separator">-</div>
+              <div class="field">
+                <span>Max</span>
+                <input type="number" class="input-max" value="7500" />
+              </div>
+            </div>
+
+            <button class="btn-aplicar">aplicar</button>
           </form>
         </details>
 
         <details class="fabricantes" open>
           <summary>
             Fabricantes
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              />
             </svg>
-                      
           </summary>
           <form action="opcoes-filtro">
-
-            <% const setFabs = new Set(produtos.map((prod) => prod.fabricante)) %>
-            <% setFabs.forEach((fab) => { %> 
+            <% const setFabs = new Set(produtos.map((prod) => prod.fabricante))
+            %> <% setFabs.forEach((fab) => { %>
             <label for="">
               <input type="checkbox" name="<%=fab%>" id="" />
               <%=fab%>
@@ -77,9 +120,7 @@
       </div>
 
       <div class="header-filtros">
-        <span
-          >Mostrando <strong id="quantid-produtos"></strong
-        > produtos</span>
+        <span>Mostrando <strong id="quantid-produtos"></strong> produtos</span>
         <div class="filtro-header f1">
           <span class="titulo-filtro">
             <svg
@@ -112,8 +153,8 @@
       <div class="area-produtos">
         <!-- Área Anúncios -->
         <div class="flex-anuncios">
-          <%produtos.forEach((produto) => { %> 
-          <%- include("./partials/cardProduto", {produto}); %> <% }); %>
+          <%produtos.forEach((produto) => { %> <%-
+          include("./partials/cardProduto", {produto}); %> <% }); %>
         </div>
       </div>
     </main>
@@ -121,6 +162,56 @@
     <%- include("./partials/footer.ejs") %>
 
     <script src="/javascripts/produtos.js"></script>
-  
+
+    <script>
+      const rangeInput = document.querySelectorAll(".range-input input"),
+        priceInput = document.querySelectorAll(".price-input input"),
+        progress = document.querySelector(".slider .progress");
+      
+      let priceGap = 1000;
+
+      priceInput.forEach((input) => {
+        input.addEventListener("input", (e) => {
+          // getting two inputs value and parsing them to number
+          let minVal = parseInt(priceInput[0].value),
+            maxVal = parseInt(priceInput[1].value);
+
+          if (maxVal - minVal >= priceGap && maxVal <= 10000) {
+            if (e.target.className === "input-min") {
+              //if active input is min input
+              rangeInput[0].value = minVal;
+              progress.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+            } else {
+              rangeInput[1].value = maxVal;
+              progress.style.right =
+                100 - (maxVal / rangeInput[1].max) * 100 + "%";
+            }
+          }
+        });
+      });
+
+      rangeInput.forEach((input) => {
+        input.addEventListener("input", (e) => {
+          // getting two inputs value and parsing them to number
+          let minVal = parseInt(rangeInput[0].value),
+            maxVal = parseInt(rangeInput[1].value);
+
+          if (maxVal - minVal < priceGap) {
+            if (e.target.className === "range-min") {
+              //if active slider is min s
+              rangeInput[0].value = maxVal - priceGap;
+            } else {
+              rangeInput[1].value = minVal + priceGap;
+            }
+          } else {
+            priceInput[0].value = minVal;
+            priceInput[1].value = maxVal;
+            progress.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+            progress.style.right =
+              100 - (maxVal / rangeInput[1].max) * 100 + "%";
+          }
+        });
+      });
+    </script>
   </body>
 </html>

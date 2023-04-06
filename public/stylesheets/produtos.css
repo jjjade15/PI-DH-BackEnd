@@ -20,8 +20,6 @@ body {
 }
 
 
-
-
 /* -=-=- Área geral -=-=-*/
 main {
   width: 95%;
@@ -274,3 +272,104 @@ main .area-produtos {
 
 }
 
+/* Deslizador de Preço */
+
+.price-input{
+
+  display: flex;
+
+}
+.price-input .field{
+  height: 45px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.field input{
+  width: 100%;
+  height: 100%;
+  outline: none;
+  font-size: 14px;
+  text-align: center;
+  margin-left: 12px;
+  border-radius: 5px;
+  border: 1px solid #999;
+  -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+}
+.price-input .separator{
+  width: 60px;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+}
+.slider{
+  margin-top: 16px;
+
+  height: 5px;
+  border-radius: 5px;
+  background: #ddd;
+  position: relative;
+}
+.slider .progress{
+  height: 5px;
+  left: 25%;
+  right: 25%;
+  position: absolute;
+  border-radius: 5px;
+  background: #002168;
+}
+.range-input{
+  position: relative;
+  margin-bottom: 32px;
+}
+.range-input input{
+  position: absolute;
+  top: -10px;
+  height: 5px;
+  width: 100%;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb{
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  background: #002168;
+  
+
+}
+input[type="range"]::-moz-range-thumb{
+  height: 17px;
+  width: 17px;
+  border: none;
+  border-radius: 50%;
+  pointer-events: auto;
+  -moz-appearance: none;
+  background: #28707b;
+}
+
+.btn-aplicar {
+  margin-top: 24px;
+  display: inline-block;
+  width:fit-content;
+  padding: 6px 12px;
+
+  border: none;
+  font-size: 17px;
+  background-color: #002168;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-aplicar:hover {
+  opacity: 0.95;
+}

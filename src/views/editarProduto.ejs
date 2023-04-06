@@ -89,12 +89,12 @@
     <main>
 
       <form
-        action="/criarproduto"
+        action="/produto/<%=produto.id%>?_method=PUT"
         method="POST"
         class="criar-produto-form"
         enctype="multipart/form-data"
       >
-        <h1>Criação de Produto</h1>
+        <h1>Edição de Produto</h1>      
         <div class="form-nome">
           <label for="name">Nome:</label>
           <input
@@ -102,6 +102,7 @@
             id="name"
             name="name"
             placeholder="Insira o nome do produto"
+            value="<%= produto.name %>"
           />
         </div>
         <div class="form-preco">
@@ -111,6 +112,7 @@
             id="price"
             name="price"
             placeholder="Insira o preco do produto"
+            value="<%=produto.price%>"
           />
         </div>
         <div class="form-fabricante">
@@ -120,12 +122,12 @@
             id="fabricante"
             name="fabricante"
             placeholder="Insira o preco do produto"
+            value="<%=produto.fabricante%>"
           />
         </div>
         <div class="form-departamento">
           <label for="departamento">Departamento:</label>
-          <select name="departamento" id="select-dep" class="dep">
-            <option value="" disabled selected hidden>Selecione</option>
+          <select name="departamento" id="select-dep" class="dep"  data-dep="<%=produto.departamento%>">
             <option value="computador">Computador</option>
             <option value="hardware">Hardware</option>
             <option value="periferico">Periféricos</option>
@@ -137,13 +139,14 @@
             <option value="games">Games</option>
           </select>
         </div>
-        <div class="form-sub-departamento">
-          <label for="sub-departamento">Sub-Departamento:</label>
+        <div class="form-sub-departamento" >
+          <label for="departamento">Sub-Departamento:</label>
           <select
             name="sub-departamento"
             id="select-sub-dep"
-
+            disabled
             class="dep"
+            data-dep="<%= produto["sub-departamento"] %>"
           >
 
           </select>
@@ -155,7 +158,7 @@
             class="form-descricao"
             cols="100"
             rows="10"
-          ></textarea>
+          ><%=produto.description%></textarea>
         </div>
 
         <div class="">
@@ -169,8 +172,10 @@
             multiple
           />
         </div>
+
+
         <div class="div.btn">
-          <button type="submit" class="btn-criar">CRIAR</button>
+          <button type="submit" class="btn-criar">SALVAR</button>
         </div>
       </form>
     </main>
@@ -183,10 +188,33 @@
     const subDepForm = document.querySelector("#select-sub-dep");
     const formSubDep = document.querySelector(".form-sub-departamento");
 
-    depForm.innerHTML
-    depForm.addEventListener("change", function (e) {
-      console.log(this.value);
-      switch (this.value) {
+    function init() {
+      const depProd = depForm.dataset.dep;
+      console.log(depProd);
+      const options = document.querySelectorAll("#select-dep option");
+      for(let op of options) {
+        if(op.value === depProd) {
+          op.setAttribute("selected", "");
+          console.log(op);
+          break;
+        }
+      } 
+
+      alteraDepartamento();
+      
+      const subDepProd = subDepForm.dataset.dep;
+      const options2 = document.querySelectorAll("#select-sub-dep option")
+      console.log(subDepProd)
+      options2.forEach((op) => {
+        if(op.value === subDepProd) {
+          op.setAttribute("selected", "");
+        }
+      })
+    }
+    init();
+    function alteraDepartamento() {
+      console.log(depForm)
+      switch (depForm.value) {
         case "computador": {
           formSubDep.style.display = "flex";
           subDepForm.removeAttribute("disabled")
@@ -242,6 +270,8 @@
           `;
         }
       }
-    });
+    }
+    depForm.innerHTML
+    depForm.addEventListener("change", alteraDepartamento);
   </script>
 </html>

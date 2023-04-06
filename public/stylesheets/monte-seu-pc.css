@@ -355,7 +355,10 @@ main .valor-total button:hover {
   display: flex;
   align-items: center;
 }
-
+.produtos-montepc .produto .info-produto .foto-produto img {
+  height: 100%;
+  width:  100%;
+}
 .produtos-montepc .produto .info-produto .descricao {
 
   padding: 24px 12px;

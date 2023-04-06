@@ -160,71 +160,11 @@
       <section class="container-descricao">
         <h3>Descrição</h3>
         <div>
-          <br />
-          <span style="font-weight: bold">Lorem ipsum dolor sit amet consectetur.</span><br />
-          <br />
-          Marca: <%=produto.fabricante%><br />
-          Modelo: 0543<br />
-          <br />
-          <span style="font-weight: bold">Itens Inclusos:</span><br />
-          - 1 x Teclado<br />
-          - 1 x Mouse<br />
-          - 1 x Headset<br />
-          <br />
-          <span style="font-weight: bold">Headset</span><br />
-          <br />
-          - Haste Regulável<br />
-          - Controle de Volume<br />
-          - Microfone Integrado<br />
-          - Qualidade de reprodução de som e captação de aúdio<br />
-          - Possui 2 cabos P2: 1 para o fone e o outro para microfone<br />
-          <br />
-          <span style="font-weight: bold">Auto Falante</span><br />
-          - Impedância: 32?<br />
-          - Frequência de Resposta: 20Hz~20KHz<br />
-          - Sensibilidade: 103db ± 2dB<br />
-          - Potência Máxima: 20mW<br />
-          <span style="font-weight: bold">Microfone</span>:<br />
-          - Impedância: 2.2K?<br />
-          - Sensibilidade: -58dB ± 2dB<br />
-          - Frequência: 20Hz~20KHz<br />
-          - Potência Máxima: 20mW<br />
-          - Tensão padrão: 1.3V<br />
-          - Comprimento do Cabo: 180cm<br />
-          - Material do Cabo: PVC<br />
-          <br />
-          <br />
-          <span style="font-weight: bold">Mouse</span><br />
-          <br />
-          - Conexão USB<br />
-          - Luzes de Led (7 cores) efeito arco-íris<br />
-          - Tecnologia óptica<br />
-          - Posicionamento de precisão<br />
-          - Instalação Plug and Play<br />
-          - Sinal de transmissão mais ágil e estável<br />
-          - Projetado para todos os tipos de Gamers<br />
-          - Com botões extras de DPI, Page Front e Page Back<br />
-          - Comprimento do cabo: 135cm<br />
-          - Resolução: 800/1200/1600/2400 DPI<br />
-          <br />
-          <br />
-          <span style="font-weight: bold">Teclado</span><br />
-          <br />
-          - Conexão USB<br />
-          - Teclas retroiluminadas (7 cores) efeito arco-iris<br />
-          - Produto altamente resistente<br />
-          - Padrão ABNT2 - com teclas "ç" e "Alt Gr" <br />
-          - Para ativar as luzes do teclado, pressione a tecla ScrLk (Scroll
-          Lock)<br />
-          - 105 Teclas retroiluminadas<br />
-          - Voltagem: 5V | Corrente: 100mA<br />
-          - Compatível com Windows 7/8/10<br />
-          - Quantas vezes cada tecla pode ser usada: 3 milhões de vezes<br />
-          - Pressão de tecla: 2,2 ± 0,5 mm<br />
-          - Pressão de teclado: 50g<br />
-          - Comprimento do cabo: 135cm<br />
-          - Material: Plástico resistente<br />
-          <br />
+          <%if(produto.description) { %>
+            <%- produto.description %>
+          <%}else {%>
+            <%- include("./partials/loremDesc.ejs")%>
+          <%}%>
         </div>
       </section>
     </main>

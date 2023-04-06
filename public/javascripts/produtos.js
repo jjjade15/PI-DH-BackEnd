@@ -1,7 +1,7 @@
 //Mostra a quantidade de resultados encontrados
 const xboxfab = document.querySelector(".fabricantes form") //filtro produto
 const fabricantes = document.querySelectorAll(".fabricantes form input") //filtro produto
-
+const aplFiltroPreco = document.querySelector(".btn-aplicar");
 
 const numProdutos = document.querySelector(".flex-anuncios").childElementCount;
 document.querySelector("#quantid-produtos").innerText = numProdutos;
@@ -22,8 +22,6 @@ const fabSelecionado = urlSite.searchParams.get("fabricante");
 
 //Deixa check box selecionada
 fabricantes.forEach((fab) =>{
-  console.log(fabSelecionado)
-
     if(fab.name == fabSelecionado){
       fab.checked = true
       
@@ -49,4 +47,17 @@ xboxfab.addEventListener("change", function(e) {
     
     
   }
+})
+
+//Filtro de preço
+aplFiltroPreco.addEventListener("click", function(e) {
+  e.preventDefault();
+
+  const minInput = document.querySelector(".input-min");
+  const maxInput = document.querySelector(".input-max");
+
+  const max = Number(maxInput.value);
+  const min = Number(minInput.value);
+
+  console.log(minInput.value, minInput)
 })

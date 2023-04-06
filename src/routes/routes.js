@@ -34,12 +34,17 @@ router.get("/", homeController.showHome)
 router.get("/produto", productController.showAll);
 router.get("/produto/:id", productController.showById);
 router.get("/criarproduto", productController.showCreateProduct)
+router.get("/editarproduto/:id", productController.showUpdateProduct);
+router.get("/enviarimagem/:id", productController.sendProductImage); // Envia img produto
 //post
 router.post("/criarproduto", upload.any(), productController.createProduct);
+//put
+router.put("/produto/:id", upload.any(), productController.updateProduct);
+//delete
 
 //Rotas monteSeuPc
 router.get("/monteseupc", monteSeuPcController.showMonteSeuPc);
-
+router.get("/monteseupc/:dep", monteSeuPcController.sendProductByDep);
 //Rota para enviar o produto
 router.get("/enviaprod/:id", productController.sendById);
 
@@ -48,7 +53,7 @@ router.get("/busca", homeController.search);
 
 //Rotas do carrinho
 router.get("/carrinho", carrinhoController.mostraCarrinho);
-router.get("/enviarimagem/:id", carrinhoController.sendProductImage);
+
 
 //Rota Cadastro
 router.get("/cadastro", cadastroController.showCadastro)
