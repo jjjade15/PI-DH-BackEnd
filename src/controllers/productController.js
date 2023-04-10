@@ -4,13 +4,53 @@ const fs = require("fs");
 const path = require("path");
 
 const productsData = require("../database/produtos.json");
-const { pid } = require("process");
+
+
+//Decidi criar funções externas reutilizáveis pro controller pra ficar mais organizado e não repetir código
+function getProductById(id) {
+  const idProd = Number(id);
+  const targetProduct = productsData.find((obj) => obj.id === idProd);
+
+  return targetProduct;
+}
+
+function formatImagesPath(filesArray) {
+  /*
+    Função que retorna a array the imagens, isso possibilita adicionar várias imagens ao mesmo tempo com o produto
+  */
+  return filesArray.map((file) => {
+    let caminhoImg = file.path.replace(/public/g, "");
+    caminhoImg = caminhoImg.replace(/\\/g, "/");
+
+    return caminhoImg;
+  });
+}
+
+function atualizaBanco() {
+  //Reescreve o arquivo json
+  const filePath = path.join(__dirname, "../database/produtos.json"); //Acha o caminho do produtos.json
+  fs.writeFileSync(filePath, JSON.stringify(productsData)); //Reescreve o arquivo agora com o produto adicionado
+}
+
+function deleteProductImages(prodId) {
+  prodId = Number(prodId);
+
+  const pIndex = productsData.findIndex((prod) => prod.id === prodId);
+  console.log(productsData[pIndex], pIndex, prodId);
+  //Remove as imagens antigas e o produto antigp
+  productsData[pIndex].imagens.forEach((imgCam) => {
+    imgPath = path.join(__dirname, "../../public", imgCam);
+    fs.unlinkSync(imgPath);
+  });
+
+}
 
 const productController = {
-  //Mostra todos os produtos e envia os filtros deles
+  //Views
   showAll(req, res) {
     let produtosFiltrados = [...productsData];
 
+    //Mudar esses filtros para uma função separada acho que vai ficar melhor
     if (req.query.order) {
       const queryP = req.query.order;
 
@@ -31,33 +71,32 @@ const productController = {
     return res.render("produtos", { produtos: produtosFiltrados });
   },
 
-  showById(req, res) {
-    const idProd = Number(req.params.id);
-    const targetProduct = productsData.find((obj) => obj.id === idProd);
+  showById: function (req, res) {
+    const targetProduct = getProductById(req.params.id);
 
-    //Pega as imagens no caminho
 
+    console.log(targetProduct);
     targetProduct
       ? res.render("produto", { produto: targetProduct })
       : res.status(404).render("404");
   },
+
   showCreateProduct(req, res) {
     res.render("adicionarProduto");
   },
-  showUpdateProduct(req, res) {
-    const idProd = Number(req.params.id);
-    const targetProduct = productsData.find((obj) => obj.id === idProd);
 
+  showUpdateProduct(req, res) {
+    const targetProduct = getProductById(req.params.id);
     res.render("editarProduto", { produto: targetProduct });
   },
+
   sendById(req, res) {
-    const idProd = Number(req.params.id);
-    const targetProduct = productsData.find((obj) => obj.id === idProd);
+    const targetProduct = getProductById(req.params.id);
     res.json(targetProduct);
   },
+
   sendProductImage(req, res) {
-    const idProd = Number(req.params.id);
-    const targetProduct = productsData.find((obj) => obj.id === idProd);
+    const targetProduct = getProductById(req.params.id);
     const caminhoImg = path.join(
       __dirname,
       "/../../public",
@@ -68,76 +107,69 @@ const productController = {
   },
 
   //CRUDS POST, PUT, DELETE
-
   //POST
   createProduct(req, res) {
     //Recebe o objeto contendo as infos do produto
     const produto = req.body;
 
+    /* Adiciona as propriedades no produto */
+
     //Adiciona o id no produto
-    produto.id = productsData.length + 2;
-
-    //Formata o caminho das imagens do mutler e adiciona em uma array de imagens
-    const imagensArray = req.files.map((file) => {
-      let caminhoImg = file.path.replace(/public/g, "");
-      caminhoImg = caminhoImg.replace(/\\/g, "/");
-
-      return caminhoImg;
-    });
-
+    produto.id = productsData.length + 1;
     //Adiciona preço no produto
     produto.price = Number(produto.price);
     //Adiciona a array de imagens formatada anteriormente no mutler
-    produto.imagens = imagensArray;
+    produto.imagens = formatImagesPath(req.files);
     //Adiciona o produto no objeto de produtos geral
     productsData.push(produto);
-
-    //Reescreve o arquivo json
-    const filePath = path.join(__dirname, "../database/produtos.json"); //Acha o caminho do produtos.json
-    fs.writeFileSync(filePath, JSON.stringify(productsData)); //Reescreve o arquivo agora com o produto adicionado
-
+    
+    atualizaBanco();
     //Atualiza a página
-    res.redirect(301, "/criarproduto");
+    res.redirect(302, "/criarproduto");
   },
 
   updateProduct(req, res) {
-    //Recebe o objeto contendo as infos do produto
-    const produto = req.body;
-    produto.id = Number(req.params.id);
+    //Produto a ser modificado
+    const produtoMod = getProductById(req.params.id);
+    
+    //Recebe o objeto contendo as infos do produto atualizadas
+    const produtoNovo = req.body;
+    //Deleta as imagens do produto velho
+    deleteProductImages(produtoMod.id);
 
-    //Adiciona preço no produto
-    produto.price = Number(produto.price);
-    //Deleta as imagens antigas do produto e coloca as novas
-    const pIndex = productsData.findIndex((prod) => prod.id === produto.id);
+    /*
+    OTIMIZAR A ATUALIZAÇÃO DO PRODUTO USANDO LOOP
+    */
 
-    //Remove as imagens antigas e o produto antigp
-    console.log(productsData[pIndex]);
-    productsData[pIndex].imagens.forEach((imgCam) => {
-      imgPath = path.join(__dirname, "../../public", imgCam);
-      fs.unlinkSync(imgPath);
-      console.log(imgPath);
-    });
+    //Atualiza as infos do produto 
+    produtoMod.name = produtoNovo.name;
+    produtoMod.price = Number(produtoNovo.price); //Atualiza o preço
+    produtoMod.imagens = formatImagesPath(req.files); //Atualiza as imagens
+    produtoMod.description = produtoNovo.description; //Atualiza a descrição
+    produtoMod.departamento = produtoNovo.departamento; //Atualiza o departamento
+    produtoMod["sub-departamento"] = produtoNovo["sub-departamento"]; //Atualiza o sub-departamento
+
+    //Atualiza o banco com o produto modificado
+    atualizaBanco();
+
+    res.redirect(301, `/editarproduto/${produtoMod.id}`);
+  },
+  deleteProduct(req, res) {
+    id = Number(req.params.id);
+
+    //Retorna caso o produto não exista
+    if (pIndex === -1) {
+      return res.status(404).send("Nenhum produto encontrado");
+    }
+
+    deleteProductImages(productsData[pIndex].id);
+
+    //Deleta o produto
     productsData.splice(pIndex, 1);
 
-    //Adiciona as novas imagens
-    const imagensArray = req.files.map((file) => {
-      let caminhoImg = file.path.replace(/public/g, "");
-      caminhoImg = caminhoImg.replace(/\\/g, "/");
+    atualizaBanco();
 
-      return caminhoImg;
-    });
-
-    //Adiciona as propriedades ao produto
-    produto.price = Number(produto.price); //Adiciona preço no produto
-    produto.imagens = imagensArray;
-    //Adiciona o produto no objeto de produtos geral
-    console.log(produto);
-    productsData.push(produto); //Adiciona o produto no objeto no servidor
-    //Reescreve o banco de dados
-    const filePath = path.join(__dirname, "../database/produtos.json"); //Acha o caminho do produtos.json
-    fs.writeFileSync(filePath, JSON.stringify(productsData)); //Reescreve o arquivo agora com o produto adicionado
-
-    res.redirect(301, `/editarproduto/${produto.id}`);
+    res.send("Produto deletado com sucesso");
   },
 };
 

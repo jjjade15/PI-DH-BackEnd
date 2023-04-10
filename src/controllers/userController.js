@@ -1,4 +1,6 @@
-const { use } = require("../routes/routes");
+const users = require("../database/users.json");
+
+console.log(users);
 
 const userController = {
   //Cadastro

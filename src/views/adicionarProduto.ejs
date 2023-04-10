@@ -25,7 +25,6 @@
       .criar-produto-form > * {
         display: flex;
         flex-direction: column;
-
       }
       label {
         margin-bottom: 6px;
@@ -85,9 +84,7 @@
     <%-include("./partials/header.ejs") %> <%-
     include("./partials/hamburguer.ejs") %>
 
-    
     <main>
-
       <form
         action="/criarproduto"
         method="POST"
@@ -102,6 +99,7 @@
             id="name"
             name="name"
             placeholder="Insira o nome do produto"
+            required
           />
         </div>
         <div class="form-preco">
@@ -111,6 +109,8 @@
             id="price"
             name="price"
             placeholder="Insira o preco do produto"
+            required
+            oninvalid="this.setCustomValidity('Esse número não é válido !')"
           />
         </div>
         <div class="form-fabricante">
@@ -120,11 +120,12 @@
             id="fabricante"
             name="fabricante"
             placeholder="Insira o preco do produto"
+            required
           />
         </div>
         <div class="form-departamento">
           <label for="departamento">Departamento:</label>
-          <select name="departamento" id="select-dep" class="dep">
+          <select name="departamento" id="select-dep" class="dep" required>
             <option value="" disabled selected hidden>Selecione</option>
             <option value="computador">Computador</option>
             <option value="hardware">Hardware</option>
@@ -142,11 +143,8 @@
           <select
             name="sub-departamento"
             id="select-sub-dep"
-
             class="dep"
-          >
-
-          </select>
+          ></select>
         </div>
         <div class="form-descricao">
           <label for="description">Descrição:</label>
@@ -167,6 +165,7 @@
             class="form-input"
             accept="image/*"
             multiple
+            required
           />
         </div>
         <div class="div.btn">
@@ -183,14 +182,14 @@
     const subDepForm = document.querySelector("#select-sub-dep");
     const formSubDep = document.querySelector(".form-sub-departamento");
 
-    depForm.innerHTML
+    depForm.innerHTML;
     depForm.addEventListener("change", function (e) {
       console.log(this.value);
       switch (this.value) {
         case "computador": {
           formSubDep.style.display = "flex";
-          subDepForm.removeAttribute("disabled")
-          subDepForm.innerHTML =`
+          subDepForm.removeAttribute("disabled");
+          subDepForm.innerHTML = `
             <option value="pc gamer">Pc Gamer</option>
             <option value="pc escritorio">PC Escritorio</option>
             <option value="pc casual">PC Casual</option>
@@ -199,8 +198,8 @@
         }
         case "hardware": {
           formSubDep.style.display = "flex";
-          console.log("ativou")
-          subDepForm.removeAttribute("disabled")
+          console.log("ativou");
+          subDepForm.removeAttribute("disabled");
           subDepForm.innerHTML = `
             <option value="processador">Processador</option>
             <option value="placa de video">Placa de Vídeo</option>
@@ -213,7 +212,7 @@
         }
         case "periferico": {
           formSubDep.style.display = "flex";
-          subDepForm.removeAttribute("disabled")
+          subDepForm.removeAttribute("disabled");
           subDepForm.innerHTML = `
             <option value="teclado">Teclado</option>
             <option value="mouse">Mouse</option>
@@ -226,7 +225,7 @@
         }
         case "notebook": {
           formSubDep.style.display = "flex";
-          subDepForm.removeAttribute("disabled")
+          subDepForm.removeAttribute("disabled");
           subDepForm.innerHTML = `
             <option value="macbook">Macbook</option>
             <option value="not gamer">Notebook Gamer</option>
@@ -242,6 +241,19 @@
           `;
         }
       }
+    });
+
+    //Faz a validação do number
+    const btnEnvia = document.querySelector(".btn-criar");
+
+    btnEnvia.addEventListener("click", function (e) {
+      const inputPreco = document.getElementById("price");
+      const valor = Number(inputPreco.value);
+      if(!valor || isNaN(valor)) {
+        console.log(valor);
+        inputPreco.reportValidity();
+      }
+
     });
   </script>
 </html>

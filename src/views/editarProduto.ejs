@@ -103,6 +103,7 @@
             name="name"
             placeholder="Insira o nome do produto"
             value="<%= produto.name %>"
+            required
           />
         </div>
         <div class="form-preco">
@@ -113,6 +114,8 @@
             name="price"
             placeholder="Insira o preco do produto"
             value="<%=produto.price%>"
+            required
+            oninvalid="this.setCustomValidity('Esse número não é válido !')"
           />
         </div>
         <div class="form-fabricante">
@@ -123,11 +126,12 @@
             name="fabricante"
             placeholder="Insira o preco do produto"
             value="<%=produto.fabricante%>"
+            required
           />
         </div>
         <div class="form-departamento">
           <label for="departamento">Departamento:</label>
-          <select name="departamento" id="select-dep" class="dep"  data-dep="<%=produto.departamento%>">
+          <select name="departamento" id="select-dep" class="dep"  data-dep="<%=produto.departamento%>" required>
             <option value="computador">Computador</option>
             <option value="hardware">Hardware</option>
             <option value="periferico">Periféricos</option>
@@ -170,6 +174,7 @@
             class="form-input"
             accept="image/*"
             multiple
+            required
           />
         </div>
 
@@ -212,6 +217,7 @@
       })
     }
     init();
+    
     function alteraDepartamento() {
       console.log(depForm)
       switch (depForm.value) {
@@ -273,5 +279,19 @@
     }
     depForm.innerHTML
     depForm.addEventListener("change", alteraDepartamento);
+
+    //Faz a validação do number
+    const btnEnvia = document.querySelector(".btn-criar");
+
+    btnEnvia.addEventListener("click", function (e) {
+      const inputPreco = document.getElementById("price");
+      const valor = Number(inputPreco.value);
+      if(!valor || isNaN(valor)) {
+        console.log(valor);
+        inputPreco.reportValidity();
+        e.preventDefault();
+      }
+
+    });
   </script>
 </html>

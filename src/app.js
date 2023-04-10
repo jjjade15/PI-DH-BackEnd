@@ -1,4 +1,5 @@
 const express = require("express");
+
 const app = express(); //Cria a instância do express
 const path = require('path');
 const methodOverride = require('method-override') // métodos PUT e DELETE
@@ -17,7 +18,7 @@ app.use(express.json()); // middle que transforma Json requests and objetos no r
 app.use(routes); //usa o route importado como middleware 
 
 //Erro 404 
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.status(404).render("404")
 })
 

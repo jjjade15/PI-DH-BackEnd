@@ -12,6 +12,7 @@ const carrinhoController = require("../controllers/carrinhoController.js");
 const userController = require("../controllers/userController.js");
 
 
+
 //Código principal
 const router = express.Router();
 
@@ -30,6 +31,7 @@ router.post("/criarproduto", upload.any(), productController.createProduct);
 //put
 router.put("/produto/:id", upload.any(), productController.updateProduct);
 //delete
+router.delete("/produto/:id", productController.deleteProduct);
 
 //Rotas monteSeuPc
 router.get("/monteseupc", monteSeuPcController.showMonteSeuPc);
