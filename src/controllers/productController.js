@@ -6,7 +6,7 @@ const path = require("path");
 const productsData = require("../database/produtos.json");
 
 
-//Decidi criar funções externas reutilizáveis pro controller pra ficar mais organizado e não repetir código
+//Decidi criar funções externas pro controller pra ficar mais organizado e não repetir código
 function getProductById(id) {
   const idProd = Number(id);
   const targetProduct = productsData.find((obj) => obj.id === idProd);
@@ -36,7 +36,7 @@ function deleteProductImages(prodId) {
   prodId = Number(prodId);
 
   const pIndex = productsData.findIndex((prod) => prod.id === prodId);
-  console.log(productsData[pIndex], pIndex, prodId);
+
   //Remove as imagens antigas e o produto antigp
   productsData[pIndex].imagens.forEach((imgCam) => {
     imgPath = path.join(__dirname, "../../public", imgCam);
@@ -74,8 +74,6 @@ const productController = {
   showById: function (req, res) {
     const targetProduct = getProductById(req.params.id);
 
-
-    console.log(targetProduct);
     targetProduct
       ? res.render("produto", { produto: targetProduct })
       : res.status(404).render("404");
@@ -111,7 +109,6 @@ const productController = {
   createProduct(req, res) {
     //Recebe o objeto contendo as infos do produto
     const produto = req.body;
-
     /* Adiciona as propriedades no produto */
 
     //Adiciona o id no produto
@@ -129,6 +126,7 @@ const productController = {
   },
 
   updateProduct(req, res) {
+    /* FAZER A EDIÇÃO DA IMAGEM OPICIONAL */
     //Produto a ser modificado
     const produtoMod = getProductById(req.params.id);
     
@@ -138,7 +136,7 @@ const productController = {
     deleteProductImages(produtoMod.id);
 
     /*
-    OTIMIZAR A ATUALIZAÇÃO DO PRODUTO USANDO LOOP
+    OTIMIZAR 
     */
 
     //Atualiza as infos do produto 

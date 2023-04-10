@@ -1,1 +1,7 @@
-[]
+[
+  { "id": 1, "nome": "Cleitin", "teste": "dqoiuhe973h379h" },
+  { "id": 2, "nome": "Clayton", "teste": ":)" },
+  { "id": 3, "nome": "Claudio", "teste": "abcd" },
+  { "id": 4, "nome": "Claudionisio", "teste": 2.3 },
+  { "id": 5, "nome": "batata", "teste": "funcionooooou!" }
+]
