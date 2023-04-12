@@ -31,7 +31,12 @@
     <!-- BARRA DE PESQUISA -->
     <div class="barra-pesquisa">
       <form action="/busca" method="GET">
-        <input type="text" placeholder="Digite o que você procura" name="keywords" autocomplete="off" />
+        <input
+          type="text"
+          placeholder="Digite o que você procura"
+          name="keywords"
+          autocomplete="off"
+        />
         <button>
           <svg
             class="icone-pesquisa"
@@ -52,10 +57,9 @@
       </form>
     </div>
     <!-- AREA USUÁRIO -->
-    <div class="user-mensagem">
+    <div class="user-mensagem">   
       <svg
         class="user icon-nav"
-        xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
         class="w-6 h-6"
@@ -66,11 +70,19 @@
           clip-rule="evenodd"
         />
       </svg>
-      <p>
-        <a href="/cadastro" class="strong">Cadastre-se</a>
-        <br />
-        ou <a href="/login" class="strong">faça Login</a>
-      </p>
+      <% if (locals.isLogged) { %>
+        <p>
+          <span>Olá, <strong><%= locals.nameLogged %></strong></span>
+          <br />
+          <a href="/minha-conta" >Minha Conta</a> | <a href="/logout">Sair</a>
+        </p>
+      <% } else {%>
+        <p>
+          <a href="/cadastro" class="strong">Cadastre-se</a>
+          <br />
+          ou <a href="/login" class="strong">faça Login</a>
+        </p>
+      <% } %>
     </div>
     <!-- CARRINHO E DESEJOS -->
     <div class="opcoes-nav">
@@ -369,5 +381,5 @@
     </li>
   </ul>
 </header>
-<link rel="stylesheet" href="/stylesheets/header.css">
+<link rel="stylesheet" href="/stylesheets/header.css" />
 <script src="/javascripts/header.js"></script>

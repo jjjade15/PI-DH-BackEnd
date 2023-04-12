@@ -18,6 +18,13 @@ if(urlParams.get("order") === "menorp") {
   selectOptions[2].setAttribute("selected", "")
 }
 
+//Muda a rota para a query string com o filtro correto
+document.querySelector(".select-ord").addEventListener("change", function(e) {
+  urlSite.searchParams.set("order", this.value);
+  window.location.href = urlSite;
+});
+
+
 const fabSelecionado = urlSite.searchParams.get("fabricante");
 
 //Deixa check box selecionada
@@ -28,24 +35,13 @@ fabricantes.forEach((fab) =>{
     }
 })
 
-//Muda a rota para a query string com o filtro correto
-document.querySelector(".select-ord").addEventListener("change", function(e) {
-  urlSite.searchParams.set("order", this.value);
-
-  window.location.href = urlSite;
-});
-
-
 // Filtro fabricantes
 xboxfab.addEventListener("change", function(e) {
-
-
   if(e.target.checked){
     urlSite.searchParams.set("fabricante", e.target.name);
     window.location.href = urlSite;
     console.log(urlSite.href);
-    
-    
+
   }
 })
 
@@ -59,5 +55,4 @@ aplFiltroPreco.addEventListener("click", function(e) {
   const max = Number(maxInput.value);
   const min = Number(minInput.value);
 
-  console.log(minInput.value, minInput)
 })

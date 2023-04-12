@@ -1,7 +1,34 @@
 [
-  { "id": 1, "nome": "Cleitin", "teste": "dqoiuhe973h379h" },
-  { "id": 2, "nome": "Clayton", "teste": ":)" },
-  { "id": 3, "nome": "Claudio", "teste": "abcd" },
-  { "id": 4, "nome": "Claudionisio", "teste": 2.3 },
-  { "id": 5, "nome": "batata", "teste": "funcionooooou!" }
+  {
+    "id": 1,
+    "nome": "Thiago Machado",
+    "cpf": "11022232045",
+    "datanasc": "1626-12-31",
+    "telefone": "31988888888",
+    "cep": "39134144",
+    "street": "Vale da sombra da morte",
+    "number": "20",
+    "more": "",
+    "bairro": "Planeta Terra",
+    "city": "Sistema solar",
+    "state": "Via lactea",
+    "email": "thiago@gmail.com",
+    "senha": "$2b$10$hfnGjpjOxzAAQ/2wHzuWOOIqCaDn0SlItRJShDbe221VRAWi0npFy"
+  },
+  {
+    "id": 2,
+    "nome": "Cleitinho",
+    "cpf": "123456789",
+    "datanasc": "1998-01-21",
+    "telefone": "219998889",
+    "cep": "3030333",
+    "street": "abcd",
+    "number": "666",
+    "more": "apt 666",
+    "bairro": "666",
+    "city": "Inferno",
+    "state": "Estado",
+    "email": "cleitin@gmail.com",
+    "senha": "$2b$10$iMc2bHZ0scGo.rm1c0RCm.7.sLq2mbu9WKt5sRgSqWdAqIRTol7Im"
+  }
 ]

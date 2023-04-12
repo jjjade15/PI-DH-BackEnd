@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include("./partials/head.ejs", {titulo:"Tech Star | Minha Conta"}) %>
+  <link rel="stylesheet" href="/stylesheets/perfil-user.css">
+</head>
+<body>
+  <%- include("./partials/header.ejs") %>
+  <%- include("./partials/hamburguer.ejs") %>
+
+
+  <main>
+    <h1>Bem-Vindo <%= user.nome %></h1>
+
+    
+  </main>
+
+  <%- include("./partials/footer.ejs") %>
+</body>
+</html>

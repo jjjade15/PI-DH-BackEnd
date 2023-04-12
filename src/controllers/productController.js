@@ -51,6 +51,8 @@ const productController = {
     let produtosFiltrados = [...productsData];
 
     //Mudar esses filtros para uma função separada acho que vai ficar melhor
+
+    //Filtros
     if (req.query.order) {
       const queryP = req.query.order;
 

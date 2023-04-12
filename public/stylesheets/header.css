@@ -140,7 +140,7 @@ header form button .icone-pesquisa {
 
 /* Flexbox usuário */
 .user-mensagem {
-  width: 170px;
+  width: 185px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -149,9 +149,10 @@ header form button .icone-pesquisa {
 
 nav .user {
   height: 80%;
+  color: #1a4895;
   stroke: #1a4895;
   stroke-width: 3px;
-  border: 2px solid #1a4895;
+  border: 3px solid #1a4895;
   border-radius: 20000px;
 }
 

@@ -3,6 +3,7 @@ const express = require("express");
 
 //Middlewares
 const upload = require("../middlewares/upload.js");
+const auth = require("../middlewares/auth.js"); //Middleware de autenticação, só da acesso a quem tá logado
 
 //Controllers
 const homeController = require("../controllers/homeController.js");
@@ -23,15 +24,15 @@ router.get("/busca", homeController.search); //Barra de pesquisa
 //get
 router.get("/produto", productController.showAll);
 router.get("/produto/:id", productController.showById);
-router.get("/criarproduto", productController.showCreateProduct)
-router.get("/editarproduto/:id", productController.showUpdateProduct);
+router.get("/criarproduto", auth, productController.showCreateProduct)
+router.get("/editarproduto/:id", auth, productController.showUpdateProduct);
 router.get("/enviarimagem/:id", productController.sendProductImage); // Envia img produto
 //post
-router.post("/crfiarproduto", upload.any(), productController.createProduct);
+router.post("/criarproduto", auth, upload.any(), productController.createProduct);
 //put
-router.put("/produto/:id", upload.any(), productController.updateProduct);
+router.put("/produto/:id", auth, upload.any(), productController.updateProduct);
 //delete
-router.delete("/produto/:id", productController.deleteProduct);
+router.delete("/produto/:id", auth, productController.deleteProduct);
 
 // -=-=-=-  Rotas monteSeuPc -=-=-=-  
 router.get("/monteseupc", monteSeuPcController.showMonteSeuPc);
@@ -47,8 +48,11 @@ router.get("/carrinho", carrinhoController.mostraCarrinho);
 router.get("/cadastro", userController.showCadastro)
 router.post("/cadastro", userController.cadastro)
 //Rota Login
-router.get("/login", userController.showLogin)
+router.get("/login", auth, userController.showLogin)
 router.post("/login", userController.login)
-
+//Rota LogOut
+router.get("/logout", auth, userController.logOut);
+//Rota Perfil
+router.get("/minha-conta", auth, userController.showProfile)
 
 module.exports = router;
