@@ -10,65 +10,65 @@ let inputEmail = document.querySelector("#email");
 let passwInput = document.querySelector("#password");
 let passConfirmInput = document.querySelector("#passwordC");
 
-  //Valida Email e senha
+  // //Valida Email e senha
 
-  cadastroForm.addEventListener("submit", (e) => {
+  // cadastroForm.addEventListener("submit", (e) => {
 
-  //Email vazio e errado alerta 
+  // //Email vazio e errado alerta 
 
-  if(inputEmail.value === "" || !emailValidation(inputEmail.value)){
-    alert("Por favor, preencha corretamente o email.")
-    return;
-  }
+  // if(inputEmail.value === "" || !emailValidation(inputEmail.value)){
+  //   alert("Por favor, preencha corretamente o email.")
+  //   return;
+  // }
 
-  //Senha vazia e errada alerta 
+  // //Senha vazia e errada alerta 
 
-  if(!passwordValidation(passwInput.value, 8)){
-    alert(`Por favor, crie uma senha com no minimo 8 digitos.`);
-    return;
-  }
+  // if(!passwordValidation(passwInput.value, 8)){
+  //   alert(`Por favor, crie uma senha com no minimo 8 digitos.`);
+  //   return;
+  // }
   
-  });
+  // });
 
 //função para formato correto do email
 
-function emailValidation(email){
+// function emailValidation(email){
   
-  const emailR = new RegExp(
-    /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}$/
+//   const emailR = new RegExp(
+//     /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}$/
   
-  );
+//   );
 
-  if(emailR.test(email)){
-    return true
-  } 
-    return false
+//   if(emailR.test(email)){
+//     return true
+//   } 
+//     return false
 
-}
+// }
 
-// Função validar formato senha
+// // Função validar formato senha
 
-function passwordValidation(password, digitosMin) {
-  if(password.length >= digitosMin){
-    return true
-  }
+// function passwordValidation(password, digitosMin) {
+//   if(password.length >= digitosMin){
+//     return true
+//   }
 
-  return false
+//   return false
 
-}
+// }
 
-//confirma validação de senha
+// //confirma validação de senha
 
-function confirmaSenha() {
-  if (passwInput.value != passConfirmInput.value) {
-    passConfirmInput.setCustomValidity("As senhas não batem!");
-    passConfirmInput.reportValidity();
-    return false;
-  } else {
-    passConfirmInput.setCustomValidity("");
-    return true;
-  }
-};
+// function confirmaSenha() {
+//   if (passwInput.value != passConfirmInput.value) {
+//     passConfirmInput.setCustomValidity("As senhas não batem!");
+//     passConfirmInput.reportValidity();
+//     return false;
+//   } else {
+//     passConfirmInput.setCustomValidity("");
+//     return true;
+//   }
+// };
 
-// Verifica campo modificado para alerta sumir
-passConfirmInput.addEventListener('input', confirmaSenha);
+// // Verifica campo modificado para alerta sumir
+// passConfirmInput.addEventListener('input', confirmaSenha);

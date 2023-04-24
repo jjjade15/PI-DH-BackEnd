@@ -18,29 +18,36 @@ const userController = {
 
   cadastro(req, res) {
     //Fazer as validações do express validator aqui
+      const errors = validationResult(req);
+      
+      if(!errors.isEmpty()){
+        console.log(errors)
+        return res.render('cadastro', { errors: errors.mapped()})
+      }
 
-    //Verifica se o usuário já existe
-    const userExist = User.getUserByField("email", req.body.email);
-    if (userExist) {
-      console.log("Parou aqui");
-      return res.send("Email já existe");
-      // return res.render("cadastro", {
-      //   errors: {
-      //     email: {
-      //       msg: "Este email já está registrado"
-      //     }
-      //   },
-      //   oldData: req.body
-      // })
-    }
+    // //Verifica se o usuário já existe
+    // const userExist = User.getUserByField("email", req.body.email);
+    // if (userExist) {
+    //   console.log("Parou aqui");
+    //   return res.send("Email já existe");
+    //   // return res.render("cadastro", {
+    //   //   errors: {
+    //   //     email: {
+    //   //       msg: "Este email já está registrado"
+    //   //     }
+    //   //   },
+    //   //   oldData: req.body
+    //   // })
+    // }
     //Faz o hash da senha
-    const userToCreate = {
-      ...req.body,
-      senha: bcrypt.hashSync(req.body.senha, 10),
-    };
+    // const userToCreate = {
+    //   ...req.body,
+    //   senha: bcrypt.hashSync(req.body.senha, 10),
+    // };
 
-    User.createUser(userToCreate);
-    res.redirect("/login");
+    // User.createUser(userToCreate);
+    // res.redirect("/login");
+
   },
 
   //Login

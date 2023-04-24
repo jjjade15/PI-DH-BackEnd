@@ -14,6 +14,12 @@ body{
     background-color: #165c9d;
 }
 
+.errors{
+    color: #f4f7fad1;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
 .logo{
     display: flex;
     align-self: center;
