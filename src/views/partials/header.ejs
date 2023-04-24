@@ -72,7 +72,7 @@
       </svg>
       <% if (locals.isLogged) { %>
         <p>
-          <span>Olá, <strong><%= locals.nameLogged %></strong></span>
+          <span>Olá, <strong id="user-name"><%= locals.nameLogged %></strong></span>
           <br />
           <a href="/minha-conta" >Minha Conta</a> | <a href="/logout">Sair</a>
         </p>

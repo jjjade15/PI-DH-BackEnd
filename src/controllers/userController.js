@@ -57,7 +57,7 @@ const userController = {
 
   login(req, res) {
     //Caso ele já esteja logado desloga antes de fazer o login
-    if (res.locals.isLogged) this.logOut();
+    if (res.locals.isLogged) userController.logOut.bind(userController);
 
     const { email, senha } = req.body;
     
