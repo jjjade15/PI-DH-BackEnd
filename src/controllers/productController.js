@@ -135,7 +135,10 @@ const productController = {
     //Recebe o objeto contendo as infos do produto atualizadas
     const produtoNovo = req.body;
     //Deleta as imagens do produto velho
-    deleteProductImages(produtoMod.id);
+    if(req.files.length > 0) {
+      deleteProductImages(produtoMod.id);
+      produtoMod.imagens = formatImagesPath(req.files); //Atualiza as imagens
+    } 
 
     /*
     OTIMIZAR 
@@ -144,7 +147,7 @@ const productController = {
     //Atualiza as infos do produto 
     produtoMod.name = produtoNovo.name;
     produtoMod.price = Number(produtoNovo.price); //Atualiza o preço
-    produtoMod.imagens = formatImagesPath(req.files); //Atualiza as imagens
+
     produtoMod.description = produtoNovo.description; //Atualiza a descrição
     produtoMod.departamento = produtoNovo.departamento; //Atualiza o departamento
     produtoMod["sub-departamento"] = produtoNovo["sub-departamento"]; //Atualiza o sub-departamento
