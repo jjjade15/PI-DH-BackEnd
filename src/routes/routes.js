@@ -48,6 +48,7 @@ router.get("/carrinho", carrinhoController.mostraCarrinho);
 router.get("/cadastro", userController.showCadastro);
 
  //validações -- tentativa seguindo formato do pg -- express validator
+ // adicionar mais validações para todos os campos do cadastro e login
 const { check } = require('express-validator');
 const validarCadastro = [
     check('nome').notEmpty().withMessage('Não se esqueça de preencher o nome ;)').bail()
