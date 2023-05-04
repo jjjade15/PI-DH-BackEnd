@@ -9,7 +9,7 @@ function loggedUserDataMiddleware(req, res, next) {
 
       return next();
     } catch (error) {
-      res.locals.i0sLogged = false;
+      res.locals.isLogged = false;
     }
 
   }else res.locals.isLogged = false;

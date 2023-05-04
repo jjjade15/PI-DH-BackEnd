@@ -7,7 +7,6 @@ const auth = (req, res, next) => {
       jwt.verify(req.cookies.token, "batata");
       return next();
     } catch (error) {
-      console.log(error);
       res.render("login", { errors: error });
     }
   } 

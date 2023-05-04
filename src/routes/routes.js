@@ -4,6 +4,7 @@ const express = require("express");
 //Middlewares
 const upload = require("../middlewares/upload.js");
 const auth = require("../middlewares/auth.js"); //Middleware de autenticação, só da acesso a quem tá logado
+const validarCadastro = require("../middlewares/validateUser.js");
 
 //Controllers
 const homeController = require("../controllers/homeController.js");
@@ -47,18 +48,9 @@ router.get("/carrinho", carrinhoController.mostraCarrinho);
 //Rota Cadastro
 router.get("/cadastro", userController.showCadastro);
 
- //validações -- tentativa seguindo formato do pg -- express validator
+ //validações backend cadastro
  // adicionar mais validações para todos os campos do cadastro e login
-const { check } = require('express-validator');
-const validarCadastro = [
-    check('nome').notEmpty().withMessage('Não se esqueça de preencher o nome ;)').bail()
-    .isString().withMessage('Apenas letras no campo de nome ;)'),
-    check('email').notEmpty().withMessage('Não se esqueça de preencher o email ;)').bail()
-    .isEmail().withMessage('Por favor, preencha um email valido ;)'),
-    check('password').notEmpty().withMessage('Não se esqueça de definir uma senha ;)').bail()
-    .isLength({ min: 8 }).withMessage('Crie uma senha de no minimo 8 digitos ;)'),
-    check('passwordC').notEmpty().withMessage('Preencha o campo de confirmação de senha ;)').bail(), //inserir validação de comparação
-];
+
 
 router.post("/cadastro", validarCadastro, userController.cadastro);
 

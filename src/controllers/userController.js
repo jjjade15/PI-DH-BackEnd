@@ -3,7 +3,14 @@ const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 //Models
-const User = require("../models/User.js");
+const User = require("../../modelstemp/User.js");
+const {Usuario} = require("../models/Usuario.js");
+
+async function queijo() {
+  console.log(Usuario);
+}
+console.log(Usuario);
+queijo();
 
 const userController = {
   //Cadastro
@@ -18,36 +25,33 @@ const userController = {
 
   cadastro(req, res) {
     //Fazer as validações do express validator aqui
-      const errors = validationResult(req);
-      
-      if(!errors.isEmpty()){
-        console.log(errors)
-        return res.render('cadastro', { errors: errors.mapped()})
-      }
+    const errors = validationResult(req);
 
-    // //Verifica se o usuário já existe
-    // const userExist = User.getUserByField("email", req.body.email);
-    // if (userExist) {
-    //   console.log("Parou aqui");
-    //   return res.send("Email já existe");
-    //   // return res.render("cadastro", {
-    //   //   errors: {
-    //   //     email: {
-    //   //       msg: "Este email já está registrado"
-    //   //     }
-    //   //   },
-    //   //   oldData: req.body
-    //   // })
-    // }
+    //Verifica se o usuário e o cpf já existe
+    const userExist = User.getUserByField("email", req.body.email);
+    const cpfExist = User.getUserByField("cpf", req.body.cpf);
+    if (userExist) {
+      errors.errors.push({ msg: "Email já existente" });
+    }
+    if (cpfExist) {
+      errors.errors.push({ msg: "CPF já existente" });
+    }
+
+    //Verifica se existem erros
+    if (!errors.isEmpty()) {
+      console.log(errors);
+      return res.render("cadastro", { errors: errors.mapped() });
+    }
+
     //Faz o hash da senha
-    // const userToCreate = {
-    //   ...req.body,
-    //   senha: bcrypt.hashSync(req.body.senha, 10),
-    // };
+    const userToCreate = {
+      ...req.body,
+      senha: bcrypt.hashSync(req.body.senha, 10),
+    };
 
-    // User.createUser(userToCreate);
-    // res.redirect("/login");
+    User.createUser(userToCreate);
 
+    res.redirect("/login");
   },
 
   //Login
@@ -60,7 +64,7 @@ const userController = {
     if (res.locals.isLogged) userController.logOut.bind(userController);
 
     const { email, senha } = req.body;
-    
+
     console.log(email, senha);
     const user = User.getUserByField("email", email);
     console.log(user);

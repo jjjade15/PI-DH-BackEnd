@@ -2,21 +2,22 @@
 ESSE CÓDIGO TÁ UMA PORCARIA OTIMIZAR ELE DEPOIS
 */
 
+// -=-=-=- Variáveis -=-=-=-
 const itensCarrinho = JSON.parse(localStorage.getItem("carrinho")); //Cria a array de objetos que vieram do carrinho
-
-const containerProdutos = document.querySelector(
-  ".produtos-carrinho .produtos"
-); //Container dos produtos
+const containerProdutos = document.querySelector(".produtos-carrinho .produtos"); //Container dos produtos
 const btnLimpaCarrinho = document.querySelector(".btn-limpar-carrinho"); //Botão limpa carrinho
 const subtotalEL = document.querySelector("#valor-subtotal");
 const totalEL = document.querySelector("#valor-total");
 const freteEL = document.querySelector("#opcao-frete");
 
 
+//Código principal
+
+//Atualiza as infos de compra
 const atualizaValorCompra = (cupom = 1) => {
   let valorTotal = 0;
   itensCarrinho.forEach((prod) => {
-    valorTotal += prod.price*prod.quantidade;
+    valorTotal += prod.price * prod.quantidade;
   });
 
   subtotalEL.textContent = valorTotal.toLocaleString("pt-br", {
@@ -31,7 +32,6 @@ const atualizaValorCompra = (cupom = 1) => {
 
   freteEL.textContent = "Gratis";
 };
-
 
 //Condição de carrinho vazio e carrinho cheio
 if (
@@ -141,7 +141,6 @@ if (
     //Aumenta a quantidade de produto
     else if (clicado.classList.contains("mais")) {
       itensCarrinho[indexProd].quantidade++;
-
     }
     //Diminui a quantidade de produto
     else if (clicado.classList.contains("menos")) {
@@ -150,7 +149,7 @@ if (
       }
       itensCarrinho[indexProd].quantidade--;
     }
-    
+
     location.reload();
     localStorage.setItem("carrinho", JSON.stringify(itensCarrinho));
   });

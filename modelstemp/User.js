@@ -6,46 +6,42 @@ const path = require("path");
 // 3- Buscar o usuário pelo seu ID R
 
 const User = {
-  
   fileName: path.join(__dirname, "../database/users.json"),
-  Users: require("../database/users.json"),
+  Users: require("../src/database/users.json"),
 
-  updateUserJson: function() {
-    fs.writeFileSync(this.fileName, JSON.stringify(this.Users),"utf-8");
+  updateUserJson: function () {
+    fs.writeFileSync(this.fileName, JSON.stringify(this.Users), "utf-8");
   },
 
-  generateId: function() {
+  generateId: function () {
     const lastUser = this.Users[this.Users.length - 1];
-    
-    if(lastUser) 
-      return lastUser.id + 1;
+
+    if (lastUser) return lastUser.id + 1;
     return 1;
   },
-  
+
   //Create
-  createUser: function(userData) {
+  createUser: function (userData) {
     const newUser = {
       id: this.generateId(),
-      ...userData
-    }
-    
+      ...userData,
+    };
     this.Users.push(newUser);
     this.updateUserJson();
   },
   //Read
-  getUserById: function(id) {
+  getUserById: function (id) {
     const allUsers = this.Users;
     const targetUser = allUsers.find((u) => u.id === id);
-    
+
     return targetUser;
   },
-  getUserByField: function(fieldName, value) {
+  getUserByField: function (fieldName, value) {
     const allUsers = this.Users;
     const targetUser = allUsers.find((u) => u[fieldName] === value);
-    
+
     return targetUser;
   },
- 
-}
+};
 
 module.exports = User;
