@@ -4,13 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 //Models
 const User = require("../../modelstemp/User.js");
-const {Usuario} = require("../models/Usuario.js");
-
-async function queijo() {
-  console.log(Usuario);
-}
-console.log(Usuario);
-queijo();
+const { Usuario } = require("../models");
 
 const userController = {
   //Cadastro
@@ -23,34 +17,42 @@ const userController = {
     res.render("cadastro");
   },
 
-  cadastro(req, res) {
+  async cadastro(req, res) {
     //Fazer as validações do express validator aqui
     const errors = validationResult(req);
 
-    //Verifica se o usuário e o cpf já existe
-    const userExist = User.getUserByField("email", req.body.email);
-    const cpfExist = User.getUserByField("cpf", req.body.cpf);
+    //Verifica se o email e o cpf já existem
+    const userExist = await Usuario.findOne({
+      where: { email: req.body.email },
+    });
+    const cpfExist = await Usuario.findOne({ where: { cpf: req.body.cpf } });
+
     if (userExist) {
+      console.log("email já existe");
       errors.errors.push({ msg: "Email já existente" });
     }
     if (cpfExist) {
+      console.log("cpf já existente");
       errors.errors.push({ msg: "CPF já existente" });
     }
 
-    //Verifica se existem erros
+    //Verifica se existem erros no express validator
     if (!errors.isEmpty()) {
-      console.log(errors);
       return res.render("cadastro", { errors: errors.mapped() });
     }
+
+    //Cria o cadastro caso não tenha erros
 
     //Faz o hash da senha
     const userToCreate = {
       ...req.body,
       senha: bcrypt.hashSync(req.body.senha, 10),
+      adm: 0,
     };
 
-    User.createUser(userToCreate);
-
+    // Cria o usuario no json User.createUser(userToCreate);
+    const resultado = await Usuario.create(userToCreate);
+    console.log(resultado);
     res.redirect("/login");
   },
 
@@ -59,22 +61,28 @@ const userController = {
     res.render("login");
   },
 
-  login(req, res) {
-    //Caso ele já esteja logado desloga antes de fazer o login
-    if (res.locals.isLogged) userController.logOut.bind(userController);
-
+  async login(req, res) {
     const { email, senha } = req.body;
 
-    console.log(email, senha);
-    const user = User.getUserByField("email", email);
-    console.log(user);
+    const user = await Usuario.findOne({
+      where: {
+        email: email,
+      },
+    });
 
     //Não encontrou o user retorna
-    if (user && bcrypt.compareSync(senha, user.senha)) {
-      const userName = user.nome.split(" ")[0];
+    //Temporário até eu puxar a criação de usuário para o banco ** bcrypt.compareSync(senha, user.senha)
+
+    if (user && bcrypt.compareSync(senha, user.dataValues.senha)) {
+      //Caso ele já esteja logado desloga antes de fazer o login
+      if (res.locals.isLogged) userController.logOut.bind(userController);
+
+      const userData = user.dataValues;
+      const userName = userData.nome.split(" ")[0];
+
       //Gera o token de autenticação
       const token = jwt.sign(
-        { id: user.id, email: user.email, name: userName },
+        { id: userData.id_usuario, email: userData.email, name: userName },
         "batata"
       );
       //Cria o cookie com o token
@@ -95,10 +103,9 @@ const userController = {
   },
 
   //Perfil
-  showProfile(req, res) {
+  async showProfile(req, res) {
     const { id } = jwt.verify(req.cookies.token, "batata");
-    const userLogged = User.getUserByField("id", id);
-
+    const userLogged = await Usuario.findByPk(id);
     res.render("perfilUsuario", { user: userLogged });
   },
 };

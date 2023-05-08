@@ -12,8 +12,6 @@ const { sequelize } = require("./models/index.js");
 
 const app = express(); //Cria a instância do express
 
-
-
 app.use(cookieParser()); // Desmembra cookies
 app.use(express.static(path.resolve("public"))); // Seta os arquivos da public como estáticos
 app.use(express.urlencoded({ extended: false })) // captura na forma de objeto literal tudo o que vem de um formulário
@@ -28,7 +26,7 @@ app.use(routes); //usa o route importado como middleware
 //Erro 404 
 app.use((req, res) => {
   res.status(404).render("404")
-})
+});
 
 app.listen(3000, () => {
   console.log("servidor iniciado");

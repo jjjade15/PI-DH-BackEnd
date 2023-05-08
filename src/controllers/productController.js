@@ -147,7 +147,6 @@ const productController = {
     //Atualiza as infos do produto 
     produtoMod.name = produtoNovo.name;
     produtoMod.price = Number(produtoNovo.price); //Atualiza o preço
-
     produtoMod.description = produtoNovo.description; //Atualiza a descrição
     produtoMod.departamento = produtoNovo.departamento; //Atualiza o departamento
     produtoMod["sub-departamento"] = produtoNovo["sub-departamento"]; //Atualiza o sub-departamento

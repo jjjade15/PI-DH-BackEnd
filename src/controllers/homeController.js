@@ -13,7 +13,7 @@ const homeController = {
     res.render("produtos", {produtos: productsToSearch})
 
   }
-
 }
+ 
 
 module.exports = homeController;
