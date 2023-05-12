@@ -12,7 +12,7 @@ const auth = (req, res, next) => {
   } 
   //Caso não esteja logado
   else {
-    console.log("Usuário não autenticado");
+
     res.render("login", { errors: [{ msg: "Usuário não autenticado" }] });
   }
 };

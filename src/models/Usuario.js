@@ -31,5 +31,8 @@ module.exports = (sequelize, DataType) => {
     timestamps: false
   })
 
+  Usuario.associate = (models) => {
+    Usuario.hasOne(models.Endereco, {foreignKey:"id_usuario"});
+  }
   return Usuario;
 }

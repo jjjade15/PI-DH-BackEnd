@@ -69,10 +69,10 @@
           </div>
           <!-- Anuncios (include card produto)-->
           <div class="flex-anuncios">
-           <%produtos.forEach((produto) => {%> 
-            <%- include("./partials/cardProduto", {produto}); %> 
+            <%produtos.forEach((produto) => {%> 
+            
+              <%-include("./partials/cardProduto", {produto}); %> 
             <% }); %>
-
           </div>
         </div>
 
@@ -103,10 +103,8 @@
             <h1>MAIS VENDIDOS</h1>
           </div>
           <div class="flex-anuncios">
-            <%produtos.forEach((produto) => {%> 
-              <%- include("./partials/cardProduto", {produto}); %> 
-              <% }); %>
-  
+            <%produtos.forEach((produto) => {%> <%-
+            include("./partials/cardProduto", {produto}); %> <% }); %>
           </div>
         </div>
         <!-- Departamentos -->
@@ -236,7 +234,6 @@
       });
 
       $(".banners").show();
-
     </script>
   </body>
 </html>

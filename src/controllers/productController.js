@@ -1,10 +1,13 @@
+//Pacotes
 const { render } = require("ejs");
 const { query } = require("express");
 const fs = require("fs");
 const path = require("path");
+const { validationResult } = require("express-validator");
 
+//Models
 const productsData = require("../database/produtos.json");
-
+const { Produto, Imagem } = require("../models");
 
 //Decidi criar funções externas pro controller pra ficar mais organizado e não repetir código
 function getProductById(id) {
@@ -42,7 +45,6 @@ function deleteProductImages(prodId) {
     imgPath = path.join(__dirname, "../../public", imgCam);
     fs.unlinkSync(imgPath);
   });
-
 }
 
 const productController = {
@@ -73,12 +75,30 @@ const productController = {
     return res.render("produtos", { produtos: produtosFiltrados });
   },
 
-  showById: function (req, res) {
-    const targetProduct = getProductById(req.params.id);
+  showById: async function (req, res) {
+    try {
+      const id_produto = Number(req.params.id);
+      console.log(id_produto)
+      const targetProduct = await Produto.findOne({
+        where: { id_produto },
+        raw:true
+      });
 
-    targetProduct
-      ? res.render("produto", { produto: targetProduct })
-      : res.status(404).render("404");
+      if(targetProduct === null) res.status(404).render("404");
+
+      const imagens = await Imagem.findAll({
+        where: { id_produto },
+        raw: true,
+      });
+      console.log(targetProduct)
+      targetProduct.Imagem = imagens;
+      targetProduct.preco = Number(targetProduct.preco);
+
+      res.render("produto", { produto: targetProduct });
+    } catch (error) {
+      console.log(error)
+    }
+    
   },
 
   showCreateProduct(req, res) {
@@ -90,6 +110,7 @@ const productController = {
     res.render("editarProduto", { produto: targetProduct });
   },
 
+  // Rotas que enviam dados
   sendById(req, res) {
     const targetProduct = getProductById(req.params.id);
     res.json(targetProduct);
@@ -107,44 +128,82 @@ const productController = {
   },
 
   //CRUDS POST, PUT, DELETE
-  //POST
-  createProduct(req, res) {
-    //Recebe o objeto contendo as infos do produto
-    const produto = req.body;
-    /* Adiciona as propriedades no produto */
+  async createProduct(req, res) {
+    const errorsVal = validationResult(req);
 
-    //Adiciona o id no produto
-    produto.id = productsData.length + 1;
-    //Adiciona preço no produto
-    produto.price = Number(produto.price);
-    //Adiciona a array de imagens formatada anteriormente no mutler
-    produto.imagens = formatImagesPath(req.files);
-    //Adiciona o produto no objeto de produtos geral
-    productsData.push(produto);
-    
-    atualizaBanco();
+    if (!errorsVal.isEmpty())
+      return res.render("adicionarProduto", { errorsVal: errorsVal.mapped() });
+
+    //Recebe o objeto contendo as infos do produto
+    const {
+      nome,
+      id_departamento,
+      id_sub_departamento,
+      fabricante,
+      preco,
+      descricao,
+    } = req.body;
+
+    //Cria o produto no banco
+    try {
+      const {
+        dataValues: { id_produto },
+      } = await Produto.create({
+        nome,
+        id_departamento: Number(id_departamento),
+        id_sub_departamento: id_sub_departamento
+          ? Number(id_sub_departamento)
+          : null,
+        fabricante: fabricante ? fabricante : null,
+        preco,
+        descricao: descricao ? descricao : null,
+      });
+
+      //Adiciona o caminho das imagens no banco
+      const caminhoImagens = formatImagesPath(req.files);
+
+      //Adiciona as imagens do produto no banco
+      for (let img of caminhoImagens) {
+        try {
+          await Imagem.create({
+            id_produto,
+            caminho: img,
+          });
+        } catch (error) {
+          console.error(error);
+          return res.render("adicionarProduto", {
+            error: "Erro ao adicionar imagens",
+          });
+        }
+      }
+    } catch (error) {
+      return res.render("adicionarProduto", {
+        error: "Produto não adicionado",
+      });
+    }
+
     //Atualiza a página
-    res.redirect(302, "/criarproduto");
+    res.render("adicionarProduto", { sucess: true });
   },
 
   updateProduct(req, res) {
     /* FAZER A EDIÇÃO DA IMAGEM OPICIONAL */
     //Produto a ser modificado
     const produtoMod = getProductById(req.params.id);
-    
+
     //Recebe o objeto contendo as infos do produto atualizadas
     const produtoNovo = req.body;
     //Deleta as imagens do produto velho
-    if(req.files.length > 0) {
+    if (req.files.length > 0) {
       deleteProductImages(produtoMod.id);
       produtoMod.imagens = formatImagesPath(req.files); //Atualiza as imagens
-    } 
+    }
 
     /*
     OTIMIZAR 
     */
 
-    //Atualiza as infos do produto 
+    //Atualiza as infos do produto
     produtoMod.name = produtoNovo.name;
     produtoMod.price = Number(produtoNovo.price); //Atualiza o preço
     produtoMod.description = produtoNovo.description; //Atualiza a descrição
@@ -156,6 +215,7 @@ const productController = {
 
     res.redirect(301, `/editarproduto/${produtoMod.id}`);
   },
+
   deleteProduct(req, res) {
     id = Number(req.params.id);
 

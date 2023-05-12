@@ -1,10 +1,12 @@
-//Módulos
+//Pacotes
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
 //Models
-const User = require("../../modelstemp/User.js");
 const { Usuario } = require("../models");
+const { Endereco } = require("../models");
+
 
 const userController = {
   //Cadastro
@@ -28,11 +30,9 @@ const userController = {
     const cpfExist = await Usuario.findOne({ where: { cpf: req.body.cpf } });
 
     if (userExist) {
-      console.log("email já existe");
       errors.errors.push({ msg: "Email já existente" });
     }
     if (cpfExist) {
-      console.log("cpf já existente");
       errors.errors.push({ msg: "CPF já existente" });
     }
 
@@ -43,16 +43,51 @@ const userController = {
 
     //Cria o cadastro caso não tenha erros
 
-    //Faz o hash da senha
-    const userToCreate = {
-      ...req.body,
-      senha: bcrypt.hashSync(req.body.senha, 10),
+    const {
+      nome,
+      email,
+      cpf,
+      data_nasc,
+      telefone,
+      cep,
+      rua,
+      numero,
+      complemento,
+      bairro,
+      cidade,
+      estado,
+      senha,
+    } = req.body;
+
+    const userInfo = {
+      nome,
+      email,
+      cpf,
+      data_nasc,
+      telefone,
+      senha: bcrypt.hashSync(senha, 10), //Faz o hash da senha
       adm: 0,
     };
 
-    // Cria o usuario no json User.createUser(userToCreate);
-    const resultado = await Usuario.create(userToCreate);
-    console.log(resultado);
+    await Usuario.create(userInfo);
+
+    //Pega o ID do usuário criado através do email
+    const {dataValues:{id_usuario}} = await Usuario.findOne({where: {email: email}});
+
+    const userAdress = {
+      id_usuario,
+      cep,
+      rua,
+      numero,
+      complemento,
+      bairro,
+      cidade,
+      estado,
+    };
+
+    //Cria a fileira do endereço daquele usuário
+    await Endereco.create(userAdress);
+
     res.redirect("/login");
   },
 
@@ -102,7 +137,7 @@ const userController = {
     return res.redirect("/");
   },
 
-  //Perfil
+  //Perfil usuário
   async showProfile(req, res) {
     const { id } = jwt.verify(req.cookies.token, "batata");
     const userLogged = await Usuario.findByPk(id);

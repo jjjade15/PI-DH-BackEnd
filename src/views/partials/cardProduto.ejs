@@ -1,6 +1,6 @@
 
 
-<a href="/produto/<%=produto.id%>" class="caixa-anuncio">
+<a href="/produto/<%=produto.id_produto%>" class="caixa-anuncio">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -18,7 +18,7 @@
   
   <div class="imagem">
     <img
-      src="<%=produto.imagens[0]%>"
+      src="<%=produto.Imagem.caminho%>"
       alt=""
     />
   </div>
@@ -26,10 +26,10 @@
   <div class="info-prod">
     <div class="caixa-titulo">
       <h3 class="tit-prod">
-        <%=produto.name %>
+        <%=produto.nome %>
       </h3>
     </div>
-    <div class="preco"><%=produto.price.toLocaleString('pt-br',{style:
+    <div class="preco"><%=Number(produto.preco).toLocaleString('pt-br',{style:
       'currency', currency: 'BRL'});%></div>
   </div>
   

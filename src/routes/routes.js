@@ -5,6 +5,7 @@ const express = require("express");
 const upload = require("../middlewares/upload.js");
 const auth = require("../middlewares/auth.js"); //Middleware de autenticação, só da acesso a quem tá logado
 const validarCadastro = require("../middlewares/validateUser.js");
+const validarProduto = require("../middlewares/validateProduct.js");
 
 //Controllers
 const homeController = require("../controllers/homeController.js");
@@ -29,7 +30,7 @@ router.get("/criarproduto", auth, productController.showCreateProduct)
 router.get("/editarproduto/:id", auth, productController.showUpdateProduct);
 router.get("/enviarimagem/:id", productController.sendProductImage); // Envia img produto
 //post
-router.post("/criarproduto", auth, upload.any(), productController.createProduct);
+router.post("/criarproduto", auth, upload.any(), validarProduto, productController.createProduct);
 //put
 router.put("/produto/:id", auth, upload.any(), productController.updateProduct);
 //delete
@@ -61,5 +62,15 @@ router.post("/login", userController.login)
 router.get("/logout", auth, userController.logOut);
 //Rota Perfil
 router.get("/minha-conta", auth, userController.showProfile)
+
+
+const {check, validationResult} = require("express-validator");
+router.post("/rotateste", [check("numero").isNumeric().withMessage("Não é um número carai")],(req, res) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty())
+    res.json(errors);
+  
+  else res.send("Sem erros");
+})
 
 module.exports = router;

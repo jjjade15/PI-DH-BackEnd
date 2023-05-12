@@ -9,9 +9,30 @@ module.exports = (sequelize, DataType) => {
     },
     id_usuario: {
       type: DataType.INTEGER
+    },
+    cep: {
+      type: DataType.STRING(13)
+    },
+    rua: {
+      type: DataType.STRING(45)
+    },
+    numero: {
+      type: DataType.INTEGER
+    },
+    bairro: {
+      type: DataType.STRING(200)
+    },
+    cidade: {
+      type: DataType.STRING(200)
+    },
+    estado: {
+      type: DataType.STRING(200)
+    },
+    complemento: {
+      type: DataType.STRING(200)
     }
   }, {
-    tableName: "usuario",
+    tableName: "endereco",
     timestamps: false
   })
 

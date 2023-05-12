@@ -78,12 +78,33 @@
       .form-sub-departamento {
         display: none;
       }
+
+      .errors-list {
+        background-color: rgb(255, 214, 214);
+        padding: 16px 0;
+        border-radius: 5px;
+        list-style: initial !important;
+
+      }
+      .errors-list li {
+        color: rgb(168, 0, 0);
+        list-style-type: disc;
+        margin: 0 32px;
+      }
+
+      .prod_add {
+        background-color: rgb(196, 255, 196);
+        color: green;
+        padding: 16px;
+      }
     </style>
   </head>
   <body>
     <%-include("./partials/header.ejs") %> <%-
     include("./partials/hamburguer.ejs") %>
-
+    <% if(typeof(sucess)!= "undefined") {%>
+    <h1 class="prod_add">Produto Adicionado com sucesso</h1>
+    <%}%>
     <main>
       <form
         action="/criarproduto"
@@ -92,22 +113,29 @@
         enctype="multipart/form-data"
       >
         <h1>Criação de Produto</h1>
+        <% if(typeof errorsVal !== "undefined") { %>
+        <ul class="errors-list">
+          <% for(let error in errorsVal) { %>
+          <li class="error"><%=errorsVal[error].msg%></li> 
+          <% } %>
+        </ul>
+        <% } %>
         <div class="form-nome">
-          <label for="name">Nome:</label>
+          <label for="nome">Nome:</label>
           <input
             type="text"
             id="name"
-            name="name"
+            name="nome"
             placeholder="Insira o nome do produto"
             required
           />
         </div>
         <div class="form-preco">
-          <label for="price">Preço:</label>
+          <label for="preco">Preço:</label>
           <input
             type="text"
-            id="price"
-            name="price"
+            id="preco"
+            name="preco"
             placeholder="Insira o preco do produto"
             required
             oninvalid="this.setCustomValidity('Esse número não é válido !')"
@@ -124,24 +152,24 @@
           />
         </div>
         <div class="form-departamento">
-          <label for="departamento">Departamento:</label>
-          <select name="departamento" id="select-dep" class="dep" required>
+          <label for="id_departamento">Departamento:</label>
+          <select name="id_departamento" id="select-dep" class="dep" required>
             <option value="" disabled selected hidden>Selecione</option>
-            <option value="computador">Computador</option>
-            <option value="hardware">Hardware</option>
-            <option value="periferico">Periféricos</option>
-            <option value="notebook">Notebooks</option>
-            <option value="kit upgrade">Kit Upgrade</option>
-            <option value="cadeira gamer">Cadeiras Gamer</option>
-            <option value="monitor">Monitores</option>
-            <option value="celular">Celulares</option>
-            <option value="games">Games</option>
+            <option value="1">Computador</option>
+            <option value="2">Hardware</option>
+            <option value="3">Periféricos</option>
+            <option value="4">Notebooks</option>
+            <option value="5">Kit Upgrade</option>
+            <option value="6">Cadeiras Gamer</option>
+            <option value="7">Monitores</option>
+            <option value="8">Celulares</option>
+            <option value="9">Games</option>
           </select>
         </div>
         <div class="form-sub-departamento">
-          <label for="sub-departamento">Sub-Departamento:</label>
+          <label for="id_sub_departamento">Sub-Departamento:</label>
           <select
-            name="sub-departamento"
+            name="id_sub_departamento"
             id="select-sub-dep"
             class="dep"
           ></select>
@@ -149,7 +177,7 @@
         <div class="form-descricao">
           <label for="description">Descrição:</label>
           <textarea
-            name="description"
+            name="descricao"
             class="form-descricao"
             cols="100"
             rows="10"
@@ -184,52 +212,51 @@
 
     depForm.innerHTML;
     depForm.addEventListener("change", function (e) {
-      console.log(this.value);
       switch (this.value) {
-        case "computador": {
+        case "1": {
           formSubDep.style.display = "flex";
           subDepForm.removeAttribute("disabled");
           subDepForm.innerHTML = `
-            <option value="pc gamer">Pc Gamer</option>
-            <option value="pc escritorio">PC Escritorio</option>
-            <option value="pc casual">PC Casual</option>
+            <option value="1">Pc Gamer</option>
+            <option value="2">PC Escritorio</option>
+            <option value="3">PC Casual</option>
           `;
           break;
         }
-        case "hardware": {
+        case "2": {
           formSubDep.style.display = "flex";
           console.log("ativou");
           subDepForm.removeAttribute("disabled");
           subDepForm.innerHTML = `
-            <option value="processador">Processador</option>
-            <option value="placa de video">Placa de Vídeo</option>
-            <option value="placa mae">Placa Mãe</option>
-            <option value="memoria">Memória</option>
-            <option value="armazenamento">Armazenamento</option>
-            <option value="cooler">Cooler</option>
+            <option value="4">Processador</option>
+            <option value="5">Placa de Vídeo</option>
+            <option value="6">Placa Mãe</option>
+            <option value="7">Memória</option>
+            <option value="8">Armazenamento</option>
+            <option value="9">Cooler</option>
           `;
           break;
         }
-        case "periferico": {
+        case "3": {
           formSubDep.style.display = "flex";
           subDepForm.removeAttribute("disabled");
           subDepForm.innerHTML = `
-            <option value="teclado">Teclado</option>
-            <option value="mouse">Mouse</option>
-            <option value="fone">Fone</option>
-            <option value="headset">Headset</option>
-            <option value="webcam">Webcam</option>
-            <option value="kits perif">Kits Periferico</option>
+            <option value="12">Teclado</option>
+            <option value="13">Mouse</option>
+            <option value="14">Fone</option>
+            <option value="15">Headset</option>
+            <option value="16">Webcam</option>
+            <option value="17">Kits Periferico</option>
           `;
           break;
         }
-        case "notebook": {
+        case "4": {
           formSubDep.style.display = "flex";
           subDepForm.removeAttribute("disabled");
           subDepForm.innerHTML = `
-            <option value="macbook">Macbook</option>
-            <option value="not gamer">Notebook Gamer</option>
-            <option value="not escritorio">Notebook Escritório</option>
+            <option value="18">Macbook</option>
+            <option value="19">Notebook Gamer</option>
+            <option value="20">Notebook Escritório</option>
           `;
           break;
         }
@@ -247,13 +274,22 @@
     const btnEnvia = document.querySelector(".btn-criar");
 
     btnEnvia.addEventListener("click", function (e) {
-      const inputPreco = document.getElementById("price");
+      const inputPreco = document.getElementById("preco");
+
       const valor = Number(inputPreco.value);
-      if(!valor || isNaN(valor)) {
+      console.log(valor)
+      if (!valor || isNaN(valor)) {
         console.log(valor);
         inputPreco.reportValidity();
       }
-
     });
+
+    const prodAdd = document.querySelector(".prod_add");
+    if(prodAdd) {
+      setTimeout(() => {
+        prodAdd.remove();
+      }, 4000)
+    }
+
   </script>
 </html>

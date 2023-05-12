@@ -16,7 +16,7 @@
 
     <main class="container-principal">
       <div class="container-produto">
-        <h1><%= produto.name %></h1>
+        <h1><%= produto.nome %></h1>
 
         <div class="area-produto">
           <div class="slide-imagens">
@@ -38,8 +38,8 @@
             </button>
 
             <div class="container-imagens">
-              <% for(img of produto.imagens) { %>
-              <img src="<%=img%>" alt="" class="ativa" />
+              <% for(img of produto.Imagem) { %>
+              <img src="<%=img.caminho%>" alt="" class="ativa" />
               <% } %>
             </div>
 
@@ -107,14 +107,14 @@
             </div>
             <div class="caixa-preco">
               <h2>
-                <% const preco = produto.price.toLocaleString('pt-br',{style:
+                <% const preco = produto.preco.toLocaleString('pt-br',{style:
                 'currency', currency: 'BRL'}); %>
                 <span id="preco-produto"><%= preco %></span><span> ou </span>
               </h2>
               <h4>
                 <span id="parcela">12X</span> de
                 <span id="preco-produto-parcelado"
-                  ><%= (produto.price*1.15/12).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});%></span
+                  ><%= (produto.preco*1.15/12).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});%></span
                 >
               </h4>
             </div>
@@ -160,8 +160,8 @@
       <section class="container-descricao">
         <h3>Descrição</h3>
         <div>
-          <%if(produto.description) { %>
-            <%- produto.description %>
+          <%if(produto.descricao) { %>
+            <%- produto.descricao %>
           <%}else {%>
             <%- include("./partials/loremDesc.ejs")%>
           <%}%>
