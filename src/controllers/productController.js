@@ -78,27 +78,26 @@ const productController = {
   showById: async function (req, res) {
     try {
       const id_produto = Number(req.params.id);
-      console.log(id_produto)
+      console.log(id_produto);
       const targetProduct = await Produto.findOne({
         where: { id_produto },
-        raw:true
+        raw: true,
       });
 
-      if(targetProduct === null) res.status(404).render("404");
+      if (targetProduct === null) res.status(404).render("404");
 
+      //Faz o query das imagens
       const imagens = await Imagem.findAll({
         where: { id_produto },
         raw: true,
       });
-      console.log(targetProduct)
       targetProduct.Imagem = imagens;
       targetProduct.preco = Number(targetProduct.preco);
 
       res.render("produto", { produto: targetProduct });
     } catch (error) {
-      console.log(error)
+      res.status(404).render("404");
     }
-    
   },
 
   showCreateProduct(req, res) {
@@ -110,6 +109,45 @@ const productController = {
     res.render("editarProduto", { produto: targetProduct });
   },
 
+  async showByDepartament(req, res) {
+    const departNums = new Map([
+      ["computadores", 1],
+      ["hardware", 2],
+      ["perifericos", 3],
+      ["notebooks", 4],
+      ["kit-upgrade", 5],
+      ["cadeiras-gamer", 6],
+      ["monitores", 7],
+      ["celulares", 8],
+      ["games", 9],
+    ]);
+
+    const dep = departNums.get(req.params.dep);
+    console.log(dep);
+    if (!dep) res.status(404).render("404"); //Caso o parâmetro da rota não seja um departamento responde com a 404
+
+    //Fazer o query dos produtos
+    try {
+      const produtos = await Produto.findAll({
+        where: { id_departamento: dep },
+        raw: true,
+      });
+
+      //Faz o query das imagens
+      for (const p of produtos) {
+        const img = await Imagem.findOne({
+          where: { id_produto: p.id_produto },
+          raw: true,
+        });
+        const produto = produtos.find((p) => p.id_produto === img.id_produto);
+        produto.Imagem = img;
+      }
+
+      res.render("produtos", { produtos });
+    } catch (error) {
+      res.status(404).render("404");
+    }
+  },
   // Rotas que enviam dados
   sendById(req, res) {
     const targetProduct = getProductById(req.params.id);

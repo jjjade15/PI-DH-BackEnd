@@ -24,11 +24,12 @@ router.get("/busca", homeController.search); //Barra de pesquisa
 
 // -=-=-=-  Rotas produto -=-=-=-  
 //get
-router.get("/produto", productController.showAll);
+router.get("/departamento/:dep", productController.showByDepartament);
 router.get("/produto/:id", productController.showById);
 router.get("/criarproduto", auth, productController.showCreateProduct)
 router.get("/editarproduto/:id", auth, productController.showUpdateProduct);
 router.get("/enviarimagem/:id", productController.sendProductImage); // Envia img produto
+
 //post
 router.post("/criarproduto", auth, upload.any(), validarProduto, productController.createProduct);
 //put

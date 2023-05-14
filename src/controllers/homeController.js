@@ -2,7 +2,9 @@ const { Produto, Imagem } = require("../models");
 
 const homeController = {
   async showHome(req, res) {
-    /* Otimizar depois, tentar pegar as imagens e o produto em só um query */
+    /* Otimizar depois, tentar pegar as imagens e o produto em um só query 
+      Criar o json com os produtos da home
+    */
     
     //Faz o query de todos os produtos
     try {
