@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Adicionar produto</title>
+    <title>Editar produto</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.svg" />
 
     <style>
@@ -25,7 +25,6 @@
       .criar-produto-form > * {
         display: flex;
         flex-direction: column;
-
       }
       label {
         margin-bottom: 6px;
@@ -79,30 +78,56 @@
       .form-sub-departamento {
         display: none;
       }
+
+      .errors-list {
+        background-color: rgb(255, 214, 214);
+        padding: 16px 0;
+        border-radius: 5px;
+        list-style: initial !important;
+      }
+      .errors-list li {
+        color: rgb(168, 0, 0);
+        list-style-type: disc;
+        margin: 0 32px;
+      }
+
+      .prod_add {
+        background-color: rgb(196, 255, 196);
+        color: green;
+        padding: 16px;
+      }
     </style>
   </head>
   <body>
     <%-include("./partials/header.ejs") %> <%-
-    include("./partials/hamburguer.ejs") %>
-
-    
+    include("./partials/hamburguer.ejs") %> <% if(typeof(sucess)!= "undefined")
+    {%>
+    <h1 class="prod_add">Produto Editado com sucesso</h1>
+    <%}%>
     <main>
+      <% if(typeof errorsVal !== "undefined") { %>
+      <ul class="errors-list">
+        <% for(let error in errorsVal) { %>
+        <li class="error"><%=errorsVal[error].msg%></li>
+        <% } %>
+      </ul>
+      <% } %>
 
       <form
-        action="/produto/<%=produto.id%>?_method=PUT"
+        action="/produto/<%=produto.id_produto%>?_method=PUT"
         method="POST"
         class="criar-produto-form"
         enctype="multipart/form-data"
       >
-        <h1>Edição de Produto</h1>      
+        <h1>Edição de Produto</h1>
         <div class="form-nome">
           <label for="name">Nome:</label>
           <input
             type="text"
             id="name"
-            name="name"
+            name="nome"
             placeholder="Insira o nome do produto"
-            value="<%= produto.name %>"
+            value="<%= produto.nome %>"
             required
           />
         </div>
@@ -111,9 +136,9 @@
           <input
             type="text"
             id="price"
-            name="price"
+            name="preco"
             placeholder="Insira o preco do produto"
-            value="<%=produto.price%>"
+            value="<%=produto.preco%>"
             required
             oninvalid="this.setCustomValidity('Esse número não é válido !')"
           />
@@ -126,43 +151,48 @@
             name="fabricante"
             placeholder="Insira o preco do produto"
             value="<%=produto.fabricante%>"
-            required
           />
         </div>
         <div class="form-departamento">
           <label for="departamento">Departamento:</label>
-          <select name="departamento" id="select-dep" class="dep"  data-dep="<%=produto.departamento%>" required>
-            <option value="computador">Computador</option>
-            <option value="hardware">Hardware</option>
-            <option value="periferico">Periféricos</option>
-            <option value="notebook">Notebooks</option>
-            <option value="kit upgrade">Kit Upgrade</option>
-            <option value="cadeira gamer">Cadeiras Gamer</option>
-            <option value="monitor">Monitores</option>
-            <option value="celular">Celulares</option>
-            <option value="games">Games</option>
+          <select
+            name="id_departamento"
+            id="select-dep"
+            class="dep"
+            data-dep="<%=produto.id_departamento%>"
+            required
+          >
+            <option value="1">Computador</option>
+            <option value="2">Hardware</option>
+            <option value="3">Periféricos</option>
+            <option value="4">Notebooks</option>
+            <option value="5">Kit Upgrade</option>
+            <option value="6">Cadeiras Gamer</option>
+            <option value="7">Monitores</option>
+            <option value="8">Celulares</option>
+            <option value="9">Games</option>
           </select>
         </div>
-        <div class="form-sub-departamento" >
+        <div class="form-sub-departamento">
           <label for="departamento">Sub-Departamento:</label>
           <select
-            name="sub-departamento"
+            name="id_sub_departamento"
             id="select-sub-dep"
             disabled
             class="dep"
-            data-dep="<%= produto["sub-departamento"] %>"
-          >
-
-          </select>
+            data-dep="<%= produto.id_sub_departamento%>"
+          ></select>
         </div>
         <div class="form-descricao">
           <label for="description">Descrição:</label>
           <textarea
-            name="description"
+            name="descricao"
             class="form-descricao"
             cols="100"
             rows="10"
-          ><%=produto.description%></textarea>
+          >
+<%=produto.descricao%></textarea
+          >
         </div>
 
         <div class="">
@@ -176,7 +206,6 @@
             multiple
           />
         </div>
-
 
         <div class="div.btn">
           <button type="submit" class="btn-criar">SALVAR</button>
@@ -194,76 +223,76 @@
 
     function init() {
       const depProd = depForm.dataset.dep;
-      console.log(depProd);
+
       const options = document.querySelectorAll("#select-dep option");
-      for(let op of options) {
-        if(op.value === depProd) {
+      for (let op of options) {
+        if (op.value === depProd) {
           op.setAttribute("selected", "");
-          console.log(op);
+
           break;
         }
-      } 
+      }
 
       alteraDepartamento();
-      
+
       const subDepProd = subDepForm.dataset.dep;
-      const options2 = document.querySelectorAll("#select-sub-dep option")
-      console.log(subDepProd)
+      const options2 = document.querySelectorAll("#select-sub-dep option");
+      console.log(subDepProd);
       options2.forEach((op) => {
-        if(op.value === subDepProd) {
+        if (op.value === subDepProd) {
           op.setAttribute("selected", "");
         }
-      })
+      });
     }
+
     init();
-    
+
     function alteraDepartamento() {
-      console.log(depForm)
       switch (depForm.value) {
-        case "computador": {
+        case "1": {
+          console.log("ativou");
           formSubDep.style.display = "flex";
-          subDepForm.removeAttribute("disabled")
-          subDepForm.innerHTML =`
-            <option value="pc gamer">Pc Gamer</option>
-            <option value="pc escritorio">PC Escritorio</option>
-            <option value="pc casual">PC Casual</option>
+          subDepForm.removeAttribute("disabled");
+          subDepForm.innerHTML = `
+            <option value="1">Pc Gamer</option>
+            <option value="2">PC Escritorio</option>
+            <option value="3">PC Casual</option>
           `;
           break;
         }
-        case "hardware": {
+        case "2": {
           formSubDep.style.display = "flex";
-          console.log("ativou")
-          subDepForm.removeAttribute("disabled")
+          console.log("ativou");
+          subDepForm.removeAttribute("disabled");
           subDepForm.innerHTML = `
-            <option value="processador">Processador</option>
-            <option value="placa de video">Placa de Vídeo</option>
-            <option value="placa mae">Placa Mãe</option>
-            <option value="memoria">Memória</option>
-            <option value="armazenamento">Armazenamento</option>
-            <option value="cooler">Cooler</option>
+            <option value="4">Processador</option>
+            <option value="5">Placa de Vídeo</option>
+            <option value="6">Placa Mãe</option>
+            <option value="7">Memória</option>
+            <option value="8">Armazenamento</option>
+            <option value="9">Cooler</option>
           `;
           break;
         }
-        case "periferico": {
+        case "3": {
           formSubDep.style.display = "flex";
-          subDepForm.removeAttribute("disabled")
+          subDepForm.removeAttribute("disabled");
           subDepForm.innerHTML = `
-            <option value="teclado">Teclado</option>
-            <option value="mouse">Mouse</option>
-            <option value="fone">Fone</option>
-            <option value="headset">Headset</option>
-            <option value="webcam">Webcam</option>
-            <option value="kits perif">Kits Periferico</option>
+            <option value="10">Teclado</option>
+            <option value="11">Mouse</option>
+            <option value="12">Fone</option>
+            <option value="13">Headset</option>
+            <option value="14">Webcam</option>
           `;
           break;
         }
-        case "notebook": {
+        case "4": {
           formSubDep.style.display = "flex";
-          subDepForm.removeAttribute("disabled")
+          subDepForm.removeAttribute("disabled");
           subDepForm.innerHTML = `
-            <option value="macbook">Macbook</option>
-            <option value="not gamer">Notebook Gamer</option>
-            <option value="not escritorio">Notebook Escritório</option>
+            <option value="16">Macbook</option>
+            <option value="17">Notebook Gamer</option>
+            <option value="18">Notebook Escritório</option>
           `;
           break;
         }
@@ -276,21 +305,28 @@
         }
       }
     }
-    depForm.innerHTML
+
     depForm.addEventListener("change", alteraDepartamento);
 
     //Faz a validação do number
     const btnEnvia = document.querySelector(".btn-criar");
 
+    //Verifica o número no preço é válido.
     btnEnvia.addEventListener("click", function (e) {
       const inputPreco = document.getElementById("price");
       const valor = Number(inputPreco.value);
-      if(!valor || isNaN(valor)) {
+      if (!valor || isNaN(valor)) {
         console.log(valor);
         inputPreco.reportValidity();
         e.preventDefault();
       }
-
     });
+    
+    const prodAdd = document.querySelector(".prod_add");
+    if (prodAdd) {
+      setTimeout(() => {
+        prodAdd.remove();
+      }, 4000);
+    }
   </script>
 </html>

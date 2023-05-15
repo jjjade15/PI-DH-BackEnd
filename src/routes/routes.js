@@ -25,6 +25,7 @@ router.get("/busca", homeController.search); //Barra de pesquisa
 // -=-=-=-  Rotas produto -=-=-=-  
 //get
 router.get("/departamento/:dep", productController.showByDepartament);
+router.get("/departamento/:dep/:subdep", productController.showByDepartament);
 router.get("/produto/:id", productController.showById);
 router.get("/criarproduto", auth, productController.showCreateProduct)
 router.get("/editarproduto/:id", auth, productController.showUpdateProduct);
@@ -33,9 +34,9 @@ router.get("/enviarimagem/:id", productController.sendProductImage); // Envia im
 //post
 router.post("/criarproduto", auth, upload.any(), validarProduto, productController.createProduct);
 //put
-router.put("/produto/:id", auth, upload.any(), productController.updateProduct);
+router.put("/produto/:id", auth, upload.any(), validarProduto, productController.updateProduct);
 //delete
-router.delete("/produto/:id", auth, productController.deleteProduct);
+router.delete("/produto/:id",  productController.deleteProduct);
 
 // -=-=-=-  Rotas monteSeuPc -=-=-=-  
 router.get("/monteseupc", monteSeuPcController.showMonteSeuPc);

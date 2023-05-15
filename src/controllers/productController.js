@@ -4,19 +4,13 @@ const { query } = require("express");
 const fs = require("fs");
 const path = require("path");
 const { validationResult } = require("express-validator");
+const { Op } = require("sequelize"); //Módulo de operadores sequelize
 
 //Models
 const productsData = require("../database/produtos.json");
 const { Produto, Imagem } = require("../models");
 
-//Decidi criar funções externas pro controller pra ficar mais organizado e não repetir código
-function getProductById(id) {
-  const idProd = Number(id);
-  const targetProduct = productsData.find((obj) => obj.id === idProd);
-
-  return targetProduct;
-}
-
+//Funções externas para o controller
 function formatImagesPath(filesArray) {
   /*
     Função que retorna a array the imagens, isso possibilita adicionar várias imagens ao mesmo tempo com o produto
@@ -29,19 +23,9 @@ function formatImagesPath(filesArray) {
   });
 }
 
-function atualizaBanco() {
-  //Reescreve o arquivo json
-  const filePath = path.join(__dirname, "../database/produtos.json"); //Acha o caminho do produtos.json
-  fs.writeFileSync(filePath, JSON.stringify(productsData)); //Reescreve o arquivo agora com o produto adicionado
-}
-
-function deleteProductImages(prodId) {
-  prodId = Number(prodId);
-
-  const pIndex = productsData.findIndex((prod) => prod.id === prodId);
-
-  //Remove as imagens antigas e o produto antigp
-  productsData[pIndex].imagens.forEach((imgCam) => {
+function deleteImages(imagesPaths) {
+  //Remove as imagens antigas
+  imagesPaths.forEach((imgCam) => {
     imgPath = path.join(__dirname, "../../public", imgCam);
     fs.unlinkSync(imgPath);
   });
@@ -104,9 +88,19 @@ const productController = {
     res.render("adicionarProduto");
   },
 
-  showUpdateProduct(req, res) {
-    const targetProduct = getProductById(req.params.id);
-    res.render("editarProduto", { produto: targetProduct });
+  async showUpdateProduct(req, res) {
+    try {
+      const id = Number(req.params.id);
+      const produto = await Produto.findOne({
+        where: { id_produto: id },
+        raw: true,
+      });
+
+      if (!produto) throw new Error("Produto não encontrado");
+      req.statusCode === 301 ?  res.render("editarProduto", { produto: produto, sucess:true }) : res.render("editarProduto", { produto: produto });
+    } catch (error) {
+      res.status(404).render("404");
+    }
   },
 
   async showByDepartament(req, res) {
@@ -122,16 +116,60 @@ const productController = {
       ["games", 9],
     ]);
 
+    const subDepartNums = new Map([
+      ["pc-gamer", 1],
+      ["pc-escritorio", 2],
+      ["pc-casual", 3],
+      ["processador", 4],
+      ["placa-de-video", 5],
+      ["placa-mae", 6],
+      ["memoria", 7],
+      ["armazenamento", 8],
+      ["refrigeramento", 9],
+      ["teclado", 10],
+      ["mouse", 11],
+      ["fone", 12],
+      ["headset", 13],
+      ["webcam", 14],
+      ["macbook", 15],
+      ["notebook-gamer", 16],
+      ["notebook-escritorio", 17],
+    ]);
+
     const dep = departNums.get(req.params.dep);
-    console.log(dep);
+
     if (!dep) res.status(404).render("404"); //Caso o parâmetro da rota não seja um departamento responde com a 404
 
     //Fazer o query dos produtos
     try {
-      const produtos = await Produto.findAll({
-        where: { id_departamento: dep },
-        raw: true,
-      });
+      let produtos;
+      //Caso seja um query de um subdepartamento
+      if (req.params.subdep) {
+        console.log("Entrou aqui");
+
+        const subdep = subDepartNums.get(req.params.subdep);
+
+        if (!subdep) throw new Error("Sub departamento não encontrado"); //Da erro caso ele não encontre o sub departamento
+
+        produtos = await Produto.findAll({
+          where: {
+            [Op.and]: {
+              id_departamento: dep,
+              id_sub_departamento: subdep,
+            },
+          },
+          raw: true,
+        });
+      } else {
+        produtos = await Produto.findAll({
+          where: { id_departamento: dep },
+          raw: true,
+        });
+      }
+
+      //Verifica se achou algum produto, caso contrário manda pra 404
+      if (produtos.length == 0)
+        throw new Error("Nenhum produto encontrado nesse departamento");
 
       //Faz o query das imagens
       for (const p of produtos) {
@@ -145,6 +183,7 @@ const productController = {
 
       res.render("produtos", { produtos });
     } catch (error) {
+      console.error(error);
       res.status(404).render("404");
     }
   },
@@ -169,8 +208,13 @@ const productController = {
   async createProduct(req, res) {
     const errorsVal = validationResult(req);
 
-    if (!errorsVal.isEmpty())
+    //Adiciona o caminho das imagens no banco
+    const caminhoImagens = formatImagesPath(req.files);
+
+    if (!errorsVal.isEmpty()) {
+      deleteImages(caminhoImagens);
       return res.render("adicionarProduto", { errorsVal: errorsVal.mapped() });
+    }
 
     //Recebe o objeto contendo as infos do produto
     const {
@@ -197,9 +241,6 @@ const productController = {
         descricao: descricao ? descricao : null,
       });
 
-      //Adiciona o caminho das imagens no banco
-      const caminhoImagens = formatImagesPath(req.files);
-
       //Adiciona as imagens do produto no banco
       for (let img of caminhoImagens) {
         try {
@@ -214,62 +255,117 @@ const productController = {
           });
         }
       }
+      //Atualiza a página
+      res.render("adicionarProduto", { sucess: true });
     } catch (error) {
+      console.error(error);
       return res.render("adicionarProduto", {
         error: "Produto não adicionado",
       });
     }
-
-    //Atualiza a página
-    res.render("adicionarProduto", { sucess: true });
   },
 
-  updateProduct(req, res) {
+  async updateProduct(req, res) {
     /* FAZER A EDIÇÃO DA IMAGEM OPICIONAL */
     //Produto a ser modificado
-    const produtoMod = getProductById(req.params.id);
+    try {
+      const id = Number(req.params.id);
 
-    //Recebe o objeto contendo as infos do produto atualizadas
-    const produtoNovo = req.body;
-    //Deleta as imagens do produto velho
-    if (req.files.length > 0) {
-      deleteProductImages(produtoMod.id);
-      produtoMod.imagens = formatImagesPath(req.files); //Atualiza as imagens
+      const dadosProduto = await Produto.findOne({
+        where: { id_produto: id },
+        raw: true,
+      });
+
+      const errorsVal = validationResult(req);
+      const caminhoImagens = formatImagesPath(req.files);
+
+      if (!errorsVal.isEmpty()) {
+        console.log(errorsVal.mapped());
+        deleteImages(caminhoImagens);
+        return res.render("adicionarProduto", {
+          errorsVal: errorsVal.mapped(),
+          produto: dadosProduto,
+        });
+      }
+
+      if (!dadosProduto) throw new Error("Produto não encontrado");
+
+      const produtoNovo = {
+        ...req.body,
+        fabricante: req.body.fabricante ? req.body.fabricante : null,
+        descricao: req.body.descricao ? req.body.descricao : null,
+      };
+
+      const resultado = await Produto.update(produtoNovo, {
+        where: { id_produto: id },
+      });
+
+      //caso tenha imagens ele deleta as imagens antigas no banco e no diretório e adiciona as novas imagens
+      if (req.files.length > 0) {
+        const imagens = await Imagem.findAll({
+          where: { id_produto: id },
+          raw: true,
+        });
+
+        //Deleta as imagens do diretório
+        imagens.forEach((img) => {
+          imgPath = path.join(__dirname, "../../public", img.caminho);
+          fs.unlinkSync(imgPath);
+        });
+
+        //Deleta as imagens do banco
+        const resultadoImg = await Imagem.destroy({
+          where: { id_produto: id },
+        });
+
+        //Adiciona as imagens do produto no banco
+
+        for (let img of caminhoImagens) {
+          await Imagem.create({
+            id_produto: id,
+            caminho: img,
+          });
+        }
+      }
+
+
+      res.redirect(301, `/editarproduto/${id}`);
+    } catch (error) {
+      console.log(error);
+      res.send("Produto não editado, tente novamente mais tarde");
     }
 
     /*
     OTIMIZAR 
     */
-
-    //Atualiza as infos do produto
-    produtoMod.name = produtoNovo.name;
-    produtoMod.price = Number(produtoNovo.price); //Atualiza o preço
-    produtoMod.description = produtoNovo.description; //Atualiza a descrição
-    produtoMod.departamento = produtoNovo.departamento; //Atualiza o departamento
-    produtoMod["sub-departamento"] = produtoNovo["sub-departamento"]; //Atualiza o sub-departamento
-
-    //Atualiza o banco com o produto modificado
-    atualizaBanco();
-
-    res.redirect(301, `/editarproduto/${produtoMod.id}`);
   },
 
-  deleteProduct(req, res) {
-    id = Number(req.params.id);
+  async deleteProduct(req, res) {
+    // LEMBRA DE DESTRUIR TAMBÉM NAS TABELAS DO CARRINHO QUANDO ESTIVER PRONTA
 
-    //Retorna caso o produto não exista
-    if (pIndex === -1) {
-      return res.status(404).send("Nenhum produto encontrado");
+    try {
+      const id = Number(req.params.id);
+
+      const imagens = await Imagem.findAll({
+        where: { id_produto: id },
+        raw: true,
+      });
+
+      imagens.forEach((img) => {
+        imgPath = path.join(__dirname, "../../public", img.caminho);
+        fs.unlinkSync(imgPath);
+      });
+
+      const resultadoImg = await Imagem.destroy({ where: { id_produto: id } });
+      const resultadoProd = await Produto.destroy({
+        where: { id_produto: id },
+      });
+
+      res.send("deletado caralho");
+    } catch (error) {
+      console.log(error);
+      res.send("erro");
     }
-
-    deleteProductImages(productsData[pIndex].id);
-
-    //Deleta o produto
-    productsData.splice(pIndex, 1);
-
-    atualizaBanco();
-
-    res.send("Produto deletado com sucesso");
   },
 };
 

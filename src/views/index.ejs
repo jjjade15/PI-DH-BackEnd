@@ -69,10 +69,8 @@
           </div>
           <!-- Anuncios (include card produto)-->
           <div class="flex-anuncios">
-            <%produtos.forEach((produto) => {%> 
-            
-              <%-include("./partials/cardProduto", {produto}); %> 
-            <% }); %>
+            <%produtos.forEach((produto) => {%>
+            <%-include("./partials/cardProduto", {produto}); %> <% }); %>
           </div>
         </div>
 
@@ -231,8 +229,9 @@
           arrow: true,
           cssEase: "cubic-bezier(0.39, 0.58, 0.15, 0.98)",
         });
-      });
 
+      });
+      
       $(".banners").show();
     </script>
   </body>
