@@ -8,7 +8,6 @@ const btnVolta = document.querySelector(".volta-imagem")
 const btnCompra = document.querySelector(".btn-add-carrinho");
 
 //FAZ A PÁGINA MUDAR
-
 let imgAtual = 0
 
 function ativaImg(img) {
@@ -52,7 +51,7 @@ if(!localStorage.getItem("carrinho"))
 const id = Number(location.href.split("/").slice(-1)[0]); //Gambiarra pra puxar o id do produto
 let produto;
 
-//Variável que vem o item no local storage
+//Variável que vê o item no local storage
 const itensCarrinhoStorage =  JSON.parse(localStorage.getItem("carrinho"));
 
 //Verifica se o produto já existe
@@ -92,20 +91,41 @@ const modalProduto = {
 }
 modalProduto.init();
 
-//Adiciona o produto no carrinho
-btnCompra.addEventListener("click", function(e) {
-
-  fetch(`/enviaprod/${id}`).then((resp) => resp.json()).then((dadoProd) => {
-    if(existeProduto(itensCarrinhoStorage, dadoProd)) {
-      return;
-    }
+btnCompra.addEventListener("click", async function(e) {
+  try {
+    let logado = await fetch("/checarautenticacao");
+    logado = await logado.json();
     
-    dadoProd.quantidade = 1;
-    itensCarrinhoStorage.push(dadoProd);
-    localStorage.setItem("carrinho", JSON.stringify(itensCarrinhoStorage));
-    console.log(itensCarrinhoStorage)
-  }).finally(()=> {
+    //Caso o usuário esteja logado ele vai mandar um post dizendo qual produto adicionar no carrinho
+    let prodAdd = await fetch(`/carrinho/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({id_produto: id})
+    });
+    
     modalProduto.abreModal();
-  });
+  } catch (error) {
+    console.log(error);
+  }
+
 })
+
+//Adiciona o produto no carrinho
+// btnCompra.addEventListener("click", function(e) {
+
+//   console.log(document.cookie);
+//   fetch(`/enviaprod/${id}`).then((resp) => resp.json()).then((dadoProd) => {
+//     if(existeProduto(itensCarrinhoStorage, dadoProd)) {
+//       return;
+//     }
+    
+//     dadoProd.quantidade = 1;
+//     itensCarrinhoStorage.push(dadoProd);
+//     localStorage.setItem("carrinho", JSON.stringify(itensCarrinhoStorage));
+//   }).finally(()=> {
+//     modalProduto.abreModal();
+//   });
+// })
 

@@ -4,12 +4,13 @@ ESSE CÓDIGO TÁ UMA PORCARIA OTIMIZAR ELE DEPOIS
 
 // -=-=-=- Variáveis -=-=-=-
 const itensCarrinho = JSON.parse(localStorage.getItem("carrinho")); //Cria a array de objetos que vieram do carrinho
-const containerProdutos = document.querySelector(".produtos-carrinho .produtos"); //Container dos produtos
+const containerProdutos = document.querySelector(
+  ".produtos-carrinho .produtos"
+); //Container dos produtos
 const btnLimpaCarrinho = document.querySelector(".btn-limpar-carrinho"); //Botão limpa carrinho
 const subtotalEL = document.querySelector("#valor-subtotal");
 const totalEL = document.querySelector("#valor-total");
 const freteEL = document.querySelector("#opcao-frete");
-
 
 //Código principal
 
@@ -34,10 +35,7 @@ const atualizaValorCompra = (cupom = 1) => {
 };
 
 //Condição de carrinho vazio e carrinho cheio
-if (
-  !itensCarrinho ||
-  (Array.isArray(itensCarrinho) && itensCarrinho.length === 0)
-) {
+if (containerProdutos.childElementCount === 0) {
   containerProdutos.classList.add("vazio");
   containerProdutos.insertAdjacentHTML(
     "beforeend",

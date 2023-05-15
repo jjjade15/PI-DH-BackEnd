@@ -108,6 +108,7 @@ body {
 }
 
 .produtos-carrinho .btn-limpar-carrinho {
+  display: none !important;
   position: absolute;
   z-index: 10;
   padding: 6px 12px;

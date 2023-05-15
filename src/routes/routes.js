@@ -46,17 +46,14 @@ router.get("/enviaprod/:id", productController.sendById);
 
 // -=-=-=- Rotas do carrinho -=-=-=-  
 router.get("/carrinho", carrinhoController.mostraCarrinho);
+router.post("/carrinho/:id", auth, carrinhoController.adicionaProduto);
 
 // -=-=-=-  Rotas usuário -=-=-=-  
 //Rota Cadastro
 router.get("/cadastro", userController.showCadastro);
 
  //validações backend cadastro
- // adicionar mais validações para todos os campos do cadastro e login
-
-
 router.post("/cadastro", validarCadastro, userController.cadastro);
-
 //Rota Login
 router.get("/login", auth, userController.showLogin)
 router.post("/login", userController.login)
@@ -64,15 +61,8 @@ router.post("/login", userController.login)
 router.get("/logout", auth, userController.logOut);
 //Rota Perfil
 router.get("/minha-conta", auth, userController.showProfile)
+//Rota valida usuário
+router.get("/checarautenticacao", auth, userController.checkAuth)
 
-
-const {check, validationResult} = require("express-validator");
-router.post("/rotateste", [check("numero").isNumeric().withMessage("Não é um número carai")],(req, res) => {
-  const errors = validationResult(req);
-  if(!errors.isEmpty())
-    res.json(errors);
-  
-  else res.send("Sem erros");
-})
 
 module.exports = router;

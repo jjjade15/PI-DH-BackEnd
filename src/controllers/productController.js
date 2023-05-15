@@ -85,7 +85,11 @@ const productController = {
   },
 
   showCreateProduct(req, res) {
-    res.render("adicionarProduto");
+
+    console.log(req.headers.referer);
+    req.headers.referer 
+      ? res.render("adicionarproduto", { sucess: true })
+      : res.render("adicionarproduto");
   },
 
   async showUpdateProduct(req, res) {
@@ -97,7 +101,10 @@ const productController = {
       });
 
       if (!produto) throw new Error("Produto não encontrado");
-      req.statusCode === 301 ?  res.render("editarProduto", { produto: produto, sucess:true }) : res.render("editarProduto", { produto: produto });
+
+      req.headers.referer 
+        ? res.render("editarProduto", { produto: produto, sucess: true })
+        : res.render("editarProduto", { produto: produto });
     } catch (error) {
       res.status(404).render("404");
     }
@@ -256,7 +263,8 @@ const productController = {
         }
       }
       //Atualiza a página
-      res.render("adicionarProduto", { sucess: true });
+
+      res.redirect(301, `/criarproduto`);
     } catch (error) {
       console.error(error);
       return res.render("adicionarProduto", {
@@ -328,7 +336,6 @@ const productController = {
         }
       }
 
-
       res.redirect(301, `/editarproduto/${id}`);
     } catch (error) {
       console.log(error);
@@ -361,7 +368,7 @@ const productController = {
         where: { id_produto: id },
       });
 
-      res.send("deletado caralho");
+      res.send("deletado");
     } catch (error) {
       console.log(error);
       res.send("erro");

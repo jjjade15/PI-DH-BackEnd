@@ -4,7 +4,7 @@ const auth = (req, res, next) => {
   //Verifica a autenticação através do cookie
   if (req.cookies.token) {
     try {
-      jwt.verify(req.cookies.token, "batata");
+      const user = jwt.verify(req.cookies.token, "batata");
       return next();
     } catch (error) {
       res.render("login", { errors: error });

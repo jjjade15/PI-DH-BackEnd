@@ -4,8 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 //Models
-const { Usuario } = require("../models");
-const { Endereco } = require("../models");
+const { Usuario, Endereco, Carrinho} = require("../models");
 
 
 const userController = {
@@ -69,10 +68,10 @@ const userController = {
       adm: 0,
     };
 
-    await Usuario.create(userInfo);
+   
 
     //Pega o ID do usuário criado através do email
-    const {dataValues:{id_usuario}} = await Usuario.findOne({where: {email: email}});
+    const {dataValues:{id_usuario}} =  await Usuario.create(userInfo);
 
     const userAdress = {
       id_usuario,
@@ -87,7 +86,9 @@ const userController = {
 
     //Cria a fileira do endereço daquele usuário
     await Endereco.create(userAdress);
-
+    await Carrinho.create({
+      id_usuario,
+    })
     res.redirect("/login");
   },
 
@@ -137,12 +138,16 @@ const userController = {
     return res.redirect("/");
   },
 
+  checkAuth(req,res) {
+    res.json(true);
+  },
   //Perfil usuário
   async showProfile(req, res) {
     const { id } = jwt.verify(req.cookies.token, "batata");
     const userLogged = await Usuario.findByPk(id);
     res.render("perfilUsuario", { user: userLogged });
   },
+
 };
 
 module.exports = userController;

@@ -33,6 +33,7 @@ module.exports = (sequelize, DataType) => {
 
   Usuario.associate = (models) => {
     Usuario.hasOne(models.Endereco, {foreignKey:"id_usuario"});
+    Usuario.hasOne(models.Carrinho, {foreignKey:"id_usuario"});
   }
   return Usuario;
 }
