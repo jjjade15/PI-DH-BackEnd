@@ -1,107 +1,155 @@
-
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/stylesheets/cadastro.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/cadastro.css" />
     <title>Cadastre-se | Tech Star</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="container">
-        
-        <div class="formSignUp">
-            <form action="/cadastro" method="POST" id="formSignUp">
-                
-                    <div class="logo">
-                        <a href="/"><img src="/images/headerImages/logo 2 degradê+texto Horizontal.svg" alt=""></a>
-                    </div>
-                
-                    <div class="formHeader"> 
-                    <div class="title">
-                        <h1>Cadastre-se | Tech Star</h1>
-                    </div>
-                    <div class="backButton">
-                        <button><a href="/src/views/index.ejs">Voltar</a></button>
-                    </div>
-                </div>
+      <div class="formSignUp">
+        <form action="/cadastro" method="POST" id="formSignUp">
+          <div class="logo">
+            <a href="/"
+              ><img
+                src="/images/headerImages/logo 2 degradê+texto Horizontal.svg"
+                alt=""
+            /></a>
+          </div>
 
-                <div class="inputs">
-                    <% if(typeof errors !== 'undefined'){ %>
-                    <ul class="errors">
-                        <% for(let error in errors) {%>
-                        <li><%= errors[error].msg %></li>
-                        <% } %>
-                    </ul>
-                    <% } %>
-                    <div class="inputbox">
-                        <label for="fullname">Nome completo:</label>
-                        <input name="nome" id="fullname" type="text" placeholder="Digite seu nome completo:">
-                    </div>
-                    <div class="inputbox">
-                        <label for="cpf">Digite seu cpf:</label>
-                        <input name="cpf" id="cpf" type="number" placeholder="Digite seu cpf:" required>
-                    </div>
-                    <div class="inputbox">
-                        <label for="birth">Data de nascimento:</label>
-                        <input name="data_nasc" id="birth" type="date" required>
-                    </div>
-                    <div class="inputbox">
-                        <label for="cellphone">Celular:</label>
-                        <input name="telefone" id="cellphone" type="tel" placeholder="Telefone fixo ou celular: *com DDD*" maxlength="11" required>
-                    </div>
-                    <div class="inputbox">
-                        <label for="cep">CEP:</label>
-                        <input id="cep" type="number" name="cep" placeholder="Digite seu CEP:" required>
-                    </div>
-                    <div class="inputbox">
-                        <label for="street">Rua:</label>
-                        <input id="street" type="text" name="rua" required>
-                    </div>
-                    <div class="inputbox">
-                        <label for="number">Número:</label>
-                        <input id="number" type="number" name="numero" placeholder="Digite o número:" required>
-                    </div>
-                    <div class="inputbox">
-                        <label for="more">Complemento:</label>
-                        <input id="more" type="text" name="complemento" placeholder="Digite o complemento:">
-                    </div>
-                    <div class="inputbox">
-                        <label for="bairro">Bairro:</label>
-                        <input id="bairro" type="text" name="bairro" required>
-                    </div>
-                    <div class="inputbox">
-                        <label for="city">Cidade:</label>
-                        <input id="city" type="text" name="cidade" required>
-                    </div>
-                    <div class="inputbox">
-                        <label for="state">Estado:</label>
-                        <input id="state" type="text" name="estado" required>
-                    </div>
-                    <div class="inputbox">
-                        <label for="email">Email:</label>
-                        <input name="email" id="email" type="email" placeholder="Digite seu email">
-                    </div>
-                    <div class="inputbox">
-                        <label for="password">Senha:</label>
-                        <input name="senha" id="password" type="password" placeholder="Defina uma senha:">
-                    </div>
-                    <div class="inputbox">
-                        <label for="passwordC">Confirmação de senha:</label>
-                        <input name= "passwordC" id="passwordC" type="password" placeholder="Confirme sua senha">
-                    </div>
-                </div>
+          <div class="formHeader">
+            <div class="title">
+              <h1>Cadastre-se | Tech Star</h1>
+            </div>
+            <div class="backButton">
+              <button><a href="/src/views/index.ejs">Voltar</a></button>
+            </div>
+          </div>
 
-                <div class="buttonSignUp">
-                    <button type="submit">Cadastrar</button>
-                </div>
-                
-            </form>
-        </div>
-        
+          <div class="inputs">
+            <% if(typeof errors !== 'undefined'){ %>
+            <ul class="errors">
+              <% for(let error in errors) {%>
+              <li><%= errors[error].msg %></li>
+              <% } %>
+            </ul>
+            <% } %>
+            <div class="inputbox">
+              <label for="fullname">Nome completo:</label>
+              <input
+                name="nome"
+                id="fullname"
+                type="text"
+                placeholder="Digite seu nome completo:"
+              />
+            </div>
+            <div class="inputbox">
+              <label for="cpf">Digite seu cpf:</label>
+              <input
+                name="cpf"
+                id="cpf"
+                type="number"
+                placeholder="Digite seu cpf:"
+                required
+              />
+            </div>
+            <div class="inputbox">
+              <label for="birth">Data de nascimento:</label>
+              <input name="data_nasc" id="birth" type="date" required />
+            </div>
+            <div class="inputbox">
+              <label for="cellphone">Celular:</label>
+              <input
+                name="telefone"
+                id="cellphone"
+                type="tel"
+                placeholder="Telefone fixo ou celular: *com DDD*"
+                maxlength="11"
+                required
+              />
+            </div>
+            <div class="inputbox">
+              <label for="cep">CEP:</label>
+              <input
+                id="cep"
+                type="number"
+                name="cep"
+                placeholder="Digite seu CEP:"
+                required
+              />
+            </div>
+            <div class="inputbox">
+              <label for="street">Rua:</label>
+              <input id="street" type="text" name="rua" required />
+            </div>
+            <div class="inputbox">
+              <label for="number">Número:</label>
+              <input
+                id="number"
+                type="number"
+                name="numero"
+                placeholder="Digite o número:"
+                required
+              />
+            </div>
+            <div class="inputbox">
+              <label for="more">Complemento:</label>
+              <input
+                id="more"
+                type="text"
+                name="complemento"
+                placeholder="Digite o complemento:"
+              />
+            </div>
+            <div class="inputbox">
+              <label for="bairro">Bairro:</label>
+              <input id="bairro" type="text" name="bairro" required />
+            </div>
+            <div class="inputbox">
+              <label for="city">Cidade:</label>
+              <input id="city" type="text" name="cidade" required />
+            </div>
+            <div class="inputbox">
+              <label for="state">Estado:</label>
+              <input id="state" type="text" name="estado" required />
+            </div>
+            <div class="inputbox">
+              <label for="email">Email:</label>
+              <input
+                name="email"
+                id="email"
+                type="email"
+                placeholder="Digite seu email"
+              />
+            </div>
+            <div class="inputbox">
+              <label for="password">Senha:</label>
+              <input
+                name="senha"
+                id="password"
+                type="password"
+                placeholder="Defina uma senha:"
+              />
+            </div>
+            <div class="inputbox">
+              <label for="passwordC">Confirmação de senha:</label>
+              <input
+                name="passwordC"
+                id="passwordC"
+                type="password"
+                placeholder="Confirme sua senha"
+              />
+            </div>
+          </div>
+
+          <div class="buttonSignUp">
+            <button type="submit">Cadastrar</button>
+          </div>
+        </form>
+      </div>
     </div>
     <script src="/javascripts/cadastro.js"></script>
-</body>
+  </body>
 </html>
