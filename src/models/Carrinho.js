@@ -7,11 +7,7 @@ module.exports = (sequelize, DataType) => {
     },
     id_usuario: {
       type: DataType.INTEGER
-    },
-    valor_total: {
-      type: DataType.DECIMAL(12,2),
-      allowNull: true
-    },
+    }
   }, {
     tableName: "carrinho",
     timestamps: false

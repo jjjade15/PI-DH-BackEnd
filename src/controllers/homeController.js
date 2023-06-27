@@ -13,20 +13,20 @@ const homeController = {
         raw: true,
       });
       //Faz o query das imagens
+      let x = 0
       for (const p of dadosProdutos) {
+        
         const img = await Imagem.findOne({
           where: { id_produto: p.id_produto },
           raw: true,
         });
-        const produto = dadosProdutos.find(
-          (p) => p.id_produto === img.id_produto
-        );
-        produto.Imagem = img;
+        p.Imagem = img.caminho;
       }
-
+      console.log(dadosProdutos)
       res.render("index", { produtos: dadosProdutos });
     } catch (error) {
-      res.send("Erro ao puxar os objetos");
+      console.log(error);
+      res.json(error);
     }
   },
   async search(req, res) {
